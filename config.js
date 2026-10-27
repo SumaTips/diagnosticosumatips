@@ -1,0 +1,1 @@
+window.SUMATIPS_CONFIG = {"email": "Lgonr0430@gmail.com", "whatsapp": "584127147963", "calendar": ""};
