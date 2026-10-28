@@ -6,84 +6,92 @@
 <meta name="description" content="SumaTips Consulting Group: diagnóstico y acompañamiento para ordenar la gestión de pequeñas y medianas empresas.">
 <title>SumaTips Consulting Group | Claridad para crecer</title>
 <style>
-:root{--blue:#082b68;--cyan:#159fc1;--gold:#d6a43b;--bg:#f5f7fb;--text:#243247}
+:root{
+  --blue:#082b68;
+  --cyan:#159fc1;
+  --gold:#d6a43b;
+  --bg:#f5f7fb;
+  --text:#243247;
+  --red:#dc2626;
+  --yellow:#d97706;
+  --green:#16a34a;
+}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:100px}
-body{margin:0;background:var(--bg);font:17px/1.6 system-ui,sans-serif;color:var(--text)}
+body{margin:0;background:var(--bg);font:17px/1.6 system-ui,-apple-system,sans-serif;color:var(--text)}
 a{color:var(--blue)}
 .wrap{max-width:1160px;margin:auto;padding:0 24px}
 header{background:white;position:sticky;top:0;z-index:10;box-shadow:0 2px 12px #082b6810}
 nav{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:88px;flex-wrap:wrap;padding:12px 0}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;color:var(--blue)}
-.brand img{width:70px;height:54px;object-fit:contain}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;font-weight:800;color:var(--blue)}
+.brand img{width:75px;height:55px;object-fit:contain;background:transparent}
 .links{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
 .links a{text-decoration:none;font-size:14px}
 h1,h2,h3{color:var(--blue);line-height:1.15}
-h1{font-size:clamp(36px,5vw,62px);letter-spacing:-2px}
-h2{font-size:clamp(28px,4vw,40px)}
-h3{font-size:21px}
-section{padding:76px 0}
+h1{font-size:clamp(36px,5vw,60px);letter-spacing:-1.5px}
+h2{font-size:clamp(26px,4vw,38px)}
+h3{font-size:20px}
+section{padding:72px 0}
 .hero{background:linear-gradient(135deg,#fff,#e8f3fa)}
-.hero-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:50px;align-items:center}
+.hero-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:48px;align-items:center}
 .tag{color:#086880;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:2px}
-.lead{font-size:20px}
-.btn,button{display:inline-block;background:var(--blue);color:white;border:0;border-radius:9px;padding:13px 20px;text-decoration:none;font:600 15px system-ui;cursor:pointer}
+.lead{font-size:19px}
+.btn,button{display:inline-block;background:var(--blue);color:white;border:0;border-radius:8px;padding:13px 22px;text-decoration:none;font:600 15px system-ui;cursor:pointer;transition:background .2s}
+.btn:hover,button:hover{opacity:.95}
 .btn.secondary{background:white;color:var(--blue);border:1px solid var(--blue)}
-.actions{display:flex;gap:12px;flex-wrap:wrap;margin:26px 0}
-.card{background:white;border:1px solid #dfe6ee;border-radius:18px;padding:26px;box-shadow:0 10px 30px #082b6808}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin:24px 0}
+.card{background:white;border:1px solid #dfe6ee;border-radius:16px;padding:26px;box-shadow:0 8px 24px #082b6808}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .two{grid-template-columns:repeat(2,1fr)}
 .four{grid-template-columns:repeat(4,1fr)}
-.card p{margin-bottom:0}
-.line{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #e5eaf0;padding:18px 0}
-.dot{width:9px;height:9px;background:var(--cyan);border-radius:50%;display:inline-block;margin-right:7px}
+.line{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #e5eaf0;padding:16px 0}
+.dot{width:10px;height:10px;background:var(--cyan);border-radius:50%;display:inline-block;margin-right:8px}
 .dark{background:var(--blue);color:white}
 .dark h2,.dark h3{color:white}
 .dark .tag{color:#8de0f0}
-.num{font-size:34px;color:var(--cyan);font-weight:800}
+.num{font-size:32px;color:var(--cyan);font-weight:800}
 .muted,small{font-size:14px;color:#536176}
-fieldset{border:1px solid #dce4ed;border-radius:12px;margin:20px 0;padding:20px}
-legend{font-weight:800;color:var(--blue)}
-.question{display:block;margin:0 0 18px}
-select,input,textarea{width:100%;font:inherit;padding:12px;border:1px solid #8190a3;border-radius:7px;background:white;color:var(--text);margin-top:8px}
-textarea{min-height:110px}
-label{display:block;margin-bottom:14px}
-:focus-visible{outline:3px solid #159fc1;outline-offset:4px}
-.result-row{padding:12px 0;border-bottom:1px solid #dce4ed}
-progress{display:block;width:100%;height:14px;accent-color:var(--cyan)}
-footer{padding:30px 0;background:#061b41;color:white}
-footer a{color:white}
-.note{background:#fff7e2;border-left:4px solid var(--gold);padding:16px;border-radius:5px}
-.skip{position:absolute;left:-10000px}
-.skip:focus{left:10px;top:10px;z-index:20}
-details{padding:18px 0;border-bottom:1px solid #dce4ed}
-summary{cursor:pointer;font-weight:700}
-#results:focus{outline:none}
-[hidden]{display:none!important}
-button:disabled{opacity:.65;cursor:not-allowed}
+
+/* Estilos de las preguntas Sí/No */
+fieldset{border:1px solid #dce4ed;border-radius:12px;margin:22px 0;padding:22px;background:#ffffff}
+legend{font-weight:800;color:var(--blue);padding:0 8px}
+.question-item{padding:14px 0;border-bottom:1px solid #edf2f7}
+.question-item:last-child{border-bottom:0}
+.question-text{display:block;margin-bottom:10px;font-weight:600}
+.bool-options{display:flex;gap:16px}
+.bool-options label{display:flex;align-items:center;gap:6px;cursor:pointer;font-weight:600;padding:6px 14px;border:2px solid #dce4ed;border-radius:8px}
+.bool-options input[type="radio"]{cursor:pointer;margin:0}
+
+/* Estilos del semáforo y puntuación */
+.score-box{text-align:center;padding:24px;border-radius:12px;margin:20px 0;border:2px solid #dfe6ee}
+.score-number{font-size:3rem;font-weight:800;line-height:1}
+.traffic-light{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:99px;color:white;font-weight:800;margin-top:14px;text-transform:uppercase;font-size:14px}
+.bg-red{background:var(--red)}
+.bg-yellow{background:var(--yellow)}
+.bg-green{background:var(--green)}
+.area-result{padding:14px 0;border-bottom:1px solid #edf2f7}
+.area-header{display:flex;justify-content:space-between;align-items:center;font-weight:700}
+.area-bar{height:10px;border-radius:99px;background:#e2e8f0;overflow:hidden;margin:8px 0}
+.area-bar-fill{height:100%;transition:width .4s}
+
+input[type=text],input[type=email],textarea{width:100%;font:inherit;padding:12px;border:1px solid #8190a3;border-radius:7px;background:white;color:var(--text);margin-top:6px}
+textarea{min-height:100px}
+footer{padding:30px 0;background:#061b41;color:white;text-align:center}
+
 @media(max-width:850px){
   .hero-grid,.grid,.two,.four{grid-template-columns:1fr}
-  .links{gap:12px}
-  section{padding:48px 0}
-  nav{align-items:flex-start}
-  .brand{font-size:15px}
-  h1{letter-spacing:-1px}
-}
-@media print{
-  header,.actions,button,footer,#contacto{display:none}
-  section{padding:15px 0}
-  .grid{display:block}
-  .card{break-inside:avoid;box-shadow:none}
+  section{padding:46px 0}
+  h1{font-size:32px}
 }
 </style>
 </head>
 <body>
-<a class="skip" href="#inicio">Saltar al contenido</a>
+
 <header>
   <div class="wrap">
     <nav aria-label="Principal">
       <a class="brand" href="#inicio">
-        <img src="assets/logo.jpg" alt="SumaTips Logo" onerror="this.hidden=true">
+        <img src="assets/logo.png" alt="SumaTips Logo" onerror="this.src='assets/logo.jpg'; this.onerror=null;">
         <span>SumaTips<br><small>Consulting Group</small></span>
       </a>
       <div class="links">
@@ -91,7 +99,7 @@ button:disabled{opacity:.65;cursor:not-allowed}
         <a href="#metodo">Metodología</a>
         <a href="#diagnostico">Autodiagnóstico</a>
         <a href="#equipo">Nosotros</a>
-        <a class="btn" href="#contacto">Conversemos</a>
+        <a class="btn" href="#contacto">Contacto</a>
       </div>
     </nav>
   </div>
@@ -103,10 +111,10 @@ button:disabled{opacity:.65;cursor:not-allowed}
     <div>
       <div class="tag">Consultoría para pequeñas y medianas empresas</div>
       <h1>Ordena tu empresa.<br>Decide con claridad.<br>Crece con dirección.</h1>
-      <p class="lead">Entiende la situación de tu negocio, fortalece el control financiero y mejora tus procesos con un plan de acción adaptado a tu realidad.</p>
+      <p class="lead">Entiende el estado real de tu negocio, fortalece el control financiero y optimiza tus procesos con un plan adaptado a tu realidad.</p>
       <div class="actions">
-        <a class="btn" href="#diagnostico">Evaluar mi negocio</a>
-        <a class="btn secondary" href="#contacto">Agendar una llamada</a>
+        <a class="btn" href="#diagnostico">Realizar autodiagnóstico</a>
+        <a class="btn secondary" href="#contacto">Agendar llamada</a>
       </div>
       <small>Diagnóstico · Estrategia · Implementación · Seguimiento</small>
     </div>
@@ -114,22 +122,9 @@ button:disabled{opacity:.65;cursor:not-allowed}
       <div class="tag">Tu negocio, en perspectiva</div>
       <h3>Una visión integral para priorizar.</h3>
       <div class="line"><span><i class="dot"></i>Finanzas y caja</span><span>Visibilidad</span></div>
-      <div class="line"><span><i class="dot"></i>Operaciones</span><span>Orden</span></div>
-      <div class="line"><span><i class="dot"></i>Estrategia</span><span>Dirección</span></div>
-      <p class="muted">Esquema ilustrativo de gestión para pymes.</p>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="tag">El punto de partida</div>
-    <h2>Cuando todo depende de ti,<br>es momento de ordenar la gestión.</h2>
-    <div class="grid two">
-      <div class="card">“Vendemos, pero no sabemos cuánto ganamos realmente.”</div>
-      <div class="card">“Todas las decisiones y tareas terminan en el dueño.”</div>
-      <div class="card">“Cada persona ejecuta las operaciones a su propio criterio.”</div>
-      <div class="card">“Queremos crecer sin que los costos se salgan de control.”</div>
+      <div class="line"><span><i class="dot"></i>Operaciones</span><span>Control y orden</span></div>
+      <div class="line"><span><i class="dot"></i>Estrategia</span><span>Rumbo claro</span></div>
+      <p class="muted">Metodología ágil orientada a resultados tangibles.</p>
     </div>
   </div>
 </section>
@@ -145,27 +140,31 @@ button:disabled{opacity:.65;cursor:not-allowed}
 <section class="dark" id="metodo">
   <div class="wrap">
     <div class="tag">Cómo trabajamos</div>
-    <h2>Del diagnóstico a la acción.</h2>
+    <h2>Del diagnóstico a la acción estructurada.</h2>
     <div class="grid four">
-      <div><span class="num">01</span><h3>Diagnóstico</h3><p>Revisamos información, procesos y riesgos para entender la situación.</p></div>
-      <div><span class="num">02</span><h3>Estrategia</h3><p>Definimos prioridades, responsables, plazos e indicadores claros.</p></div>
-      <div><span class="num">03</span><h3>Implementación</h3><p>Acompañamos los cambios y la estandarización operativa.</p></div>
-      <div><span class="num">04</span><h3>Seguimiento</h3><p>Medimos avances y ajustamos las acciones sobre números reales.</p></div>
+      <div><span class="num">01</span><h3>Diagnóstico</h3><p>Evaluamos procesos, tesorería y riesgos del negocio.</p></div>
+      <div><span class="num">02</span><h3>Estrategia</h3><p>Definimos prioridades, cronograma y responsables.</p></div>
+      <div><span class="num">03</span><h3>Ejecución</h3><p>Acompañamos la implementación de herramientas y procesos.</p></div>
+      <div><span class="num">04</span><h3>Seguimiento</h3><p>Monitoreamos indicadores clave de rentabilidad y orden.</p></div>
     </div>
   </div>
 </section>
 
 <section id="diagnostico">
   <div class="wrap">
-    <div class="tag">Autodiagnóstico inicial</div>
-    <h2>¿Qué necesita atención primero en tu empresa?</h2>
-    <p>Responde 21 preguntas clave sobre tu gestión. El resultado es confidencial y se procesa directamente en tu navegador.</p>
+    <div class="tag">Autodiagnóstico del Negocio</div>
+    <h2>¿Qué nivel de control tiene tu empresa hoy?</h2>
+    <p>Responde <strong>Sí</strong> o <strong>No</strong> con total honestidad a las siguientes 21 afirmaciones para obtener tu puntuación y semáforo operativo de inmediato.</p>
+
     <form id="quiz">
       <div id="questions"></div>
-      <button type="submit">Ver mis prioridades</button> 
-      <button type="reset" class="btn secondary">Reiniciar</button>
+      <div class="actions">
+        <button type="submit" class="btn">Obtener Diagnóstico y Semáforo</button>
+        <button type="reset" class="btn secondary">Limpiar respuestas</button>
+      </div>
     </form>
-    <div id="results" class="card" tabindex="-1" hidden aria-live="polite"></div>
+
+    <div id="results" class="card" hidden style="margin-top:32px;"></div>
   </div>
 </section>
 
@@ -173,14 +172,14 @@ button:disabled{opacity:.65;cursor:not-allowed}
   <div class="wrap hero-grid">
     <div>
       <div class="tag">Sobre SumaTips</div>
-      <h2>Consultoría gerencial cercana a las decisiones del negocio.</h2>
-      <p>SumaTips Consulting Group ayuda a pequeñas y medianas empresas a organizar su administración, optimizar su tesorería y estructurar procesos operativos sostenibles.</p>
+      <h2>Consultoría estratégica cercana a las decisiones clave.</h2>
+      <p>SumaTips Consulting Group acompaña a empresarios y directores de pymes a estructurar su flujo de caja, formalizar procesos y alcanzar sostenibilidad financiera.</p>
     </div>
     <div class="card">
-      <h3>Modalidades de trabajo</h3>
-      <div class="line">Diagnóstico empresarial integral</div>
-      <div class="line">Optimización de procesos y costos</div>
-      <div class="line">Acompañamiento en tesorería y finanzas</div>
+      <h3>Áreas de acompañamiento</h3>
+      <div class="line">Estructuración de flujo de caja y costos</div>
+      <div class="line">Manuales de procesos y control interno</div>
+      <div class="line">Planes de continuidad y crecimiento ordenado</div>
     </div>
   </div>
 </section>
@@ -189,20 +188,17 @@ button:disabled{opacity:.65;cursor:not-allowed}
   <div class="wrap hero-grid">
     <div>
       <div class="tag">Conversemos</div>
-      <h2>El siguiente paso comienza con una conversación.</h2>
-      <p>Cuéntanos qué ocurre en tu empresa y qué te gustaría mejorar.</p>
-      <p id="contact-status" class="note"></p>
+      <h2>El orden de tu empresa comienza aquí.</h2>
+      <p>Envíanos tus dudas o el resultado de tu diagnóstico para coordinar una llamada de evaluación.</p>
       <div id="contact-links" class="actions"></div>
     </div>
     <div class="card">
-      <h3>Preparar mi consulta</h3>
+      <h3>Contáctanos</h3>
       <form id="contact-form">
-        <label for="name">Nombre<input id="name" maxlength="120" required autocomplete="name"></label>
-        <label for="company">Empresa<input id="company" maxlength="180" required autocomplete="organization"></label>
-        <label for="email">Correo electrónico<input id="email" type="email" maxlength="200" required autocomplete="email"></label>
-        <label for="challenge">Principal reto o necesidad<textarea id="challenge" maxlength="2000" required></textarea></label>
-        <button type="submit">Enviar consulta por correo</button>
-        <p id="contact-feedback" role="status" style="margin-top:10px;font-weight:600;"></p>
+        <label>Nombre<input id="name" required></label>
+        <label>Empresa<input id="company" required></label>
+        <label>Mensaje o necesidad<textarea id="challenge" required></textarea></label>
+        <button type="submit" style="margin-top:14px;">Enviar consulta</button>
       </form>
     </div>
   </div>
@@ -211,134 +207,220 @@ button:disabled{opacity:.65;cursor:not-allowed}
 
 <footer>
   <div class="wrap">
-    SumaTips Consulting Group · <span id="year"></span>
+    SumaTips Consulting Group · <span id="year"></span> · WhatsApp: +58 412 714 7963
   </div>
 </footer>
 
-<script src="config.js"></script>
 <script>
-const cfg = window.SUMATIPS_CONFIG || {};
 const areas = [
-  ['Estrategia y gestión', 'Define el rumbo y las prioridades.', 'Diagnóstico integral, planes de negocio y modelos de crecimiento.', ['¿Tu empresa tiene objetivos definidos y revisados?', '¿Has definido los clientes y la propuesta de valor?', '¿Existe un plan con responsables y plazos?'], 'Definir objetivos y una hoja de ruta.'],
-  ['Finanzas y caja', 'Entiende tus números y protege la liquidez.', 'Flujo de caja, presupuestos, márgenes y cuentas por cobrar.', ['¿Actualizas el flujo de caja periódicamente?', '¿Conoces los márgenes reales por producto o servicio?', '¿Controlas la cartera y los compromisos de pago a tiempo?'], 'Construir un flujo de caja y revisar márgenes.'],
-  ['Operaciones y procesos', 'Organiza la ejecución y reduce fricciones.', 'Procesos, estandarización, indicadores y optimización de costos.', ['¿Los procesos críticos están documentados?', '¿Mides tiempos, errores o mermas operativas?', '¿Tienes controles claros sobre compras e inventarios?'], 'Mapear procesos críticos y sus controles.'],
-  ['Marketing y ventas', 'Conecta tu propuesta comercial con orden.', 'Posicionamiento, seguimiento de prospectos y fidelización.', ['¿Tienes una estrategia comercial definida?', '¿Registras y sigues las oportunidades de venta?', '¿Revisas recurrencia y satisfacción de tus clientes?'], 'Organizar el seguimiento e indicadores comerciales.'],
-  ['Personas y organización', 'Clarifica responsabilidades y fortalece el equipo.', 'Estructura, funciones, capacitación y retribución.', ['¿Están definidas las responsabilidades de cada cargo?', '¿Existen criterios de evaluación claros?', '¿El negocio puede operar sin la presencia constante del dueño?'], 'Definir roles y respaldos para funciones críticas.'],
-  ['Transformación digital', 'Digitaliza con propósito de negocio.', 'Automatización de tareas, control de datos y herramientas.', ['¿Tus sistemas contables u hojas generan datos confiables?', '¿Cuentas con respaldos seguros de tu información clave?', '¿Evalúas automatizaciones para tareas repetitivas?'], 'Revisar datos, respaldos y automatización básica.'],
-  ['Cumplimiento y formalidad', 'Organiza tus obligaciones y contingencias.', 'Permisos, contratos y prevención de contingencias.', ['¿Mantienes al día licencias, permisos e impuestos?', '¿Formalizas acuerdos con clientes y proveedores por escrito?', '¿Cuentas con planes de contingencia para servicios básicos o internet?'], 'Formalizar acuerdos clave y calendario de obligaciones.']
+  {
+    name: "Estrategia y Gestión",
+    desc: "Planes de dirección, metas y modelo de negocio.",
+    questions: [
+      "¿Tu empresa tiene metas financieras y comerciales por escrito?",
+      "¿Conoces claramente tu propuesta de valor frente a la competencia?",
+      "¿Tienes un plan de acción con fechas y responsables definidos?"
+    ],
+    tip: "Define una hoja de ruta con prioridades claras para el trimestre."
+  },
+  {
+    name: "Finanzas y Caja",
+    desc: "Flujo de liquidez, márgenes y rentabilidad real.",
+    questions: [
+      "¿Llevas un registro semanal actualizado de entradas y salidas de dinero?",
+      "¿Conoces con certeza el costo y margen de ganancia de cada producto o servicio?",
+      "¿Separas totalmente las finanzas del negocio de tus gastos personales?"
+    ],
+    tip: "Estructura un flujo de caja proyectado para evitar sorpresas de liquidez."
+  },
+  {
+    name: "Operaciones y Procesos",
+    desc: "Eficiencia, entregas a tiempo y control de costos.",
+    questions: [
+      "¿Tus tareas y procesos clave están documentados por escrito?",
+      "¿Llevas control estricto de inventarios o insumos para evitar pérdidas?",
+      "¿Cuentas con al menos dos opciones de proveedores para insumos críticos?"
+    ],
+    tip: "Estandariza los 3 procesos principales que más impactan la operación."
+  },
+  {
+    name: "Ventas y Clientes",
+    desc: "Gestión comercial, fidelización y cobranza.",
+    questions: [
+      "¿Tienes una base de datos organizada de tus clientes y sus compras?",
+      "¿Consigues clientes nuevos mediante un canal predecible o planificado?",
+      "¿Tus clientes pagan dentro del plazo acordado sin retrasos severos?"
+    ],
+    tip: "Sistematiza el seguimiento a cotizaciones y el control de cobranzas."
+  },
+  {
+    name: "Equipo y Organización",
+    desc: "Roles, responsabilidades y delegación efectiva.",
+    questions: [
+      "¿Cada colaborador sabe con precisión qué le toca hacer y ante quién responde?",
+      "¿Tu negocio puede operar varios días con normalidad sin tu presencia?",
+      "¿Existe un plan de inducción o capacitación cuando entra un nuevo empleado?"
+    ],
+    tip: "Delega responsabilidades operativas para concentrarte en la estrategia."
+  },
+  {
+    name: "Tecnología y Respaldo",
+    desc: "Sistemas confiables, automatización y seguridad.",
+    questions: [
+      "¿Realizas copias de seguridad periódicas de tu información contable y comercial?",
+      "¿Utilizas herramientas digitales para ahorrar tiempo en tareas manuales?",
+      "¿El acceso a la información bancaria y sensible está estrictamente restringido?"
+    ],
+    tip: "Automatiza respaldos en la nube y centraliza tus registros."
+  },
+  {
+    name: "Formalidad y Continuidad",
+    desc: "Cumplimiento legal, contingencias y sostenibilidad.",
+    questions: [
+      "¿Mantienes al día licencias, permisos e impuestos del negocio?",
+      "¿Formalizas los acuerdos con clientes y colaboradores por escrito?",
+      "¿Tu negocio cuenta con un plan de respaldo ante fallas de luz o internet?"
+    ],
+    tip: "Formaliza acuerdos contractuales y prepara contingencias operativas."
+  }
 ];
 
-const options = [
-  ['', 'Selecciona una respuesta'],
-  ['0', '0 · No existe'],
-  ['1', '1 · Se realiza informalmente'],
-  ['2', '2 · Aplicación irregular'],
-  ['3', '3 · Se aplica y revisa periódicamente'],
-  ['unknown', 'No lo sé'],
-  ['na', 'No aplica']
-];
-
+// Cargar servicios en la cuadrícula
 document.getElementById('services').innerHTML = areas.map((a, i) => `
   <article class="card">
     <div class="tag">0${i + 1}</div>
-    <h3>${a[0]}</h3>
-    <p>${a[1]}</p>
-    <p class="muted">${a[2]}</p>
+    <h3>${a.name}</h3>
+    <p>${a.desc}</p>
   </article>
 `).join('');
 
-document.getElementById('questions').innerHTML = areas.map((a, i) => `
-  <fieldset>
-    <legend>${a[0]}</legend>
-    ${a[3].map((q, j) => `
-      <label class="question" for="q${i}_${j}">${q}
-        <select required id="q${i}_${j}" name="q${i}_${j}">
-          ${options.map(o => `<option value="${o[0]}">${o[1]}</option>`).join('')}
-        </select>
-      </label>
-    `).join('')}
-  </fieldset>
-`).join('');
+// Generar preguntas con opciones Sí / No
+let qHTML = '';
+let qCount = 0;
+areas.forEach((area, aIdx) => {
+  qHTML += `<fieldset><legend>${area.name}</legend>`;
+  area.questions.forEach((q, qIdx) => {
+    qHTML += `
+      <div class="question-item">
+        <span class="question-text">${q}</span>
+        <div class="bool-options">
+          <label><input type="radio" name="q_${aIdx}_${qIdx}" value="1" required> Sí</label>
+          <label><input type="radio" name="q_${aIdx}_${qIdx}" value="0" required> No</label>
+        </div>
+      </div>
+    `;
+    qCount++;
+  });
+  qHTML += `</fieldset>`;
+});
+document.getElementById('questions').innerHTML = qHTML;
 
-const result = document.getElementById('results');
-
-document.getElementById('quiz').addEventListener('submit', e => {
+// Manejo del envío del formulario y cálculo de semáforo
+document.getElementById('quiz').addEventListener('submit', function(e) {
   e.preventDefault();
-  const scores = areas.map((a, i) => {
-    const vals = a[3].map((_, j) => document.getElementById(`q${i}_${j}`).value);
-    const nums = vals.filter(v => ['0', '1', '2', '3'].includes(v)).map(Number);
-    return {
-      a,
-      unknown: vals.filter(v => v === 'unknown').length,
-      na: vals.filter(v => v === 'na').length,
-      n: nums.length,
-      avg: nums.length ? nums.reduce((x, y) => x + y, 0) / nums.length : null
-    };
+  let totalScore = 0;
+  let areaScores = [];
+
+  areas.forEach((area, aIdx) => {
+    let aScore = 0;
+    area.questions.forEach((_, qIdx) => {
+      const selected = document.querySelector(`input[name="q_${aIdx}_${qIdx}"]:checked`);
+      if (selected && selected.value === "1") {
+        aScore++;
+        totalScore++;
+      }
+    });
+    areaScores.push({ name: area.name, score: aScore, total: area.questions.length, tip: area.tip });
   });
 
-  const priorities = scores
-    .filter(s => s.unknown || s.avg !== null)
-    .sort((x, y) => Number(y.unknown > 0) - Number(x.unknown > 0) || (x.avg ?? 4) - (y.avg ?? 4))
-    .slice(0, 3);
+  // Determinar Semáforo Global
+  let semaforoClass = "";
+  let semaforoText = "";
+  let diagnosticoMensaje = "";
 
-  result.innerHTML = '<h3>Orientación inicial de tu negocio</h3>' +
-    scores.map(s => `
-      <div class="result-row">
-        <b>${s.a[0]}</b>
-        <p>${s.avg === null ? 'Sin puntuación suficiente' : s.avg.toFixed(1) + ' / 3 · ' + (s.avg < 1 ? 'Nivel Crítico' : s.avg < 2 ? 'En desarrollo' : 'Prácticas estructuradas')}. Respuestas evaluadas: ${s.n}/3.</p>
-        ${s.avg === null ? '' : `<progress max="3" value="${s.avg}"></progress>`}
+  if (totalScore <= 10) {
+    semaforoClass = "bg-red";
+    semaforoText = "🔴 Semáforo Rojo · Gestión Crítica";
+    diagnosticoMensaje = "Tu empresa depende excesivamente de la improvisación o del día a día del dueño. Hay riesgos altos de fugas de dinero o frenos operativos.";
+  } else if (totalScore <= 16) {
+    semaforoClass = "bg-yellow";
+    semaforoText = "🟡 Semáforo Amarillo · En Desarrollo";
+    diagnosticoMensaje = "El negocio está en marcha pero existen puntos ciegos importantes en finanzas y procesos que impiden un crecimiento sostenido.";
+  } else {
+    semaforoClass = "bg-green";
+    semaforoText = "🟢 Semáforo Verde · Gestión Estructurada";
+    diagnosticoMensaje = "Cuentas con controles sólidos y buenas prácticas. Tu enfoque actual debe orientarse a la optimización fina y la delegación estratégica.";
+  }
+
+  // Renderizar resultado
+  let resHTML = `
+    <div class="score-box">
+      <div class="muted">PUNTAJE GLOBAL DE CONTROL</div>
+      <div class="score-number">${totalScore} <span style="font-size:1.5rem;color:var(--text);opacity:.6;">/ 21</span></div>
+      <div class="traffic-light ${semaforoClass}">${semaforoText}</div>
+      <p style="margin-top:16px;max-width:650px;margin-left:auto;margin-right:auto;">${diagnosticoMensaje}</p>
+    </div>
+
+    <h3 style="margin-top:28px;">Semáforo por Área:</h3>
+  `;
+
+  areaScores.forEach(item => {
+    let color = item.score <= 1 ? "var(--red)" : item.score === 2 ? "var(--yellow)" : "var(--green)";
+    let estado = item.score <= 1 ? "🔴 Atención Urgente" : item.score === 2 ? "🟡 Por Mejorar" : "🟢 Bajo Control";
+    let pct = (item.score / item.total) * 100;
+
+    resHTML += `
+      <div class="area-result">
+        <div class="area-header">
+          <span>${item.name}</span>
+          <span style="color:${color}">${estado} (${item.score}/${item.total})</span>
+        </div>
+        <div class="area-bar">
+          <div class="area-bar-fill" style="width:${pct}%;background:${color};"></div>
+        </div>
+        <p class="muted" style="margin:4px 0 0;"><strong>Acción recomendada:</strong> ${item.tip}</p>
       </div>
-    `).join('') +
-    '<h3>Áreas prioritarias para intervenir:</h3>' +
-    (priorities.length ? '<ol>' + priorities.map(s => `<li><strong>${s.a[0]}:</strong> ${s.a[4]}</li>`).join('') + '</ol>' : '<p>Sin datos suficientes para priorizar.</p>') +
-    '<br><a class="btn" href="#contacto">Solicitar plan de acción</a>';
+    `;
+  });
 
-  result.hidden = false;
-  result.focus();
+  const waMsg = encodeURIComponent(`Hola SumaTips, completé el autodiagnóstico de mi empresa.\nPuntaje: ${totalScore}/21 (${semaforoText}).\nQuiero revisar un plan de acción.`);
+  resHTML += `
+    <div class="actions" style="margin-top:28px;">
+      <a class="btn" target="_blank" href="https://wa.me/584127147963?text=${waMsg}">Enviar resultado por WhatsApp</a>
+      <a class="btn secondary" href="#contacto">Solicitar llamada de asesoría</a>
+    </div>
+  `;
+
+  const resDiv = document.getElementById('results');
+  resDiv.innerHTML = resHTML;
+  resDiv.hidden = false;
+  resDiv.scrollIntoView({ behavior: 'smooth' });
 });
 
 document.getElementById('quiz').addEventListener('reset', () => {
-  result.hidden = true;
-  result.innerHTML = '';
+  const resDiv = document.getElementById('results');
+  resDiv.hidden = true;
+  resDiv.innerHTML = '';
+});
+
+// Enlaces de contacto
+const contactLinks = document.getElementById('contact-links');
+contactLinks.innerHTML = `
+  <a class="btn" target="_blank" href="https://wa.me/584127147963">Escribir por WhatsApp (+58 412 714 7963)</a>
+  <a class="btn secondary" href="mailto:Lgonr0430@gmail.com">Enviar Correo Electrónico</a>
+`;
+
+// Formulario de contacto
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const n = document.getElementById('name').value;
+  const c = document.getElementById('company').value;
+  const t = document.getElementById('challenge').value;
+  const body = encodeURIComponent(`Nombre: ${n}\nEmpresa: ${c}\nConsulta: ${t}`);
+  window.location.href = `mailto:Lgonr0430@gmail.com?subject=Consulta%20SumaTips%20-%20${encodeURIComponent(c)}&body=${body}`;
 });
 
 document.getElementById('year').textContent = new Date().getFullYear();
-
-const validEmail = typeof cfg.email === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cfg.email);
-const links = document.getElementById('contact-links');
-
-function addLink(text, href) {
-  const a = document.createElement('a');
-  a.textContent = text;
-  a.href = href;
-  a.className = 'btn';
-  a.target = '_blank';
-  a.rel = 'noopener noreferrer';
-  links.append(a);
-}
-
-if (validEmail) addLink('Enviar correo', 'mailto:' + cfg.email);
-if (/^\d{8,15}$/.test(cfg.whatsapp || '')) addLink('WhatsApp directo', 'https://wa.me/' + cfg.whatsapp);
-try {
-  const u = new URL(cfg.calendar);
-  if (u.protocol === 'https:') addLink('Reservar llamada', u.href);
-} catch (e) {}
-
-document.getElementById('contact-status').textContent = links.children.length ?
-  'Canales directos disponibles para agendar o consultar:' :
-  'Canales pendientes de configuración.';
-
-document.getElementById('contact-form').addEventListener('submit', e => {
-  e.preventDefault();
-  const feedback = document.getElementById('contact-feedback');
-  const name = document.getElementById('name').value;
-  const company = document.getElementById('company').value;
-  const challenge = document.getElementById('challenge').value;
-  const text = `Nombre: ${name}\nEmpresa: ${company}\nReto: ${challenge}`;
-  
-  window.location.href = `mailto:${cfg.email}?subject=${encodeURIComponent('Consulta SumaTips - ' + company)}&body=${encodeURIComponent(text)}`;
-  feedback.textContent = 'Abriendo tu aplicación de correo para enviar la consulta...';
-});
 </script>
 </body>
 </html>
