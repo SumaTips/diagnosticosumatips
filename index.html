@@ -72,7 +72,6 @@ legend{font-weight:800;color:var(--blue);padding:0 8px}
 .area-bar{height:10px;border-radius:99px;background:#e2e8f0;overflow:hidden;margin:8px 0}
 .area-bar-fill{height:100%;transition:width .4s}
 
-/* Estilos de formulario limpios y ordenados */
 .form-group{margin-bottom:18px}
 .form-group label{display:block;font-weight:700;margin-bottom:6px;color:var(--blue)}
 .form-group input, .form-group textarea{
@@ -164,7 +163,7 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
   <div class="wrap">
     <div class="tag">Autodiagnóstico del Negocio</div>
     <h2>¿Qué nivel de control tiene tu empresa hoy?</h2>
-    <p>Responde <strong>Sí</strong> o <strong>No</strong> con total honestidad a las siguientes 21 afirmaciones para obtener tu puntuación y semáforo operativo de inmediato.</p>
+    <p>Responde <strong>Sí</strong> o <strong>No</strong> con total honestidad a las siguientes 21 afirmaciones para obtener una orientación preliminar y semáforo operativo de inmediato.</p>
 
     <form id="quiz">
       <div id="questions"></div>
@@ -344,43 +343,59 @@ document.getElementById('quiz').addEventListener('submit', function(e) {
         totalScore++;
       }
     });
-    areaScores.push({ name: area.name, score: aScore, total: area.questions.length, tip: area.tip });
+    areaScores.push({ 
+      name: area.name, 
+      score: aScore, 
+      total: area.questions.length, 
+      tip: area.tip 
+    });
   });
 
+  // Identificar el desempeño específico en Finanzas y Caja (área crítica)
+  const finanzasArea = areaScores.find(a => a.name.includes("Finanzas"));
+  const riesgoCajaCritico = finanzasArea && finanzasArea.score <= 1;
+
+  // Determinar Semáforo y Lenguaje Orientativo (sin afirmaciones absolutas)
   let semaforoClass = "";
   let semaforoText = "";
   let diagnosticoMensaje = "";
 
   if (totalScore <= 10) {
     semaforoClass = "bg-red";
-    semaforoText = "🔴 Semáforo Rojo · Gestión Crítica";
-    diagnosticoMensaje = "Tu empresa depende excesivamente de la improvisación o del día a día del dueño. Hay riesgos altos de fugas de dinero o frenos operativos.";
-  } else if (totalScore <= 16) {
+    semaforoText = "🔴 Semáforo Rojo · Atención Prioritaria";
+    diagnosticoMensaje = "Se reportan pocas prácticas formales en la operación diaria. La prioridad sugerida es organizar el registro básico de números y tareas clave.";
+  } else if (totalScore <= 16 || riesgoCajaCritico) {
     semaforoClass = "bg-yellow";
-    semaforoText = "🟡 Semáforo Amarillo · En Desarrollo";
-    diagnosticoMensaje = "El negocio está en marcha pero existen puntos ciegos importantes en finanzas y procesos que impiden un crecimiento sostenido.";
+    semaforoText = "🟡 Semáforo Amarillo · En Desarrollo Operativo";
+    
+    if (riesgoCajaCritico && totalScore > 16) {
+      diagnosticoMensaje = "Aviso: Aunque el volumen general de respuestas afirmativas es favorable, se identificó poca formalidad en Finanzas y Caja. La visibilidad de liquidez es prioritaria antes de considerar la gestión estructurada.";
+    } else {
+      diagnosticoMensaje = "Existen procesos funcionales en marcha, pero con áreas clave que muestran informalidad o dependencia de la memoria.";
+    }
   } else {
     semaforoClass = "bg-green";
-    semaforoText = "🟢 Semáforo Verde · Gestión Estructurada";
-    diagnosticoMensaje = "Cuentas con controles sólidos y buenas prácticas. Tu enfoque actual debe orientarse a la optimización fina y la delegación estratégica.";
+    semaforoText = "🟢 Semáforo Verde · Mayor Estructura Declarada";
+    diagnosticoMensaje = "Reportas un número favorable de prácticas básicas de control. El paso siguiente consiste en validar estos procesos con indicadores y delegación formal.";
   }
 
   let resHTML = `
     <div class="score-box">
-      <div class="muted">PUNTAJE GLOBAL DE CONTROL</div>
+      <div class="muted">ORIENTACIÓN INICIAL SEGÚN AUTOEVALUACIÓN</div>
       <div class="score-number">${totalScore} <span style="font-size:1.5rem;color:var(--text);opacity:.6;">/ 21</span></div>
       <div class="traffic-light ${semaforoClass}">${semaforoText}</div>
       <p style="margin-top:16px;max-width:650px;margin-left:auto;margin-right:auto;">${diagnosticoMensaje}</p>
+      <small class="muted" style="display:block;margin-top:10px;">* Herramienta orientativa propia basada en respuestas declaradas. No constituye auditoría ni dictamen financiero o legal.</small>
     </div>
 
-    <h3 style="margin-top:28px;">Semáforo por Área:</h3>
+    <h3 style="margin-top:28px;">Detalle por Área:</h3>
   `;
 
-  let resumenTexto = `Puntaje Total: ${totalScore}/21 (${semaforoText})\n`;
+  let resumenTexto = `Puntaje Reportado: ${totalScore}/21 (${semaforoText})\n`;
 
   areaScores.forEach(item => {
     let color = item.score <= 1 ? "var(--red)" : item.score === 2 ? "var(--yellow)" : "var(--green)";
-    let estado = item.score <= 1 ? "🔴 Atención Urgente" : item.score === 2 ? "🟡 Por Mejorar" : "🟢 Bajo Control";
+    let estado = item.score <= 1 ? "🔴 Brecha importante" : item.score === 2 ? "🟡 Aplicación parcial" : "🟢 Práctica reportada";
     let pct = (item.score / item.total) * 100;
 
     resumenTexto += `${item.name}: ${item.score}/${item.total} (${estado})\n`;
@@ -394,16 +409,16 @@ document.getElementById('quiz').addEventListener('submit', function(e) {
         <div class="area-bar">
           <div class="area-bar-fill" style="width:${pct}%;background:${color};"></div>
         </div>
-        <p class="muted" style="margin:4px 0 0;"><strong>Acción recomendada:</strong> ${item.tip}</p>
+        <p class="muted" style="margin:4px 0 0;"><strong>Enfoque sugerido:</strong> ${item.tip}</p>
       </div>
     `;
   });
 
-  const waMsg = encodeURIComponent(`Hola SumaTips, completé el autodiagnóstico de mi empresa.\n${resumenTexto}\nQuiero revisar un plan de acción.`);
+  const waMsg = encodeURIComponent(`Hola SumaTips, completé la autoevaluación preliminar.\n${resumenTexto}\nQuiero conversar para validar un plan de trabajo.`);
   resHTML += `
     <div class="actions" style="margin-top:28px;">
       <a class="btn" target="_blank" href="https://wa.me/584127147963?text=${waMsg}">Enviar resultado por WhatsApp</a>
-      <a class="btn secondary" href="#contacto">Solicitar llamada de asesoría</a>
+      <a class="btn secondary" href="#contacto">Solicitar llamada exploratoria</a>
     </div>
   `;
 
