@@ -24,7 +24,7 @@ a{color:var(--blue)}
 header{background:white;position:sticky;top:0;z-index:10;box-shadow:0 2px 12px #082b6810}
 nav{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:88px;flex-wrap:wrap;padding:12px 0}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;font-weight:800;color:var(--blue)}
-.brand-icon{flex:none;width:44px;height:44px}
+.brand img{max-height:54px;max-width:90px;width:auto;height:auto;object-fit:contain;background:transparent;display:block}
 .links{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
 .links a{text-decoration:none;font-size:14px}
 h1,h2,h3{color:var(--blue);line-height:1.15}
@@ -100,11 +100,10 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
   <div class="wrap">
     <nav aria-label="Principal">
       <a class="brand" href="#inicio">
-        <svg class="brand-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="44" height="44" rx="10" fill="#082b68"/>
-          <path d="M12 16C12 13.7909 13.7909 12 16 12H28C30.2091 12 32 13.7909 32 16C32 18.2091 30.2091 20 28 20H16C13.7909 20 12 21.7909 12 24C12 26.2091 13.7909 28 16 28H28C30.2091 28 32 29.7909 32 32" stroke="#d6a43b" stroke-width="4.5" stroke-linecap="round"/>
-          <circle cx="22" cy="22" r="3.5" fill="#159fc1"/>
-        </svg>
+        <!-- Enlace original a la carpeta con recuperación automática ante extensiones -->
+        <img src="assets/logo.png" 
+             alt="SumaTips Logo" 
+             onerror="if(!this.tried){this.tried=1;this.src='assets/logo.jpg';}else if(this.tried===1){this.tried=2;this.src='asset/logo.png';}else if(this.tried===2){this.tried=3;this.src='asset/logo.jpg';}else{this.hidden=true;}">
         <span>SumaTips<br><small>Consulting Group</small></span>
       </a>
       <div class="links">
