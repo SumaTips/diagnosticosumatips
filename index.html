@@ -100,7 +100,6 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
   <div class="wrap">
     <nav aria-label="Principal">
       <a class="brand" href="#inicio">
-        <!-- RUTA EXACTA A TU ARCHIVO EN GITHUB -->
         <img src="Logo.png" alt="SumaTips Logo">
         <span>SumaTips<br><small>Consulting Group</small></span>
       </a>
@@ -133,7 +132,8 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
       <h3>Una visión integral para priorizar.</h3>
       <div class="line"><span><i class="dot"></i>Finanzas y caja</span><span>Visibilidad</span></div>
       <div class="line"><span><i class="dot"></i>Operaciones</span><span>Control y orden</span></div>
-      <div class="line"><span><i class="dot"></i>Estrategia</span><span>Rumbo claro</span></div>
+      <div class="line"><span><i class="dot"></i>Gestión fiscal</span><span>Seguridad</span></div>
+      <div class="line"><span><i class="dot"></i>Marketing</span><span>Atracción</span></div>
       <p class="muted">Metodología ágil orientada a resultados tangibles.</p>
     </div>
   </div>
@@ -152,7 +152,7 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
     <div class="tag">Cómo trabajamos</div>
     <h2>Del diagnóstico a la acción estructurada.</h2>
     <div class="grid four">
-      <div><span class="num">01</span><h3>Diagnóstico</h3><p>Evaluamos procesos, tesorería y riesgos del negocio.</p></div>
+      <div><span class="num">01</span><h3>Diagnóstico</h3><p>Evaluamos procesos, tesorería, riesgos fiscales y comerciales.</p></div>
       <div><span class="num">02</span><h3>Estrategia</h3><p>Definimos prioridades, cronograma y responsables.</p></div>
       <div><span class="num">03</span><h3>Ejecución</h3><p>Acompañamos la implementación de herramientas y procesos.</p></div>
       <div><span class="num">04</span><h3>Seguimiento</h3><p>Monitoreamos indicadores clave de rentabilidad y orden.</p></div>
@@ -164,7 +164,7 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
   <div class="wrap">
     <div class="tag">Autodiagnóstico del Negocio</div>
     <h2>¿Qué nivel de control tiene tu empresa hoy?</h2>
-    <p>Responde <strong>Sí</strong> o <strong>No</strong> con total honestidad a las siguientes 21 afirmaciones para obtener una orientación preliminar y semáforo operativo de inmediato.</p>
+    <p>Responde <strong>Sí</strong> o <strong>No</strong> con total honestidad a las siguientes 27 afirmaciones para obtener una orientación preliminar y semáforo operativo de inmediato.</p>
 
     <form id="quiz">
       <div id="questions"></div>
@@ -183,13 +183,14 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
     <div>
       <div class="tag">Sobre SumaTips</div>
       <h2>Consultoría estratégica cercana a las decisiones clave.</h2>
-      <p>SumaTips Consulting Group acompaña a empresarios y directores de pymes a estructurar su flujo de caja, formalizar procesos y alcanzar sostenibilidad financiera.</p>
+      <p>SumaTips Consulting Group acompaña a empresarios y directores de pymes a estructurar su flujo de caja, formalizar procesos, blindar su gestión tributaria y alcanzar sostenibilidad.</p>
     </div>
     <div class="card">
       <h3>Áreas de acompañamiento</h3>
       <div class="line">Estructuración de flujo de caja y costos</div>
       <div class="line">Manuales de procesos y control interno</div>
-      <div class="line">Planes de continuidad y crecimiento ordenado</div>
+      <div class="line">Cumplimiento fiscal y orden tributario</div>
+      <div class="line">Estrategia comercial y atracción digital</div>
     </div>
   </div>
 </section>
@@ -273,6 +274,26 @@ const areas = [
     tip: "Sistematiza el seguimiento a cotizaciones y el control de cobranzas."
   },
   {
+    name: "Marketing y Redes Sociales",
+    desc: "Atracción de prospectos, presencia de marca y conversión digital.",
+    questions: [
+      "¿Publicas contenido con un calendario planificado y orientado a tu cliente ideal?",
+      "¿Mides qué publicaciones o campañas te generan consultas o ventas reales?",
+      "¿Cuentas con un proceso rápido para responder cotizaciones por redes y WhatsApp?"
+    ],
+    tip: "Diseña un calendario de contenidos enfocado en resolver dudas de compra y mide el retorno de tus campañas."
+  },
+  {
+    name: "Gestión Fiscal y Tributaria",
+    desc: "Cumplimiento normativo, retenciones y prevención de sanciones.",
+    questions: [
+      "¿Mantienes al día la presentación y pago de declaraciones de impuestos (IVA, ISLR, municipales)?",
+      "¿Emites facturas con los requisitos formales vigentes y archivas soportes contables?",
+      "¿Revisas periódicamente con tu contador el impacto tributario antes del cierre de mes?"
+    ],
+    tip: "Establece un calendario fiscal preventivo y audita tus libros de compra/venta para evitar multas imprevistas."
+  },
+  {
     name: "Equipo y Organización",
     desc: "Roles, responsabilidades y delegación efectiva.",
     questions: [
@@ -296,7 +317,7 @@ const areas = [
     name: "Formalidad y Continuidad",
     desc: "Cumplimiento legal, contingencias y sostenibilidad.",
     questions: [
-      "¿Mantienes al día licencias, permisos e impuestos del negocio?",
+      "¿Mantienes al día licencias, permisos de funcionamiento y actas de asamblea?",
       "¿Formalizas los acuerdos con clientes y colaboradores por escrito?",
       "¿Tu negocio cuenta con un plan de respaldo ante fallas de luz o internet?"
     ],
@@ -352,36 +373,40 @@ document.getElementById('quiz').addEventListener('submit', function(e) {
     });
   });
 
+  // Áreas críticas para veto (Finanzas y Fiscal)
   const finanzasArea = areaScores.find(a => a.name.includes("Finanzas"));
+  const fiscalArea = areaScores.find(a => a.name.includes("Fiscal"));
   const riesgoCajaCritico = finanzasArea && finanzasArea.score <= 1;
+  const riesgoFiscalCritico = fiscalArea && fiscalArea.score <= 1;
 
   let semaforoClass = "";
   let semaforoText = "";
   let diagnosticoMensaje = "";
 
-  if (totalScore <= 10) {
+  // Escala calibrada a 27 puntos
+  if (totalScore <= 13) {
     semaforoClass = "bg-red";
     semaforoText = "🔴 Semáforo Rojo · Atención Prioritaria";
-    diagnosticoMensaje = "Se reportan pocas prácticas formales en la operación diaria. La prioridad sugerida es organizar el registro básico de números y tareas clave.";
-  } else if (totalScore <= 16 || riesgoCajaCritico) {
+    diagnosticoMensaje = "Se reportan pocas prácticas formales en la operación diaria. La prioridad sugerida es organizar el registro básico de números, tareas clave y cumplimiento tributario.";
+  } else if (totalScore <= 20 || riesgoCajaCritico || riesgoFiscalCritico) {
     semaforoClass = "bg-yellow";
     semaforoText = "🟡 Semáforo Amarillo · En Desarrollo Operativo";
     
-    if (riesgoCajaCritico && totalScore > 16) {
-      diagnosticoMensaje = "Aviso: Aunque el volumen general de respuestas afirmativas es favorable, se identificó poca formalidad en Finanzas y Caja. La visibilidad de liquidez es prioritaria antes de considerar la gestión estructurada.";
+    if ((riesgoCajaCritico || riesgoFiscalCritico) && totalScore > 20) {
+      diagnosticoMensaje = "Aviso: Aunque el volumen general de respuestas afirmativas es favorable, se identificaron brechas sensibles en Finanzas o Gestión Fiscal. Resolver estas áreas críticas es indispensable antes de consolidar el crecimiento.";
     } else {
-      diagnosticoMensaje = "Existen procesos funcionales en marcha, pero con áreas clave que muestran informalidad o dependencia de la memoria.";
+      diagnosticoMensaje = "Existen procesos funcionales en marcha, pero con áreas clave que muestran informalidad, debilidad comercial o dependencia de la memoria.";
     }
   } else {
     semaforoClass = "bg-green";
     semaforoText = "🟢 Semáforo Verde · Mayor Estructura Declarada";
-    diagnosticoMensaje = "Reportas un número favorable de prácticas básicas de control. El paso siguiente consiste en validar estos procesos con indicadores y delegación formal.";
+    diagnosticoMensaje = "Reportas un número favorable de prácticas básicas de control. El paso siguiente consiste en validar estos procesos con indicadores de gestión y delegación formal.";
   }
 
   let resHTML = `
     <div class="score-box">
       <div class="muted">ORIENTACIÓN INICIAL SEGÚN AUTOEVALUACIÓN</div>
-      <div class="score-number">${totalScore} <span style="font-size:1.5rem;color:var(--text);opacity:.6;">/ 21</span></div>
+      <div class="score-number">${totalScore} <span style="font-size:1.5rem;color:var(--text);opacity:.6;">/ 27</span></div>
       <div class="traffic-light ${semaforoClass}">${semaforoText}</div>
       <p style="margin-top:16px;max-width:650px;margin-left:auto;margin-right:auto;">${diagnosticoMensaje}</p>
       <small class="muted" style="display:block;margin-top:10px;">* Herramienta orientativa propia basada en respuestas declaradas. No constituye auditoría ni dictamen financiero o legal.</small>
@@ -390,7 +415,7 @@ document.getElementById('quiz').addEventListener('submit', function(e) {
     <h3 style="margin-top:28px;">Detalle por Área:</h3>
   `;
 
-  let resumenTexto = `Puntaje Reportado: ${totalScore}/21 (${semaforoText})\n`;
+  let resumenTexto = `Puntaje Reportado: ${totalScore}/27 (${semaforoText})\n`;
 
   areaScores.forEach(item => {
     let color = item.score <= 1 ? "var(--red)" : item.score === 2 ? "var(--yellow)" : "var(--green)";
