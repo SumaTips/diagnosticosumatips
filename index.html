@@ -65,13 +65,16 @@ section{padding:64px 0}
 .num{font-size:32px;color:var(--cyan);font-weight:800}
 .muted,small{font-size:14px;color:#536176}
 
-/* MODELOS DE NEGOCIO (FILTRO) */
+/* MODELOS DE NEGOCIO */
 .model-selector{display:grid;grid-template-columns:repeat(auto-fill, minmax(165px, 1fr));gap:12px;margin:24px 0}
 .model-card{background:white;border:2px solid #e2e8f0;border-radius:12px;padding:16px 12px;text-align:center;cursor:pointer;transition:all .2s;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
 .model-card:hover{border-color:var(--cyan);background:#f8fafc}
 .model-card.selected{border-color:var(--blue);background:#ebf5fb;box-shadow:0 0 0 2px var(--blue)}
 .model-icon{font-size:26px;line-height:1}
 .model-title{font-size:13px;font-weight:700;color:var(--text);line-height:1.2}
+
+/* BADGE INFORMATIVO DE ADAPTACIÓN */
+.adaptation-banner{background:#ebf5fb;border:1px solid #bce1f5;padding:14px 18px;border-radius:10px;margin-bottom:20px;font-size:15px;color:var(--blue);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
 
 /* FORMULARIO Y PREGUNTAS */
 fieldset{border:1px solid #dce4ed;border-radius:12px;margin:20px 0;padding:20px;background:#ffffff}
@@ -83,7 +86,7 @@ legend{font-weight:800;color:var(--blue);padding:0 8px}
 .bool-options label{display:flex;align-items:center;gap:6px;cursor:pointer;font-weight:600;padding:6px 14px;border:2px solid #dce4ed;border-radius:8px}
 .bool-options input[type="radio"]{cursor:pointer;margin:0}
 
-/* RESULTADOS Y SEMÁFORO SEGÚN INFOGRAFÍA */
+/* RESULTADOS Y SEMÁFORO */
 .score-box{text-align:center;padding:26px;border-radius:14px;margin:20px 0;border:2px solid #dfe6ee;background:white}
 .score-number{font-size:3.5rem;font-weight:800;line-height:1;color:var(--blue)}
 .traffic-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 22px;border-radius:99px;color:white;font-weight:800;margin-top:14px;text-transform:uppercase;font-size:14px}
@@ -160,7 +163,7 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
         <div class="line"><span><i class="dot"></i>Costos y Rentabilidad</span><span>Márgenes</span></div>
         <div class="line"><span><i class="dot"></i>Gestión Fiscal</span><span>Cumplimiento</span></div>
         <div class="line"><span><i class="dot"></i>Operaciones y Procesos</span><span>Eficiencia</span></div>
-        <p class="muted">Microcuestionario ágil por modelo de negocio antes de tu cita consultiva.</p>
+        <p class="muted">Microcuestionario dinámico adaptado por modelo de negocio antes de tu cita consultiva.</p>
       </div>
     </div>
   </section>
@@ -215,28 +218,34 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
 <div id="view-diag" class="tab-view">
   <section>
     <div class="wrap">
-      <div class="tag">Herramienta Consultiva</div>
+      <div class="tag">Herramienta Consultiva Dinámica</div>
       <h2>Diagnóstico Empresarial Pre-Cita Consultiva</h2>
-      <p class="lead">Un micro cuestionario por modelo de negocio para identificar rápidamente las áreas críticas.</p>
+      <p class="lead">Un micro cuestionario que adapta sus preguntas técnicas según tu modelo de negocio y escala operativa.</p>
 
       <!-- PASO 1: FILTRO DE MODELO DE NEGOCIO Y UNIDAD ECONÓMICA -->
       <div class="card" style="margin-bottom:28px;">
         <h3 style="margin-top:0;">Paso 1: Selecciona tu Modelo de Negocio y Unidad Económica</h3>
-        <p class="muted">Elige el sector principal que mejor representa tu operación diaria:</p>
+        <p class="muted">Al hacer clic en un modelo o cambiar el tamaño, las preguntas del diagnóstico se actualizarán automáticamente:</p>
         
         <div class="model-selector" id="models-container"></div>
 
-        <div class="form-group" style="max-width:480px;margin-top:16px;">
-          <label for="econ-unit">Unidad Económica / Tamaño Operativo:</label>
-          <select id="econ-unit">
-            <option value="Microempresa / Emprendedor (1 a 5 personas)">Microempresa / Profesional Independiente (1 a 5 personas)</option>
-            <option value="Pequeña Empresa (6 a 20 personas)">Pequeña Empresa (6 a 20 colaboradores)</option>
-            <option value="Mediana Empresa (21 a 50+ personas)">Mediana Empresa (21 a 50+ colaboradores)</option>
+        <div class="form-group" style="max-width:520px;margin-top:16px;">
+          <label for="econ-unit">Unidad Económica / Tamaño de Operación:</label>
+          <select id="econ-unit" onchange="handleEconUnitChange()">
+            <option value="micro">Microempresa / Emprendedor (1 a 5 personas)</option>
+            <option value="pequena" selected>Pequeña Empresa (6 a 20 colaboradores)</option>
+            <option value="mediana">Mediana Empresa (21 a 50+ colaboradores)</option>
           </select>
         </div>
       </div>
 
-      <!-- PASO 2: CUESTIONARIO POR ÁREA -->
+      <!-- BANNER INFORMATIVO DEL CUESTIONARIO CARGADO -->
+      <div class="adaptation-banner" id="adaptation-banner">
+        <span>Cuestionario calibrado para: <strong id="active-model-label">Servicios Profesionales</strong> (<span id="active-unit-label">Pequeña Empresa</span>)</span>
+        <small style="color:#086880;font-weight:700;">24 preguntas específicas cargadas</small>
+      </div>
+
+      <!-- PASO 2: CUESTIONARIO DINÁMICO POR ÁREA -->
       <form id="quiz-form">
         <div id="questions-wrapper"></div>
         <div class="actions">
@@ -279,190 +288,331 @@ function switchTab(tab) {
 
 // 12 MODELOS DE NEGOCIO SEGÚN LA INFOGRAFÍA
 const businessModels = [
-  { id: "serv_prof", name: "Servicios Profesionales", icon: "👥" },
-  { id: "serv_tec", name: "Servicios Técnicos", icon: "🔧" },
-  { id: "com_min", name: "Comercio Minorista", icon: "🛒" },
-  { id: "dist_may", name: "Distribución y Mayorista", icon: "📦" },
-  { id: "manuf", name: "Manufactura", icon: "🏭" },
-  { id: "const", name: "Construcción y Proyectos", icon: "🏗️" },
-  { id: "rest", name: "Restaurantes y Alimentos", icon: "🍽️" },
-  { id: "transp", name: "Transporte y Logística", icon: "🚚" },
-  { id: "agro", name: "Agroindustria", icon: "🌱" },
-  { id: "digital", name: "Negocios Digitales", icon: "💻" },
-  { id: "fin", name: "Financiero y Seguros", icon: "🏛️" },
-  { id: "alquiler", name: "Alquiler y Activos", icon: "🏠" }
+  { id: "serv_prof", name: "Servicios Profesionales", icon: "👥", category: "servicios" },
+  { id: "serv_tec", name: "Servicios Técnicos", icon: "🔧", category: "servicios" },
+  { id: "com_min", name: "Comercio Minorista", icon: "🛒", category: "comercio" },
+  { id: "dist_may", name: "Distribución y Mayorista", icon: "📦", category: "comercio" },
+  { id: "manuf", name: "Manufactura", icon: "🏭", category: "produccion" },
+  { id: "const", name: "Construcción y Proyectos", icon: "🏗️", category: "proyectos" },
+  { id: "rest", name: "Restaurantes y Alimentos", icon: "🍽️", category: "alimentos" },
+  { id: "transp", name: "Transporte y Logística", icon: "🚚", category: "logistica" },
+  { id: "agro", name: "Agroindustria", icon: "🌱", category: "produccion" },
+  { id: "digital", name: "Negocios Digitales", icon: "💻", category: "digital" },
+  { id: "fin", name: "Financiero y Seguros", icon: "🏛️", category: "financiero" },
+  { id: "alquiler", name: "Alquiler y Activos", icon: "🏠", category: "activos" }
 ];
 
-let selectedModel = businessModels[0].name;
+let selectedModelObj = businessModels[0];
+let selectedUnit = "pequena";
 
+// DICCIONARIO DE PREGUNTAS ESPECÍFICAS SEGÚN MODELO Y TAMAÑO
+function getQuestionsFor(model, unit) {
+  // Ajustes de escala según unidad económica para Estrategia, RRHH y Tecnología
+  let qEstrategia = [
+    "¿Tiene objetivos comerciales y financieros claros y por escrito?",
+    "¿Evalúa su entorno y cuenta con un plan de crecimiento definido?"
+  ];
+  let qRRHH = [
+    "¿Tiene estructura organizacional con roles definidos y capacitación formal?",
+    "¿Evalúa el desempeño de su equipo y controla la rotación de personal?"
+  ];
+  let qTecnologia = [
+    "¿Usa sistemas eficientes con información confiable y respaldo de datos seguro?",
+    "¿Automatiza tareas repetitivas y cuenta con soporte técnico adecuado?"
+  ];
+
+  if (unit === "micro") {
+    qEstrategia = [
+      "¿Tiene metas mensuales de ventas y ganancias personales/del negocio por escrito?",
+      "¿El negocio tiene un rumbo claro que no dependa solo de apagar fuegos diarios?"
+    ];
+    qRRHH = [
+      "¿Tiene claramente delimitadas las tareas de cada persona (incluyéndose a usted mismo)?",
+      "¿El negocio puede operar al menos 3 días con normalidad si usted se ausenta?"
+    ];
+    qTecnologia = [
+      "¿Respalda su información contable y base de clientes en la nube de forma segura?",
+      "¿Usa herramientas digitales sencillas para facturar y cotizar sin depender de papel?"
+    ];
+  } else if (unit === "mediana") {
+    qEstrategia = [
+      "¿Cuenta con un plan estratégico formal con KPIs compartidos con sus líderes de área?",
+      "¿Revisa trimestralmente escenarios de expansión, riesgos de mercado y competencia?"
+    ];
+    qRRHH = [
+      "¿Cuenta con manuales de cargos, mandos medios empoderados y planes de retención?",
+      "¿Mide formalmente índices de rotación, clima laboral y productividad por departamento?"
+    ];
+    qTecnologia = [
+      "¿Opera bajo un sistema ERP o software centralizado que integra compras, ventas y contabilidad?",
+      "¿Cuenta con protocolos de ciberseguridad, permisos por usuario y plan de contingencia TI?"
+    ];
+  }
+
+  // Costos, Operaciones, Ventas, Compras y Legal varían radicalmente por Modelo
+  let qCostos, qOperaciones, qVentas, qCompras, qLegal;
+
+  switch (model.category) {
+    case "comercio":
+      qCostos = [
+        "¿Conoce el margen bruto real por línea de producto descontando fletes y promociones?",
+        "¿Identifica con precisión los productos de baja rotación que congelan su capital?"
+      ];
+      qOperaciones = [
+        "¿Tiene tiempos definidos para reposición de anaquel, despacho y atención en mostrador?",
+        "¿Realiza arqueos diarios y auditorías periódicas a sus puntos de cobro y despachos?"
+      ];
+      qVentas = [
+        "¿Mide el ticket promedio de compra y la frecuencia de visita de sus clientes?",
+        "¿Aplica estrategias activas de venta cruzada para aumentar el volumen vendido?"
+      ];
+      qCompras = [
+        "¿Lleva control estricto de inventarios con conteos cíclicos para evitar hurtos o pérdidas?",
+        "¿Negocia plazos de crédito y descuentos por volumen con sus distribuidores clave?"
+      ];
+      qLegal = [
+        "¿Cumple con normativas de protección al consumidor, rotulado de precios y garantías?",
+        "¿Tiene contratos de arrendamiento comercial claros y pólizas contra robos e incendios?"
+      ];
+      break;
+
+    case "produccion": // Manufactura y Agroindustria
+      qCostos = [
+        "¿Calcula fichas técnicas de costos separando materia prima, mano de obra y costos indirectos (CIF)?",
+        "¿Mide con exactitud el porcentaje de desperdicio, merma o rechazo en cada lote?"
+      ];
+      qOperaciones = [
+        "¿Tiene estandarizados los tiempos de producción y planes de mantenimiento de maquinaria?",
+        "¿Controla la capacidad instalada de su planta para evitar paradas no programadas?"
+      ];
+      qVentas = [
+        "¿Planifica su producción con base en pedidos comprometidos o pronósticos reales de venta?",
+        "¿Cuenta con clientes recurrentes que aseguren un volumen base de producción mensual?"
+      ];
+      qCompras = [
+        "¿Mantiene stock de seguridad de materias primas críticas para no detener la producción?",
+        "¿Evalúa al menos dos proveedores certificados por cada insumo estratégico?"
+      ];
+      qLegal = [
+        "¿Cumple estrictamente con normativas ambientales, de seguridad laboral (LOPCYMAT/equivalente) y permisos sanitarios?",
+        "¿Formaliza contratos de suministro de materia prima con cláusulas de penalización por retraso?"
+      ];
+      break;
+
+    case "alimentos": // Restaurantes y Alimentos
+      qCostos = [
+        "¿Tiene costeada cada receta con su respectivo 'escandallo' actualizado a precios de hoy?",
+        "¿Mide y controla diariamente las mermas de cocina, descomposición y consumo interno?"
+      ];
+      qOperaciones = [
+        "¿Mantiene fichas de preparación estándar para asegurar la misma calidad en cada plato?",
+        "¿Controla la cadena de frío, rotación FIFO (primero que entra, primero que sale) e higiene?"
+      ];
+      qVentas = [
+        "¿Mide la ocupación por turno/mesa y la rentabilidad del menú según platos más pedidos?",
+        "¿Tiene un canal ágil para responder y fidelizar clientes por delivery o reservas?"
+      ];
+      qCompras = [
+        "¿Realiza compras de perecederos con base en pronóstico de ventas para evitar vencimientos?",
+        "¿Verifica pesos, frescura y temperatura al momento de recibir a sus proveedores?"
+      ];
+      qLegal = [
+        "¿Tiene al día certificados de manipulación de alimentos, permisos de bomberos y patentes?",
+        "¿Cuenta con protocolos claros para atender reclamos por calidad o intoxicaciones?"
+      ];
+      break;
+
+    case "proyectos": // Construcción y Proyectos
+      qCostos = [
+        "¿Elabora presupuestos con análisis de precios unitarios (APU) y provisiona desviaciones por inflación?",
+        "¿Mide la desviación entre el costo presupuestado y el costo real ejecutado por hito?"
+      ];
+      qOperaciones = [
+        "¿Lleva control de avance físico vs. financiero mediante cronogramas de obra (Gantt)?",
+        "¿Supervisa el rendimiento del personal en campo y la seguridad industrial en sitio?"
+      ];
+      qVentas = [
+        "¿Tiene un embudo para licitaciones o presupuestos con seguimiento antes del vencimiento?",
+        "¿Establece condiciones de anticipo comercial que cubran el arranque de cada etapa?"
+      ];
+      qCompras = [
+        "¿Coordina la entrega de materiales en obra justo a tiempo para evitar deterioros o robos?",
+        "¿Gestiona compras con comparativas de precios de materiales pesados y equipos?"
+      ];
+      qLegal = [
+        "¿Firma contratos por obra con alcance exacto, actas de entrega y pólizas de fiel cumplimiento?",
+        "¿Gestiona las responsabilidades laborales patronales del personal eventual de obra?"
+      ];
+      break;
+
+    case "logistica": // Transporte y Logística
+      qCostos = [
+        "¿Conoce el costo operativo real por kilómetro recorrido o flete (combustible, cauchos, viáticos)?",
+        "¿Provisiona adecuadamente los fondos de depreciación y mantenimiento mayor de su flota?"
+      ];
+      qOperaciones = [
+        "¿Planifica rutas eficientes controlando tiempos de tránsito, carga y descarga?",
+        "¿Realiza mantenimientos preventivos programados a cada unidad de transporte?"
+      ];
+      qVentas = [
+        "¿Mide el nivel de cumplimiento de entregas a tiempo (OTIF) para fidelizar a sus clientes?",
+        "¿Diversifica su cartera de clientes para no depender de un solo generador de carga?"
+      ];
+      qCompras = [
+        "¿Gestiona compras de repuestos, lubricantes y neumáticos con proveedores mayoristas de confianza?",
+        "¿Lleva control de inventario de repuestos para no tener camiones paralizados?"
+      ];
+      qLegal = [
+        "¿Mantiene al día guías de movilización, permisos viales, seguros de carga y de vehículos?",
+        "¿Establece límites claros de responsabilidad civil ante pérdidas, robos o siniestros viales?"
+      ];
+      break;
+
+    case "digital": // Negocios Digitales
+      qCostos = [
+        "¿Mide el Costo de Adquisición de Clientes (CAC) y el Valor de Vida del Cliente (LTV)?",
+        "¿Controla el gasto recurrente en servidores, licencias de software y pasarelas de pago?"
+      ];
+      qOperaciones = [
+        "¿Aplica metodologías ágiles (Scrum/Kanban) con entregas continuas y control de errores/bugs?",
+        "¿Garantiza la disponibilidad de su plataforma (uptime) y tiempos de respuesta técnica rápidos?"
+      ];
+      qVentas = [
+        "¿Mide la tasa de conversión en su embudo digital (visitas vs. compras/registros)?",
+        "¿Aplica estrategias de retención para reducir la tasa de cancelación (churn rate)?"
+      ];
+      qCompras = [
+        "¿Evalúa periódicamente alternativas de pasarelas de pago y proveedores de infraestructura en la nube?",
+        "¿Negocia tarifas por volumen con sus proveedores de APIs o servicios tecnológicos?"
+      ];
+      qLegal = [
+        "¿Cuenta con Términos y Condiciones, políticas de privacidad y protección de datos (cookies)?",
+        "¿Tiene protegida su propiedad intelectual, marcas registradas y código fuente por contrato?"
+      ];
+      break;
+
+    default: // Servicios Profesionales, Técnicos, Financieros, Alquiler
+      qCostos = [
+        "¿Conoce el costo real de su hora de servicio considerando gastos fijos y horas no facturables?",
+        "¿Calcula la rentabilidad individual de cada proyecto, contrato o cliente atendido?"
+      ];
+      qOperaciones = [
+        "¿Dispone de procedimientos estándar para entregar sus servicios con calidad homogénea?",
+        "¿Lleva control estricto de los tiempos de entrega y plazos comprometidos con el cliente?"
+      ];
+      qVentas = [
+        "¿Tiene un proceso sistemático para presentar propuestas comerciales y hacerles seguimiento?",
+        "¿Consigue nuevos clientes mediante recomendaciones planificadas o canales medibles?"
+      ];
+      qCompras = [
+        "¿Evalúa a los subcontratistas y especialistas externos que apoyan sus servicios?",
+        "¿Controla las licencias o herramientas de trabajo indispensables para prestar el servicio?"
+      ];
+      qLegal = [
+        "¿Formaliza todo encargo mediante contratos de servicios con alcance y límites de responsabilidad claros?",
+        "¿Protege la confidencialidad de la información y la propiedad intelectual de sus entregables?"
+      ];
+      break;
+  }
+
+  // 12 Áreas estructuradas
+  return [
+    { num: "1", name: "Estrategia y Dirección", enfoque: "Planeación", q: qEstrategia, tip: "Estructure una hoja de ruta con metas financieras trimestrales." },
+    { num: "2", name: "Finanzas y Tesorería", enfoque: "Liquidez", q: [
+      "¿Controla su flujo de caja proyectado semanal y conoce su nivel exacto de endeudamiento?",
+      "¿Separa totalmente las finanzas del negocio de sus gastos personales y familiares?"
+    ], tip: "Implemente un flujo de caja preventivo para asegurar liquidez continua." },
+    { num: "3", name: "Contabilidad y Control", enfoque: "Información", q: [
+      "¿Cierra sus estados financieros a tiempo para tomar decisiones antes del día 10 de cada mes?",
+      "¿Concilia cuentas bancarias semanalmente y controla activos fijos?"
+    ], tip: "Estandarice fechas de corte contable para gobernar con números al día." },
+    { num: "4", name: "Costos y Rentabilidad", enfoque: "Rentabilidad", q: qCostos, tip: "Actualice la estructura de costos directos e indirectos de su operación." },
+    { num: "5", name: "Ventas y Comercial", enfoque: "Crecimiento", q: qVentas, tip: "Sistematice el seguimiento de cotizaciones para subir la tasa de conversión." },
+    { num: "6", name: "Marketing y Posicionamiento", enfoque: "Marca", q: [
+      "¿Cuenta con un calendario planificado de atracción comercial y contenidos?",
+      "¿Mide qué campañas o canales le generan ventas efectivas y no solo vistas?"
+    ], tip: "Vincule sus acciones de marketing con métricas de ventas reales." },
+    { num: "7", name: "Operaciones y Procesos", enfoque: "Eficiencia", q: qOperaciones, tip: "Documente los procedimientos que evitan retrasos y errores en su entrega." },
+    { num: "8", name: "Recursos Humanos y Organización", enfoque: "Talento", q: qRRHH, tip: "Defina responsabilidades puntuales y delegue operativamente." },
+    { num: "9", name: "Tecnología y Sistemas", enfoque: "Innovación", q: qTecnologia, tip: "Automatice tareas repetitivas y asegure respaldos periódicos de datos." },
+    { num: "10", name: "Gestión Fiscal y Tributaria", enfoque: "Cumplimiento", q: [
+      "¿Declara y paga tributos (IVA, ISLR, impuestos municipales) en los plazos fijados?",
+      "¿Emite facturas cumpliendo formalidades de ley y coordina cierres mensuales con su contador?"
+    ], tip: "Diseñe un calendario fiscal preventivo para evitar multas tributarias." },
+    { num: "11", name: "Compras, Inventarios y Proveedores", enfoque: "Abastecimiento", q: qCompras, tip: "Establezca controles de stock o acuerdos de suministro con mejores condiciones." },
+    { num: "12", name: "Legal, Riesgos y Cumplimiento", enfoque: "Seguridad", q: qLegal, tip: "Blinde legalmente sus acuerdos con clientes y mantenga licencias al día." }
+  ];
+}
+
+// RENDERIZADO DE MODELOS
 const modelsDiv = document.getElementById('models-container');
 modelsDiv.innerHTML = businessModels.map((m, idx) => `
-  <div class="model-card ${idx === 0 ? 'selected' : ''}" onclick="selectModel('${m.name}', this)">
+  <div class="model-card ${idx === 0 ? 'selected' : ''}" onclick="selectModel('${m.id}', this)">
     <div class="model-icon">${m.icon}</div>
     <div class="model-title">${m.name}</div>
   </div>
 `).join('');
 
-function selectModel(name, element) {
-  selectedModel = name;
+function selectModel(id, element) {
+  selectedModelObj = businessModels.find(m => m.id === id);
   document.querySelectorAll('.model-card').forEach(c => c.classList.remove('selected'));
   element.classList.add('selected');
+  renderQuestions();
 }
 
-// 12 ÁREAS CLAVE DE LA INFOGRAFÍA (MICRO CUESTIONARIO)
-const areasEvaluadas = [
-  {
-    num: "1",
-    name: "Estrategia y Dirección",
-    enfoque: "Planeación",
-    q: [
-      "¿Tiene objetivos comerciales y financieros claros y por escrito?",
-      "¿Evalúa su entorno y cuenta con un plan de crecimiento definido?"
-    ],
-    tip: "Estructure una hoja de ruta trimestral para alinear metas y responsables."
-  },
-  {
-    num: "2",
-    name: "Finanzas y Tesorería",
-    enfoque: "Liquidez",
-    q: [
-      "¿Controla su flujo de caja proyectado semanal y conoce su nivel de endeudamiento?",
-      "¿Gestiona cobros y pagos con presupuestos y análisis de márgenes?"
-    ],
-    tip: "Implemente un flujo de caja preventivo para proteger la liquidez operativa."
-  },
-  {
-    num: "3",
-    name: "Contabilidad y Control",
-    enfoque: "Información",
-    q: [
-      "¿Cierra cuentas a tiempo con reportes confiables?",
-      "¿Controla activos, compara con presupuesto y aplica controles internos?"
-    ],
-    tip: "Estandarice fechas de corte contable mensual para tomar decisiones a tiempo."
-  },
-  {
-    num: "4",
-    name: "Costos y Rentabilidad",
-    enfoque: "Rentabilidad",
-    q: [
-      "¿Conoce sus costos reales y mide rentabilidad controlando desperdicios/mermas?",
-      "¿Fija precios adecuados y analiza la ganancia neta por producto/servicio?"
-    ],
-    tip: "Recalcule fichas de costos unitarios considerando fletes y mano de obra real."
-  },
-  {
-    num: "5",
-    name: "Ventas y Comercial",
-    enfoque: "Crecimiento",
-    q: [
-      "¿Cumple sus metas conociendo el perfil exacto de su cliente?",
-      "¿Hace seguimiento riguroso de ventas, mide conversión y retiene clientes?"
-    ],
-    tip: "Sistematice el embudo comercial para no perder prospectos cotizados."
-  },
-  {
-    num: "6",
-    name: "Marketing y Posicionamiento",
-    enfoque: "Marca",
-    q: [
-      "¿Tiene estrategia de contenidos midiendo el retorno de sus campañas?",
-      "¿Potencia su marca comercial y capta prospectos de forma predecible?"
-    ],
-    tip: "Mida el costo de adquisición de clientes frente al ticket promedio de venta."
-  },
-  {
-    num: "7",
-    name: "Operaciones y Procesos",
-    enfoque: "Eficiencia",
-    q: [
-      "¿Cuenta con procesos claros controlando tiempos y calidad de entrega?",
-      "¿Aprovecha bien sus recursos y aplica mejoras continuas en la operación?"
-    ],
-    tip: "Documente los tres procesos críticos que más demoras causan a sus clientes."
-  },
-  {
-    num: "8",
-    name: "Recursos Humanos y Organización",
-    enfoque: "Talento",
-    q: [
-      "¿Tiene estructura organizacional con roles definidos y capacitación formal?",
-      "¿Evalúa el desempeño de su equipo y controla la rotación de personal?"
-    ],
-    tip: "Clarifique los perfiles de puesto y delegue tareas para no frenar la gerencia."
-  },
-  {
-    num: "9",
-    name: "Tecnología y Sistemas",
-    enfoque: "Innovación",
-    q: [
-      "¿Usa sistemas eficientes con información confiable y respaldo de datos seguro?",
-      "¿Automatiza tareas repetitivas y cuenta con soporte técnico adecuado?"
-    ],
-    tip: "Centralice la gestión en software en la nube con respaldos periódicos."
-  },
-  {
-    num: "10",
-    name: "Gestión Fiscal y Tributaria",
-    enfoque: "Cumplimiento",
-    q: [
-      "¿Cumple obligaciones tributarias puntualmente controlando retenciones e impuestos?",
-      "¿Planifica pagos fiscales, mantiene soportes y minimiza contingencias con su contador?"
-    ],
-    tip: "Establezca auditorías preventivas mensuales para evitar sanciones tributarias."
-  },
-  {
-    num: "11",
-    name: "Compras, Inventarios y Proveedores",
-    enfoque: "Abastecimiento",
-    q: [
-      "¿Gestiona compras con control de inventarios/stock reduciendo mermas?",
-      "¿Evalúa alternativas de proveedores y negocia mejores condiciones de pago?"
-    ],
-    tip: "Establezca niveles de stock mínimo y negocie plazos de crédito con suplidores."
-  },
-  {
-    num: "12",
-    name: "Legal, Riesgos y Cumplimiento",
-    enfoque: "Seguridad",
-    q: [
-      "¿Identifica riesgos operativos, cumple normativas vigentes y firma contratos claros?",
-      "¿Gestiona reclamos con rapidez y tiene controles preventivos contra fraudes?"
-    ],
-    tip: "Formalice acuerdos comerciales por escrito y blinde los contratos de servicio."
-  }
-];
+function handleEconUnitChange() {
+  selectedUnit = document.getElementById('econ-unit').value;
+  renderQuestions();
+}
 
-// RENDERIZAR CUESTIONARIO
-let questionsHTML = '';
-areasEvaluadas.forEach((area, aIdx) => {
-  questionsHTML += `
-    <fieldset>
-      <legend>${area.num}. ${area.name} (Enfoque: ${area.enfoque})</legend>
-  `;
-  area.q.forEach((pregunta, qIdx) => {
+// RENDERIZADO DINÁMICO DEL FORMULARIO
+let currentAreas = [];
+
+function renderQuestions() {
+  currentAreas = getQuestionsFor(selectedModelObj, selectedUnit);
+
+  const unitLabel = document.getElementById('econ-unit').options[document.getElementById('econ-unit').selectedIndex].text;
+  document.getElementById('active-model-label').textContent = selectedModelObj.name;
+  document.getElementById('active-unit-label').textContent = unitLabel;
+
+  let questionsHTML = '';
+  currentAreas.forEach((area, aIdx) => {
     questionsHTML += `
-      <div class="question-item">
-        <span class="question-text">${pregunta}</span>
-        <div class="bool-options">
-          <label><input type="radio" name="area_${aIdx}_q${qIdx}" value="1" required> Sí</label>
-          <label><input type="radio" name="area_${aIdx}_q${qIdx}" value="0" required> No</label>
-        </div>
-      </div>
+      <fieldset>
+        <legend>${area.num}. ${area.name} (Enfoque: ${area.enfoque})</legend>
     `;
+    area.q.forEach((pregunta, qIdx) => {
+      questionsHTML += `
+        <div class="question-item">
+          <span class="question-text">${pregunta}</span>
+          <div class="bool-options">
+            <label><input type="radio" name="area_${aIdx}_q${qIdx}" value="1" required> Sí</label>
+            <label><input type="radio" name="area_${aIdx}_q${qIdx}" value="0" required> No</label>
+          </div>
+        </div>
+      `;
+    });
+    questionsHTML += `</fieldset>`;
   });
-  questionsHTML += `</fieldset>`;
-});
-document.getElementById('questions-wrapper').innerHTML = questionsHTML;
+  document.getElementById('questions-wrapper').innerHTML = questionsHTML;
+  
+  // Si había resultados previos en pantalla, se limpian para obligar a nueva evaluación coherente
+  const resDiv = document.getElementById('results-box');
+  resDiv.hidden = true;
+  resDiv.innerHTML = '';
+}
 
-// PROCESAR EVALUACIÓN Y SEMÁFORO SEGÚN LA INFOGRAFÍA
+// RENDER INICIAL
+renderQuestions();
+
+// PROCESAR EVALUACIÓN Y SEMÁFORO
 document.getElementById('quiz-form').addEventListener('submit', function(e) {
   e.preventDefault();
   let totalAffirmative = 0;
-  const maxPossible = areasEvaluadas.length * 2; // 24 preguntas
+  const maxPossible = currentAreas.length * 2; // 24 preguntas
   let details = [];
 
-  areasEvaluadas.forEach((area, aIdx) => {
+  currentAreas.forEach((area, aIdx) => {
     let aScore = 0;
     area.q.forEach((_, qIdx) => {
       const checked = document.querySelector(`input[name="area_${aIdx}_q${qIdx}"]:checked`);
@@ -481,9 +631,9 @@ document.getElementById('quiz-form').addEventListener('submit', function(e) {
   });
 
   const finalPct = Math.round((totalAffirmative / maxPossible) * 100);
-  const econUnitVal = document.getElementById('econ-unit').value;
+  const econUnitText = document.getElementById('econ-unit').options[document.getElementById('econ-unit').selectedIndex].text;
 
-  // ESCALAS SEGÚN LA INFOGRAFÍA
+  // ESCALAS DE LA INFOGRAFÍA
   let badgeClass = "";
   let badgeText = "";
   let statusAction = "";
@@ -509,7 +659,7 @@ document.getElementById('quiz-form').addEventListener('submit', function(e) {
       <div class="traffic-badge ${badgeClass}">${badgeText}</div>
       <p style="margin-top:14px;font-weight:700;color:var(--blue);">${statusAction}</p>
       <div style="background:#f1f5f9;padding:12px;border-radius:8px;display:inline-block;margin-top:10px;font-size:14px;">
-        <strong>Modelo Evaluado:</strong> ${selectedModel} | <strong>Unidad Económica:</strong> ${econUnitVal}
+        <strong>Modelo Evaluado:</strong> ${selectedModelObj.name} | <strong>Unidad:</strong> ${econUnitText}
       </div>
     </div>
 
@@ -517,8 +667,8 @@ document.getElementById('quiz-form').addEventListener('submit', function(e) {
   `;
 
   let waSummary = `*Diagnóstico Pre-Cita SumaTips*\n`;
-  waSummary += `• *Modelo:* ${selectedModel}\n`;
-  waSummary += `• *Unidad Económica:* ${econUnitVal}\n`;
+  waSummary += `• *Modelo:* ${selectedModelObj.name}\n`;
+  waSummary += `• *Unidad Económica:* ${econUnitText}\n`;
   waSummary += `• *Resultado Global:* ${finalPct}% (${badgeText})\n\n`;
   waSummary += `*Áreas críticas a revisar:*\n`;
 
