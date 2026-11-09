@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="SumaTips Consulting Group: diagnóstico y acompañamiento para ordenar la gestión de pequeñas y medianas empresas.">
+<meta name="description" content="SumaTips Consulting Group: diagnóstico, estructuración y acompañamiento financiero para pequeñas y medianas empresas.">
 <title>SumaTips Consulting Group | Claridad para crecer</title>
 <style>
 :root{
@@ -56,6 +56,7 @@ section{padding:64px 0}
 .actions{display:flex;gap:12px;flex-wrap:wrap;margin:24px 0}
 .card{background:white;border:1px solid #dfe6ee;border-radius:16px;padding:26px;box-shadow:0 8px 24px #082b6808}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.two{grid-template-columns:repeat(2,1fr)}
 .four{grid-template-columns:repeat(4,1fr)}
 .line{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #e5eaf0;padding:14px 0}
 .dot{width:10px;height:10px;background:var(--cyan);border-radius:50%;display:inline-block;margin-right:8px}
@@ -65,15 +66,21 @@ section{padding:64px 0}
 .num{font-size:32px;color:var(--cyan);font-weight:800}
 .muted,small{font-size:14px;color:#536176}
 
-/* MODELOS DE NEGOCIO */
+/* SERVICIOS ESPECÍFICOS */
+.service-card{background:white;border:1px solid #dfe6ee;border-radius:16px;padding:28px;display:flex;flex-direction:column;justify-content:space-between;transition:transform .2s, box-shadow .2s}
+.service-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px #082b6812;border-color:#bce1f5}
+.service-icon{font-size:32px;margin-bottom:12px;display:inline-block}
+.service-bullets{list-style:none;padding:0;margin:16px 0;font-size:14.5px;color:#475569}
+.service-bullets li{padding:6px 0;display:flex;align-items:flex-start;gap:8px}
+.service-bullets li::before{content:"✓";color:var(--cyan);font-weight:800}
+
+/* MODELOS DE NEGOCIO (FILTRO) */
 .model-selector{display:grid;grid-template-columns:repeat(auto-fill, minmax(165px, 1fr));gap:12px;margin:24px 0}
 .model-card{background:white;border:2px solid #e2e8f0;border-radius:12px;padding:16px 12px;text-align:center;cursor:pointer;transition:all .2s;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
 .model-card:hover{border-color:var(--cyan);background:#f8fafc}
 .model-card.selected{border-color:var(--blue);background:#ebf5fb;box-shadow:0 0 0 2px var(--blue)}
 .model-icon{font-size:26px;line-height:1}
 .model-title{font-size:13px;font-weight:700;color:var(--text);line-height:1.2}
-
-/* BADGE INFORMATIVO DE ADAPTACIÓN */
 .adaptation-banner{background:#ebf5fb;border:1px solid #bce1f5;padding:14px 18px;border-radius:10px;margin-bottom:20px;font-size:15px;color:var(--blue);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
 
 /* FORMULARIO Y PREGUNTAS */
@@ -113,7 +120,7 @@ legend{font-weight:800;color:var(--blue);padding:0 8px}
 footer{padding:30px 0;background:#061b41;color:white;text-align:center}
 
 @media(max-width:850px){
-  .hero-grid,.grid,.four{grid-template-columns:1fr}
+  .hero-grid,.grid,.two,.four{grid-template-columns:1fr}
   section{padding:42px 0}
   h1{font-size:32px}
   .model-selector{grid-template-columns:repeat(2, 1fr)}
@@ -134,6 +141,7 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
       </a>
       <div class="nav-tabs">
         <button class="nav-tab active" id="tab-btn-home" onclick="switchTab('home')">Inicio</button>
+        <button class="nav-tab" id="tab-btn-serv" onclick="switchTab('serv')">Servicios</button>
         <button class="nav-tab" id="tab-btn-diag" onclick="switchTab('diag')">Diagnóstico Pre-Cita</button>
         <a class="btn" href="#contacto" onclick="switchTab('home')">Contacto</a>
       </div>
@@ -152,7 +160,7 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
         <p class="lead">Entiende el estado real de tu negocio, fortalece el control financiero y optimiza tus procesos con un plan adaptado a tu realidad.</p>
         <div class="actions">
           <button class="btn" onclick="switchTab('diag')">Iniciar Diagnóstico Pre-Cita</button>
-          <a class="btn secondary" href="#contacto">Agendar llamada</a>
+          <button class="btn secondary" onclick="switchTab('serv')">Conoce Nuestros Servicios</button>
         </div>
         <small>Diagnóstico · Estrategia · Implementación · Seguimiento</small>
       </div>
@@ -214,7 +222,149 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
   </section>
 </div>
 
-<!-- PESTAÑA 2: DIAGNÓSTICO EMPRESARIAL PRE-CITA CONSULTIVA -->
+<!-- PESTAÑA 2: SERVICIOS CONSULTIVOS (NUEVA PESTAÑA) -->
+<div id="view-serv" class="tab-view">
+  <section class="hero" style="padding:48px 0;">
+    <div class="wrap" style="text-align:center;max-width:850px;">
+      <div class="tag">Soluciones con Propósito</div>
+      <h2>Servicios de Consultoría Estratégica y Financiera</h2>
+      <p class="lead">Acompañamos a empresarios y directores de pymes con metodologías ágiles y cercanas para ordenar su liquidez, maximizar márgenes y acceder a financiamiento formal.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:20px;">
+    <div class="wrap">
+      <div class="grid">
+        <!-- Servicio 1 -->
+        <article class="service-card">
+          <div>
+            <span class="service-icon">📊</span>
+            <div class="tag">Liquidez y Control</div>
+            <h3 style="margin:8px 0 12px;">Planificación y Orden Financiero</h3>
+            <p class="muted">Estructuración y ordenamiento de la tesorería corporativa para asegurar estabilidad en entornos multimoneda.</p>
+            <ul class="service-bullets">
+              <li>Flujo de caja proyectado a 13 semanas (USD / Bs.).</li>
+              <li>Separación de finanzas del socio vs. empresa.</li>
+              <li>Políticas de cobro a clientes y crédito a proveedores.</li>
+              <li>Estandarización de cortes contables mensuales.</li>
+            </ul>
+          </div>
+          <div style="margin-top:20px;">
+            <a class="btn" style="width:100%;text-align:center;" target="_blank" href="https://wa.me/584127147963?text=Hola%20SumaTips,%20me%20interesa%20el%20servicio%20de%20Planificaci%C3%B3n%20y%20Orden%20Financiero.">Solicitar Propuesta</a>
+          </div>
+        </article>
+
+        <!-- Servicio 2 -->
+        <article class="service-card">
+          <div>
+            <span class="service-icon">📐</span>
+            <div class="tag">Márgenes Reales</div>
+            <h3 style="margin:8px 0 12px;">Estructura de Costos y Precios</h3>
+            <p class="muted">Determinación exacta del costo real de operar para fijar precios con ganancia neta garantizada.</p>
+            <ul class="service-bullets">
+              <li>Costeo directo e indirecto (materia prima, mano de obra y CIF).</li>
+              <li>Escandallos y fichas técnicas por producto o servicio.</li>
+              <li>Cálculo de Punto de Equilibrio (Break-Even) mensual.</li>
+              <li>Detección y eliminación de mermas y costos ocultos.</li>
+            </ul>
+          </div>
+          <div style="margin-top:20px;">
+            <a class="btn" style="width:100%;text-align:center;" target="_blank" href="https://wa.me/584127147963?text=Hola%20SumaTips,%20me%20interesa%20el%20servicio%20de%20Estructura%20de%20Costos%20y%20Precios.">Solicitar Propuesta</a>
+          </div>
+        </article>
+
+        <!-- Servicio 3 -->
+        <article class="service-card">
+          <div>
+            <span class="service-icon">🏛️</span>
+            <div class="tag">Mercado de Capitales</div>
+            <h3 style="margin:8px 0 12px;">Financiamiento Bursátil (BVC)</h3>
+            <p class="muted">Acceso a capital de trabajo y preservación de excedentes a través del mercado de valores regulado venezolano.</p>
+            <ul class="service-bullets">
+              <li>Elegibilidad para Pagarés Bursátiles y Papeles Comerciales.</li>
+              <li>Colocación de excedentes de caja en Renta Fija y Renta Variable.</li>
+              <li>Acompañamiento ante Casas de Bolsa autorizadas y CVV.</li>
+              <li>Estrategia para reestructuración de pasivos y deuda.</li>
+            </ul>
+          </div>
+          <div style="margin-top:20px;">
+            <a class="btn" style="width:100%;text-align:center;" target="_blank" href="https://wa.me/584127147963?text=Hola%20SumaTips,%20me%20interesa%20el%20servicio%20de%20Financiamiento%20Burs%C3%A1til%20y%20BVC.">Solicitar Propuesta</a>
+          </div>
+        </article>
+
+        <!-- Servicio 4 -->
+        <article class="service-card">
+          <div>
+            <span class="service-icon">⚙️</span>
+            <div class="tag">Procesos Ágiles</div>
+            <h3 style="margin:8px 0 12px;">Eficiencia Operativa</h3>
+            <p class="muted">Optimización de las cadenas de trabajo para entregar a tiempo, reducir fricción interna y ahorrar costos.</p>
+            <ul class="service-bullets">
+              <li>Mapeo y estandarización de procesos clave de negocio.</li>
+              <li>Manuales de cargos y delimitación de funciones.</li>
+              <li>Reducción de cuellos de botella y tiempos de respuesta.</li>
+              <li>Sistemática comercial y seguimiento de cotizaciones.</li>
+            </ul>
+          </div>
+          <div style="margin-top:20px;">
+            <a class="btn" style="width:100%;text-align:center;" target="_blank" href="https://wa.me/584127147963?text=Hola%20SumaTips,%20me%20interesa%20el%20servicio%20de%20Eficiencia%20Operativa.">Solicitar Propuesta</a>
+          </div>
+        </article>
+
+        <!-- Servicio 5 -->
+        <article class="service-card">
+          <div>
+            <span class="service-icon">📈</span>
+            <div class="tag">Dirección Estratégica</div>
+            <h3 style="margin:8px 0 12px;">Control de Gestión y KPIs</h3>
+            <p class="muted">Diseño de cuadros de mando e indicadores clave para gobernar el negocio con números reales y no por intuición.</p>
+            <ul class="service-bullets">
+              <li>Tableros de mando gerencial y financieros.</li>
+              <li>Comités de dirección y seguimiento del plan operativo.</li>
+              <li>Auditorías periódicas de cumplimiento y metas.</li>
+              <li>Acompañamiento directivo en sesiones mensuales.</li>
+            </ul>
+          </div>
+          <div style="margin-top:20px;">
+            <a class="btn" style="width:100%;text-align:center;" target="_blank" href="https://wa.me/584127147963?text=Hola%20SumaTips,%20me%20interesa%20el%20servicio%20de%20Control%20de%20Gesti%C3%B3n%20y%20KPIs.">Solicitar Propuesta</a>
+          </div>
+        </article>
+
+        <!-- Servicio 6 -->
+        <article class="service-card">
+          <div>
+            <span class="service-icon">🎓</span>
+            <div class="tag">Talento y Salario Emocional</div>
+            <h3 style="margin:8px 0 12px;">Formación In-Company</h3>
+            <p class="muted">Capacitación financiera práctica para que los equipos de trabajo gestionen sus ingresos y reduzcan el estrés económico.</p>
+            <ul class="service-bullets">
+              <li>Programa corporativo "De Ahorrista a Inversionista".</li>
+              <li>Inversión formal en Bolsa de Valores de Caracas (BVC).</li>
+              <li>Modalidad presencial u online en vivo (hasta 15 personas).</li>
+              <li>Facturación formal a tasa oficial BCV.</li>
+            </ul>
+          </div>
+          <div style="margin-top:20px;">
+            <a class="btn" style="width:100%;text-align:center;" target="_blank" href="https://wa.me/584127147963?text=Hola%20SumaTips,%20me%20interesa%20el%20Plan%20de%20Formaci%C3%B3n%20In-Company.">Solicitar Propuesta</a>
+          </div>
+        </article>
+      </div>
+
+      <!-- BANNER DE LLAMADA DESDE SERVICIOS AL DIAGNÓSTICO -->
+      <div class="card" style="margin-top:40px;background:linear-gradient(135deg,#fff,#e8f3fa);border-color:#bce1f5;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;">
+        <div style="max-width:650px;">
+          <h3 style="margin:0 0 6px;">¿No estás seguro de cuál servicio necesita tu empresa primero?</h3>
+          <p class="muted" style="margin:0;">Realiza nuestro microcuestionario preliminar y obtén un semáforo de estado de tus 12 áreas en menos de 3 minutos.</p>
+        </div>
+        <div>
+          <button class="btn" onclick="switchTab('diag')">Realizar Diagnóstico Pre-Cita &gt;</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- PESTAÑA 3: DIAGNÓSTICO EMPRESARIAL PRE-CITA CONSULTIVA -->
 <div id="view-diag" class="tab-view">
   <section>
     <div class="wrap">
@@ -268,22 +418,27 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
 </footer>
 
 <script>
-// NAVEGACIÓN ENTRE PESTAÑAS
+// NAVEGACIÓN ENTRE PESTAÑAS (INICIO, SERVICIOS, DIAGNÓSTICO)
 function switchTab(tab) {
   document.getElementById('view-home').classList.remove('active');
+  document.getElementById('view-serv').classList.remove('active');
   document.getElementById('view-diag').classList.remove('active');
+
   document.getElementById('tab-btn-home').classList.remove('active');
+  document.getElementById('tab-btn-serv').classList.remove('active');
   document.getElementById('tab-btn-diag').classList.remove('active');
 
   if (tab === 'home') {
     document.getElementById('view-home').classList.add('active');
     document.getElementById('tab-btn-home').classList.add('active');
-    window.scrollTo({top:0, behavior:'smooth'});
-  } else {
+  } else if (tab === 'serv') {
+    document.getElementById('view-serv').classList.add('active');
+    document.getElementById('tab-btn-serv').classList.add('active');
+  } else if (tab === 'diag') {
     document.getElementById('view-diag').classList.add('active');
     document.getElementById('tab-btn-diag').classList.add('active');
-    window.scrollTo({top:0, behavior:'smooth'});
   }
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 
 // 12 MODELOS DE NEGOCIO SEGÚN LA INFOGRAFÍA
@@ -305,9 +460,8 @@ const businessModels = [
 let selectedModelObj = businessModels[0];
 let selectedUnit = "pequena";
 
-// DICCIONARIO DE PREGUNTAS ESPECÍFICAS SEGÚN MODELO Y TAMAÑO
+// DICCIONARIO DE PREGUNTAS DINÁMICAS
 function getQuestionsFor(model, unit) {
-  // Ajustes de escala según unidad económica para Estrategia, RRHH y Tecnología
   let qEstrategia = [
     "¿Tiene objetivos comerciales y financieros claros y por escrito?",
     "¿Evalúa su entorno y cuenta con un plan de crecimiento definido?"
@@ -349,7 +503,6 @@ function getQuestionsFor(model, unit) {
     ];
   }
 
-  // Costos, Operaciones, Ventas, Compras y Legal varían radicalmente por Modelo
   let qCostos, qOperaciones, qVentas, qCompras, qLegal;
 
   switch (model.category) {
@@ -376,7 +529,7 @@ function getQuestionsFor(model, unit) {
       ];
       break;
 
-    case "produccion": // Manufactura y Agroindustria
+    case "produccion":
       qCostos = [
         "¿Calcula fichas técnicas de costos separando materia prima, mano de obra y costos indirectos (CIF)?",
         "¿Mide con exactitud el porcentaje de desperdicio, merma o rechazo en cada lote?"
@@ -399,7 +552,7 @@ function getQuestionsFor(model, unit) {
       ];
       break;
 
-    case "alimentos": // Restaurantes y Alimentos
+    case "alimentos":
       qCostos = [
         "¿Tiene costeada cada receta con su respectivo 'escandallo' actualizado a precios de hoy?",
         "¿Mide y controla diariamente las mermas de cocina, descomposición y consumo interno?"
@@ -422,7 +575,7 @@ function getQuestionsFor(model, unit) {
       ];
       break;
 
-    case "proyectos": // Construcción y Proyectos
+    case "proyectos":
       qCostos = [
         "¿Elabora presupuestos con análisis de precios unitarios (APU) y provisiona desviaciones por inflación?",
         "¿Mide la desviación entre el costo presupuestado y el costo real ejecutado por hito?"
@@ -445,7 +598,7 @@ function getQuestionsFor(model, unit) {
       ];
       break;
 
-    case "logistica": // Transporte y Logística
+    case "logistica":
       qCostos = [
         "¿Conoce el costo operativo real por kilómetro recorrido o flete (combustible, cauchos, viáticos)?",
         "¿Provisiona adecuadamente los fondos de depreciación y mantenimiento mayor de su flota?"
@@ -468,7 +621,7 @@ function getQuestionsFor(model, unit) {
       ];
       break;
 
-    case "digital": // Negocios Digitales
+    case "digital":
       qCostos = [
         "¿Mide el Costo de Adquisición de Clientes (CAC) y el Valor de Vida del Cliente (LTV)?",
         "¿Controla el gasto recurrente en servidores, licencias de software y pasarelas de pago?"
@@ -491,7 +644,7 @@ function getQuestionsFor(model, unit) {
       ];
       break;
 
-    default: // Servicios Profesionales, Técnicos, Financieros, Alquiler
+    default:
       qCostos = [
         "¿Conoce el costo real de su hora de servicio considerando gastos fijos y horas no facturables?",
         "¿Calcula la rentabilidad individual de cada proyecto, contrato o cliente atendido?"
@@ -515,7 +668,6 @@ function getQuestionsFor(model, unit) {
       break;
   }
 
-  // 12 Áreas estructuradas
   return [
     { num: "1", name: "Estrategia y Dirección", enfoque: "Planeación", q: qEstrategia, tip: "Estructure una hoja de ruta con metas financieras trimestrales." },
     { num: "2", name: "Finanzas y Tesorería", enfoque: "Liquidez", q: [
@@ -596,7 +748,6 @@ function renderQuestions() {
   });
   document.getElementById('questions-wrapper').innerHTML = questionsHTML;
   
-  // Si había resultados previos en pantalla, se limpian para obligar a nueva evaluación coherente
   const resDiv = document.getElementById('results-box');
   resDiv.hidden = true;
   resDiv.innerHTML = '';
@@ -609,7 +760,7 @@ renderQuestions();
 document.getElementById('quiz-form').addEventListener('submit', function(e) {
   e.preventDefault();
   let totalAffirmative = 0;
-  const maxPossible = currentAreas.length * 2; // 24 preguntas
+  const maxPossible = currentAreas.length * 2;
   let details = [];
 
   currentAreas.forEach((area, aIdx) => {
@@ -633,7 +784,6 @@ document.getElementById('quiz-form').addEventListener('submit', function(e) {
   const finalPct = Math.round((totalAffirmative / maxPossible) * 100);
   const econUnitText = document.getElementById('econ-unit').options[document.getElementById('econ-unit').selectedIndex].text;
 
-  // ESCALAS DE LA INFOGRAFÍA
   let badgeClass = "";
   let badgeText = "";
   let statusAction = "";
