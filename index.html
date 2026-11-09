@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="SumaTips Consulting Group: diagnóstico, estructuración y acompañamiento financiero para pequeñas y medianas empresas.">
+<meta name="description" content="SumaTips Consulting Group: diagnóstico, estructuración financiera, capacidad de pago y acompañamiento para pequeñas y medianas empresas.">
 <title>SumaTips Consulting Group | Claridad para crecer</title>
 <style>
 :root{
@@ -31,8 +31,8 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:20px;min-h
 .brand-title{font-size:24px;font-weight:800;color:var(--blue);line-height:1.1;letter-spacing:-0.5px}
 .brand-sub{font-size:12px;font-weight:700;color:#5a6e85;text-transform:uppercase;letter-spacing:1px;line-height:1.2;margin-top:2px}
 
-.nav-tabs{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.nav-tab{background:transparent;border:0;color:var(--text);font:700 15px system-ui;padding:10px 16px;border-radius:8px;cursor:pointer;transition:all .2s;text-decoration:none}
+.nav-tabs{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.nav-tab{background:transparent;border:0;color:var(--text);font:700 14px system-ui;padding:9px 14px;border-radius:8px;cursor:pointer;transition:all .2s;text-decoration:none}
 .nav-tab:hover{background:#edf2f7;color:var(--blue)}
 .nav-tab.active{background:var(--blue);color:white}
 
@@ -66,7 +66,7 @@ section{padding:64px 0}
 .num{font-size:32px;color:var(--cyan);font-weight:800}
 .muted,small{font-size:14px;color:#536176}
 
-/* SERVICIOS ESPECÍFICOS */
+/* SERVICIOS */
 .service-card{background:white;border:1px solid #dfe6ee;border-radius:16px;padding:28px;display:flex;flex-direction:column;justify-content:space-between;transition:transform .2s, box-shadow .2s}
 .service-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px #082b6812;border-color:#bce1f5}
 .service-icon{font-size:32px;margin-bottom:12px;display:inline-block}
@@ -74,7 +74,7 @@ section{padding:64px 0}
 .service-bullets li{padding:6px 0;display:flex;align-items:flex-start;gap:8px}
 .service-bullets li::before{content:"✓";color:var(--cyan);font-weight:800}
 
-/* MODELOS DE NEGOCIO (FILTRO) */
+/* MODELOS DE NEGOCIO */
 .model-selector{display:grid;grid-template-columns:repeat(auto-fill, minmax(165px, 1fr));gap:12px;margin:24px 0}
 .model-card{background:white;border:2px solid #e2e8f0;border-radius:12px;padding:16px 12px;text-align:center;cursor:pointer;transition:all .2s;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
 .model-card:hover{border-color:var(--cyan);background:#f8fafc}
@@ -105,6 +105,13 @@ legend{font-weight:800;color:var(--blue);padding:0 8px}
 .area-bar{height:10px;border-radius:99px;background:#e2e8f0;overflow:hidden;margin:6px 0}
 .area-bar-fill{height:100%;transition:width .4s}
 
+/* CALCULADORA FINANCIERA */
+.calc-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:28px}
+.calc-result-box{background:#f8fafc;border:2px solid #dce4ed;border-radius:14px;padding:22px;margin-top:18px}
+.calc-stat{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #e2e8f0;font-size:15px}
+.calc-stat strong{font-size:17px;color:var(--blue)}
+.calc-stat:last-child{border-bottom:0}
+
 .form-group{margin-bottom:16px}
 .form-group label{display:block;font-weight:700;margin-bottom:6px;color:var(--blue)}
 .form-group input, .form-group textarea, .form-group select{
@@ -120,7 +127,7 @@ legend{font-weight:800;color:var(--blue);padding:0 8px}
 footer{padding:30px 0;background:#061b41;color:white;text-align:center}
 
 @media(max-width:850px){
-  .hero-grid,.grid,.two,.four{grid-template-columns:1fr}
+  .hero-grid,.grid,.two,.four,.calc-grid{grid-template-columns:1fr}
   section{padding:42px 0}
   h1{font-size:32px}
   .model-selector{grid-template-columns:repeat(2, 1fr)}
@@ -143,6 +150,7 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
         <button class="nav-tab active" id="tab-btn-home" onclick="switchTab('home')">Inicio</button>
         <button class="nav-tab" id="tab-btn-serv" onclick="switchTab('serv')">Servicios</button>
         <button class="nav-tab" id="tab-btn-diag" onclick="switchTab('diag')">Diagnóstico Pre-Cita</button>
+        <button class="nav-tab" id="tab-btn-calc" onclick="switchTab('calc')">Calculadora Financiera</button>
         <a class="btn" href="#contacto" onclick="switchTab('home')">Contacto</a>
       </div>
     </nav>
@@ -160,7 +168,7 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
         <p class="lead">Entiende el estado real de tu negocio, fortalece el control financiero y optimiza tus procesos con un plan adaptado a tu realidad.</p>
         <div class="actions">
           <button class="btn" onclick="switchTab('diag')">Iniciar Diagnóstico Pre-Cita</button>
-          <button class="btn secondary" onclick="switchTab('serv')">Conoce Nuestros Servicios</button>
+          <button class="btn secondary" onclick="switchTab('calc')">Evaluar Capacidad de Crédito</button>
         </div>
         <small>Diagnóstico · Estrategia · Implementación · Seguimiento</small>
       </div>
@@ -222,7 +230,7 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
   </section>
 </div>
 
-<!-- PESTAÑA 2: SERVICIOS CONSULTIVOS (NUEVA PESTAÑA) -->
+<!-- PESTAÑA 2: SERVICIOS CONSULTIVOS -->
 <div id="view-serv" class="tab-view">
   <section class="hero" style="padding:48px 0;">
     <div class="wrap" style="text-align:center;max-width:850px;">
@@ -350,7 +358,6 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
         </article>
       </div>
 
-      <!-- BANNER DE LLAMADA DESDE SERVICIOS AL DIAGNÓSTICO -->
       <div class="card" style="margin-top:40px;background:linear-gradient(135deg,#fff,#e8f3fa);border-color:#bce1f5;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;">
         <div style="max-width:650px;">
           <h3 style="margin:0 0 6px;">¿No estás seguro de cuál servicio necesita tu empresa primero?</h3>
@@ -372,7 +379,6 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
       <h2>Diagnóstico Empresarial Pre-Cita Consultiva</h2>
       <p class="lead">Un micro cuestionario que adapta sus preguntas técnicas según tu modelo de negocio y escala operativa.</p>
 
-      <!-- PASO 1: FILTRO DE MODELO DE NEGOCIO Y UNIDAD ECONÓMICA -->
       <div class="card" style="margin-bottom:28px;">
         <h3 style="margin-top:0;">Paso 1: Selecciona tu Modelo de Negocio y Unidad Económica</h3>
         <p class="muted">Al hacer clic en un modelo o cambiar el tamaño, las preguntas del diagnóstico se actualizarán automáticamente:</p>
@@ -389,13 +395,11 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
         </div>
       </div>
 
-      <!-- BANNER INFORMATIVO DEL CUESTIONARIO CARGADO -->
       <div class="adaptation-banner" id="adaptation-banner">
         <span>Cuestionario calibrado para: <strong id="active-model-label">Servicios Profesionales</strong> (<span id="active-unit-label">Pequeña Empresa</span>)</span>
         <small style="color:#086880;font-weight:700;">24 preguntas específicas cargadas</small>
       </div>
 
-      <!-- PASO 2: CUESTIONARIO DINÁMICO POR ÁREA -->
       <form id="quiz-form">
         <div id="questions-wrapper"></div>
         <div class="actions">
@@ -404,8 +408,112 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
         </div>
       </form>
 
-      <!-- RESULTADOS -->
       <div id="results-box" class="card" hidden style="margin-top:32px;"></div>
+    </div>
+  </section>
+</div>
+
+<!-- PESTAÑA 4: CALCULADORA FINANCIERA Y CAPACIDAD DE PAGO (NUEVA PESTAÑA) -->
+<div id="view-calc" class="tab-view">
+  <section class="hero" style="padding:48px 0;">
+    <div class="wrap" style="text-align:center;max-width:850px;">
+      <div class="tag">Simulador Técnico de Solvencia</div>
+      <h2>Calculadora de Capacidad de Pago y Financiamiento</h2>
+      <p class="lead">Evalúa si tu flujo operativo soporta una nueva cuota crediticia sin comprometer nómina ni proveedores, y descubre la vía óptima (bancaria o bursátil BVC).</p>
+    </div>
+  </section>
+
+  <section style="padding-top:24px;">
+    <div class="wrap">
+      <div class="calc-grid">
+        <!-- FORMULARIO DE VARIABLES -->
+        <div class="card">
+          <h3 style="margin-top:0;">Variables de Operación y Financiamiento</h3>
+          
+          <div class="form-group">
+            <label for="calc-income">Ingresos Operativos Promedio Mensuales ($ / USD):</label>
+            <input type="number" id="calc-income" value="12000" min="500" step="100" placeholder="Ej. 12000">
+            <small class="muted">Facturación recurrente mensual sin IVA.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="calc-expense">Costos y Gastos Operativos Fijos Mensuales ($ / USD):</label>
+            <input type="number" id="calc-expense" value="8500" min="200" step="100" placeholder="Ej. 8500">
+            <small class="muted">Nómina, compras, alquiler, servicios e impuestos.</small>
+          </div>
+
+          <hr style="border:0;border-top:1px solid #edf2f7;margin:20px 0;">
+
+          <div class="form-group">
+            <label for="calc-amount">Monto del Financiamiento a Solicitar ($ / USD):</label>
+            <input type="number" id="calc-amount" value="15000" min="1000" step="500" placeholder="Ej. 15000">
+          </div>
+
+          <div class="form-group">
+            <label for="calc-term">Plazo Estimado (Meses):</label>
+            <select id="calc-term">
+              <option value="6">6 Meses (Corto plazo / Capital de trabajo)</option>
+              <option value="12" selected>12 Meses (1 Año estándar)</option>
+              <option value="24">24 Meses (2 Años)</option>
+              <option value="36">36 Meses (3 Años / Activo fijo)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="calc-rate">Tasa de Interés Anual Proyectada (% TNA):</label>
+            <input type="number" id="calc-rate" value="16" min="1" max="100" step="0.5" placeholder="Ej. 16">
+            <small class="muted">Referencia bancaria o bursátil estimada anual.</small>
+          </div>
+
+          <button class="btn" style="width:100%;margin-top:10px;" onclick="calculateLoan()">Calcular Viabilidad y Cobertura</button>
+        </div>
+
+        <!-- PANEL DE RESULTADOS Y SEMÁFORO DE COBERTURA -->
+        <div class="card" style="display:flex;flex-direction:column;justify-content:space-between;">
+          <div>
+            <div class="tag">Dictamen Preliminar de Caja</div>
+            <h3 style="margin:8px 0 16px;">Diagnóstico de Solvencia y Cuota</h3>
+            
+            <div class="calc-result-box">
+              <div class="calc-stat">
+                <span>Cuota Mensual Estimada:</span>
+                <strong id="res-payment">$1,361.05</strong>
+              </div>
+              <div class="calc-stat">
+                <span>Flujo de Caja Libre Operativo:</span>
+                <strong id="res-fcf">$3,500.00</strong>
+              </div>
+              <div class="calc-stat">
+                <span>Total Intereses del Financiamiento:</span>
+                <strong id="res-interest">$1,332.55</strong>
+              </div>
+              <div class="calc-stat">
+                <span>% de Absorción de la Caja Libre:</span>
+                <strong id="res-ratio">38.9%</strong>
+              </div>
+            </div>
+
+            <!-- SEMÁFORO DE ABSORCIÓN DE DEUDA -->
+            <div style="text-align:center;margin-top:20px;">
+              <div class="traffic-badge badge-yellow" id="calc-badge">🟡 Nivel de Alerta · 38.9% de Caja</div>
+              <p id="calc-analysis" style="font-size:14.5px;margin-top:12px;font-weight:600;color:var(--text);">
+                La cuota absorbe entre el 30% y el 50% de tu flujo libre. Es viable, pero requiere disciplina estricta de cobranzas y optimización de capital de trabajo.
+              </p>
+            </div>
+
+            <!-- VÍA RECOMENDADA -->
+            <div style="background:#edf2f7;border-radius:10px;padding:14px;margin-top:16px;font-size:14px;">
+              <strong style="color:var(--blue);display:block;margin-bottom:4px;">Vía Estratégica Sugerida:</strong>
+              <span id="calc-recommendation">Para plazos de 6 a 12 meses y montos ágiles, la emisión de <strong>Pagarés Bursátiles o Papeles Comerciales en la Bolsa de Caracas (BVC)</strong> ofrece condiciones atractivas frente al crédito bancario tradicional.</span>
+            </div>
+          </div>
+
+          <div style="margin-top:24px;">
+            <a class="btn" id="calc-wa-btn" target="_blank" style="width:100%;text-align:center;" href="#">Validar este Análisis con un Consultor SumaTips &gt;</a>
+            <small class="muted" style="display:block;text-align:center;margin-top:8px;">* Cálculo referencial según amortización francesa. No implica aprobación de crédito.</small>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 </div>
@@ -418,15 +526,17 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
 </footer>
 
 <script>
-// NAVEGACIÓN ENTRE PESTAÑAS (INICIO, SERVICIOS, DIAGNÓSTICO)
+// NAVEGACIÓN ENTRE LAS 4 PESTAÑAS
 function switchTab(tab) {
   document.getElementById('view-home').classList.remove('active');
   document.getElementById('view-serv').classList.remove('active');
   document.getElementById('view-diag').classList.remove('active');
+  document.getElementById('view-calc').classList.remove('active');
 
   document.getElementById('tab-btn-home').classList.remove('active');
   document.getElementById('tab-btn-serv').classList.remove('active');
   document.getElementById('tab-btn-diag').classList.remove('active');
+  document.getElementById('tab-btn-calc').classList.remove('active');
 
   if (tab === 'home') {
     document.getElementById('view-home').classList.add('active');
@@ -437,6 +547,10 @@ function switchTab(tab) {
   } else if (tab === 'diag') {
     document.getElementById('view-diag').classList.add('active');
     document.getElementById('tab-btn-diag').classList.add('active');
+  } else if (tab === 'calc') {
+    document.getElementById('view-calc').classList.add('active');
+    document.getElementById('tab-btn-calc').classList.add('active');
+    calculateLoan();
   }
   window.scrollTo({top:0, behavior:'smooth'});
 }
@@ -717,7 +831,6 @@ function handleEconUnitChange() {
   renderQuestions();
 }
 
-// RENDERIZADO DINÁMICO DEL FORMULARIO
 let currentAreas = [];
 
 function renderQuestions() {
@@ -753,7 +866,6 @@ function renderQuestions() {
   resDiv.innerHTML = '';
 }
 
-// RENDER INICIAL
 renderQuestions();
 
 // PROCESAR EVALUACIÓN Y SEMÁFORO
@@ -867,6 +979,73 @@ document.getElementById('quiz-form').addEventListener('reset', () => {
   resDiv.hidden = true;
   resDiv.innerHTML = '';
 });
+
+// LÓGICA DE LA CALCULADORA FINANCIERA (AMORTIZACIÓN Y COBERTURA)
+function calculateLoan() {
+  const income = parseFloat(document.getElementById('calc-income').value) || 0;
+  const expense = parseFloat(document.getElementById('calc-expense').value) || 0;
+  const principal = parseFloat(document.getElementById('calc-amount').value) || 0;
+  const months = parseInt(document.getElementById('calc-term').value) || 12;
+  const annualRate = parseFloat(document.getElementById('calc-rate').value) || 16;
+
+  const fcf = Math.max(0, income - expense);
+  const monthlyRate = (annualRate / 100) / 12;
+
+  let payment = 0;
+  if (monthlyRate > 0) {
+    payment = (principal * monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
+  } else {
+    payment = principal / months;
+  }
+
+  const totalPaid = payment * months;
+  const totalInterest = Math.max(0, totalPaid - principal);
+  const ratioPct = fcf > 0 ? ((payment / fcf) * 100) : 100;
+
+  document.getElementById('res-payment').textContent = `$${payment.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}`;
+  document.getElementById('res-fcf').textContent = `$${fcf.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}`;
+  document.getElementById('res-interest').textContent = `$${totalInterest.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}`;
+  document.getElementById('res-ratio').textContent = `${ratioPct.toFixed(1)}%`;
+
+  const badge = document.getElementById('calc-badge');
+  const analysis = document.getElementById('calc-analysis');
+  const reco = document.getElementById('calc-recommendation');
+
+  let riskLevel = "";
+  if (ratioPct <= 30) {
+    badge.className = "traffic-badge badge-green";
+    badge.textContent = `🟢 Solvencia Saludable · ${ratioPct.toFixed(1)}% de Caja`;
+    analysis.textContent = "Excelente cobertura. La cuota compromete menos del 30% del flujo libre operativo, lo que deja margen cómodo para imprevistos de caja.";
+    riskLevel = "🟢 Saludable (Bajo riesgo)";
+  } else if (ratioPct <= 50) {
+    badge.className = "traffic-badge badge-yellow";
+    badge.textContent = `🟡 Nivel de Alerta · ${ratioPct.toFixed(1)}% de Caja`;
+    analysis.textContent = "La cuota absorbe entre el 30% y el 50% de tu flujo libre. La operación es viable pero requiere sincronizar rigurosamente los días de cobro y pago.";
+    riskLevel = "🟡 Alerta (Riesgo moderado)";
+  } else {
+    badge.className = "traffic-badge badge-red";
+    badge.textContent = `🔴 Riesgo Crítico · ${ratioPct.toFixed(1)}% de Caja`;
+    analysis.textContent = "Atención: La cuota supera el 50% de tu flujo operativo disponible. Existe alto riesgo de asfixia de liquidez si no se extiende el plazo o se reduce el monto.";
+    riskLevel = "🔴 Crítico (Alto compromiso de caja)";
+  }
+
+  if (months <= 12) {
+    reco.innerHTML = `Para plazos cortos (${months} meses) orientados a capital de trabajo, la emisión estructurada de <strong>Pagarés Bursátiles o Papeles Comerciales en la Bolsa de Caracas (BVC)</strong> es una opción ágil frente a las restricciones del crédito bancario tradicional.`;
+  } else {
+    reco.innerHTML = `Para plazos medianos (${months} meses) destinados a maquinaria, expansión o infraestructura, se sugiere evaluar <strong>crédito indexado bancario o financiamiento sindicado</strong> junto a un esquema de amortizaciones trimestrales.`;
+  }
+
+  const msg = encodeURIComponent(
+    `Hola SumaTips, utilicé la Calculadora Financiera en la web.\n\n` +
+    `• Monto financiamiento: $${principal.toLocaleString('en-US')}\n` +
+    `• Plazo: ${months} meses | Tasa ref: ${annualRate}%\n` +
+    `• Cuota estimada: $${payment.toFixed(2)}/mes\n` +
+    `• Flujo libre disponible: $${fcf.toFixed(2)}/mes\n` +
+    `• Cobertura de caja: ${ratioPct.toFixed(1)}% (${riskLevel})\n\n` +
+    `Deseo coordinar una llamada para validar la viabilidad real y opciones de financiamiento.`
+  );
+  document.getElementById('calc-wa-btn').href = `https://wa.me/584127147963?text=${msg}`;
+}
 
 // FORMULARIO DE CONTACTO DIRECTO
 document.getElementById('contact-form').addEventListener('submit', function(e) {
