@@ -93,7 +93,7 @@ legend{font-weight:800;color:var(--blue);padding:0 8px}
 .bool-options label{display:flex;align-items:center;gap:6px;cursor:pointer;font-weight:600;padding:6px 14px;border:2px solid #dce4ed;border-radius:8px}
 .bool-options input[type="radio"]{cursor:pointer;margin:0}
 
-/* RESULTADOS Y SEMÁFORO */
+/* RESULTADOS Y SEMÁFOROS */
 .score-box{text-align:center;padding:26px;border-radius:14px;margin:20px 0;border:2px solid #dfe6ee;background:white}
 .score-number{font-size:3.5rem;font-weight:800;line-height:1;color:var(--blue)}
 .traffic-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 22px;border-radius:99px;color:white;font-weight:800;margin-top:14px;text-transform:uppercase;font-size:14px}
@@ -105,15 +105,18 @@ legend{font-weight:800;color:var(--blue);padding:0 8px}
 .area-bar{height:10px;border-radius:99px;background:#e2e8f0;overflow:hidden;margin:6px 0}
 .area-bar-fill{height:100%;transition:width .4s}
 
-/* CALCULADORA Y GATEKEEPER FINANCIERO */
+/* INDICADORES TÉCNICOS */
+.ratio-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:14px;margin:18px 0}
+.ratio-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:14px;border-left:5px solid var(--blue)}
+.ratio-title{font-size:13px;font-weight:700;color:#64748b;text-transform:uppercase}
+.ratio-val{font-size:22px;font-weight:800;color:var(--blue);margin:4px 0}
+.ratio-status{font-size:12.5px;font-weight:700}
+
 .calc-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:28px}
 .calc-result-box{background:#f8fafc;border:2px solid #dce4ed;border-radius:14px;padding:22px;margin-top:18px}
 .calc-stat{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #e2e8f0;font-size:15px}
 .calc-stat strong{font-size:17px;color:var(--blue)}
 .calc-stat:last-child{border-bottom:0}
-
-.eval-gate-box{background:#ffffff;border:2px solid #dce4ed;border-radius:16px;padding:24px;margin-bottom:28px}
-.verdict-box{padding:20px;border-radius:12px;margin-top:20px;display:none}
 
 .form-group{margin-bottom:16px}
 .form-group label{display:block;font-weight:700;margin-bottom:6px;color:var(--blue)}
@@ -330,7 +333,7 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
             <h3 style="margin:8px 0 12px;">Control de Gestión y KPIs</h3>
             <p class="muted">Diseño de cuadros de mando e indicadores clave para gobernar el negocio con números reales y no por intuición.</p>
             <ul class="service-bullets">
-              <li>Tableros de mando gerencial y financiero.</li>
+              <li>Tableros de mando gerencial y financieros.</li>
               <li>Comités de dirección y seguimiento del plan operativo.</li>
               <li>Auditorías periódicas de cumplimiento y metas.</li>
               <li>Acompañamiento directivo en sesiones mensuales.</li>
@@ -363,7 +366,7 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
 
       <div class="card" style="margin-top:40px;background:linear-gradient(135deg,#fff,#e8f3fa);border-color:#bce1f5;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;">
         <div style="max-width:650px;">
-          <h3 style="margin:0 0 6px;">¿No estás seguro de qué servicio necesita tu empresa primero?</h3>
+          <h3 style="margin:0 0 6px;">¿No estás seguro de cuál servicio necesita tu empresa primero?</h3>
           <p class="muted" style="margin:0;">Realiza nuestro microcuestionario preliminar y obtén un semáforo de estado de tus 12 áreas en menos de 3 minutos.</p>
         </div>
         <div>
@@ -380,7 +383,7 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
     <div class="wrap">
       <div class="tag">Herramienta Consultiva Dinámica</div>
       <h2>Diagnóstico Empresarial Pre-Cita Consultiva</h2>
-      <p class="lead">Un microcuestionario que adapta sus preguntas técnicas según tu modelo de negocio y escala operativa.</p>
+      <p class="lead">Un micro cuestionario que adapta sus preguntas técnicas según tu modelo de negocio y escala operativa.</p>
 
       <div class="card" style="margin-bottom:28px;">
         <h3 style="margin-top:0;">Paso 1: Selecciona tu Modelo de Negocio y Unidad Económica</h3>
@@ -416,184 +419,242 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
   </section>
 </div>
 
-<!-- PESTAÑA 4: EVALUACIÓN DE NECESIDAD REAL Y CALCULADORA FINANCIERA -->
+<!-- PESTAÑA 4: DIAGNÓSTICO FINANCIERO CON NUMEROS REALES Y SIMULADOR -->
 <div id="view-calc" class="tab-view">
   <section class="hero" style="padding:48px 0;">
-    <div class="wrap" style="text-align:center;max-width:850px;">
-      <div class="tag">Filtro Consultivo de Viabilidad</div>
-      <h2>Evaluación de Salud y Capacidad de Financiamiento</h2>
-      <p class="lead">Antes de solicitar deuda, determina si tu empresa realmente necesita un crédito o si requiere optimizar su caja operativa. Si la deuda está justificada, proyecta tu cuota y ratio RCSD.</p>
+    <div class="wrap" style="text-align:center;max-width:880px;">
+      <div class="tag">Diagnóstico Cuantitativo Basado en Estados Financieros</div>
+      <h2>Evaluación de Salud y Capacidad Financiera</h2>
+      <p class="lead">Ingresa los renglones clave de tu balance y estado de resultados. El sistema calculará automáticamente tus 8 indicadores de salud para determinar si justificas financiamiento y cuánto puedes pagar.</p>
     </div>
   </section>
 
   <section style="padding-top:24px;">
     <div class="wrap">
       
-      <!-- FASE 1: FILTRO DE NECESIDAD REAL DE CRÉDITO -->
-      <div class="eval-gate-box">
-        <div class="tag">Fase 1: Diagnóstico de Necesidad</div>
-        <h3 style="margin:8px 0 12px;">¿Tu negocio califica para un financiamiento?</h3>
-        <p class="muted">Responde estas 3 variables operativas:</p>
+      <!-- INGRESO DE DATOS CONTABLES SENCILLOS -->
+      <div class="card" style="margin-bottom:28px;">
+        <div class="tag">Paso 1: Tus Cifras Contables (Sin Fórmulas)</div>
+        <h3 style="margin:8px 0 16px;">Datos de tu Estado de Resultados y Balance General</h3>
+        <p class="muted">Coloca las cifras promedio mensuales de tu empresa en dólares ($ USD o equivalente contable):</p>
 
-        <div class="grid" style="grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:18px;margin-top:16px;">
+        <div class="grid" style="grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:16px;">
           <div class="form-group">
-            <label for="eval-purpose">1. Destino principal de los fondos:</label>
-            <select id="eval-purpose" onchange="runNeedEvaluation()">
-              <option value="growth">Inversión en Inventario / Nuevos Contratos / Expansión</option>
-              <option value="capex">Maquinaria, Equipos o Infraestructura Productiva</option>
-              <option value="losses">Cubrir pérdidas recurrentes o déficits mensuales</option>
-              <option value="refinance">Pagar deudas acumuladas urgentes de corto plazo</option>
-            </select>
+            <label for="f-sales">Ventas Netas Mensuales:</label>
+            <input type="number" id="f-sales" value="15000" min="0" step="500" oninput="runFinancialAudit()">
+            <small class="muted">Facturación mensual promedio.</small>
           </div>
 
           <div class="form-group">
-            <label for="eval-margin">2. Rentabilidad Operativa Actual:</label>
-            <select id="eval-margin" onchange="runNeedEvaluation()">
-              <option value="positive">Operación rentable (deja ganancia neta mensual)</option>
-              <option value="breakeven">En equilibrio exacto (apenas cubre gastos)</option>
-              <option value="negative">En pérdidas operativas continuas</option>
-            </select>
+            <label for="f-ebit">Utilidad Operativa (EBIT):</label>
+            <input type="number" id="f-ebit" value="2800" min="-10000" step="100" oninput="runFinancialAudit()">
+            <small class="muted">Ganancia neta antes de intereses e impuestos.</small>
           </div>
 
           <div class="form-group">
-            <label for="eval-cycle">3. Ciclo de Cobro vs. Pago:</label>
-            <select id="eval-cycle" onchange="runNeedEvaluation()">
-              <option value="healthy">Cobranza al día / Sincronizada con proveedores</option>
-              <option value="gap">Desfase temporal (cobro a 45+ días y pago a 15 días)</option>
-              <option value="chaos">Cobranza desordenada con alta morosidad</option>
-            </select>
+            <label for="f-expenses">Salidas de Caja Mensuales Totales:</label>
+            <input type="number" id="f-expenses" value="12200" min="0" step="500" oninput="runFinancialAudit()">
+            <small class="muted">Compras, nómina, alquiler y gastos operativos.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="f-act-corr">Activo Corriente:</label>
+            <input type="number" id="f-act-corr" value="22000" min="0" step="500" oninput="runFinancialAudit()">
+            <small class="muted">Bancos + Cuentas por Cobrar + Inventario.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="f-pas-corr">Pasivo Corriente:</label>
+            <input type="number" id="f-pas-corr" value="14000" min="1" step="500" oninput="runFinancialAudit()">
+            <small class="muted">Deudas y cuentas por pagar a corto plazo.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="f-pas-tot">Pasivo Total:</label>
+            <input type="number" id="f-pas-tot" value="25000" min="0" step="500" oninput="runFinancialAudit()">
+            <small class="muted">Suma de todas las deudas vigentes.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="f-patrim">Patrimonio Total:</label>
+            <input type="number" id="f-patrim" value="30000" min="1" step="500" oninput="runFinancialAudit()">
+            <small class="muted">Capital social + reservas acumuladas.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="f-target-loan">Monto de Crédito Estimado ($ USD):</label>
+            <input type="number" id="f-target-loan" value="15000" min="1000" step="500" oninput="runFinancialAudit()">
+            <small class="muted">Capital que buscas o necesitas financiar.</small>
           </div>
         </div>
 
-        <!-- DICTÁMENES DE LA FASE 1 -->
-        <div id="verdict-stop" class="verdict-box" style="background:#fef2f2;border:2px solid #fecaca;">
+        <!-- CHECKLIST DOCUMENTAL -->
+        <div style="background:#f1f5f9;border-radius:10px;padding:16px;margin-top:10px;">
+          <strong style="color:var(--blue);font-size:14px;display:block;margin-bottom:8px;">8. Preparación Crediticia y Documental:</strong>
+          <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:14px;">
+            <label style="cursor:pointer;"><input type="checkbox" id="doc-1" checked onchange="runFinancialAudit()"> Estados Financieros al día con Contador</label>
+            <label style="cursor:pointer;"><input type="checkbox" id="doc-2" checked onchange="runFinancialAudit()"> Cuentas bancarias corporativas activas</label>
+            <label style="cursor:pointer;"><input type="checkbox" id="doc-3" checked onchange="runFinancialAudit()"> Documentos legales y fiscales al día</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- TABLERO DE LOS 8 INDICADORES TÉCNICOS CALCULADOS -->
+      <div class="card" style="margin-bottom:28px;">
+        <div class="tag">Paso 2: Dictamen de los 8 Indicadores Financieros</div>
+        <h3 style="margin:8px 0 16px;">Diagnóstico de Salud y Viabilidad</h3>
+
+        <!-- PILAR 1 -->
+        <h4 style="color:var(--blue);margin:16px 0 8px;border-bottom:2px solid #edf2f7;padding-bottom:6px;">Pilar I: ¿Necesita Financiamiento?</h4>
+        <div class="ratio-grid">
+          <div class="ratio-card" id="card-brecha">
+            <div class="ratio-title">1. Brecha de Caja Proyectada</div>
+            <div class="ratio-val" id="val-brecha">$2,800.00 / mes</div>
+            <div class="ratio-status" id="stat-brecha">🟢 Flujo mensual positivo</div>
+          </div>
+          <div class="ratio-card" id="card-margen">
+            <div class="ratio-title">2. Margen Operativo (EBIT/Ventas)</div>
+            <div class="ratio-val" id="val-margen">18.7%</div>
+            <div class="ratio-status" id="stat-margen">🟢 Margen saludable</div>
+          </div>
+          <div class="ratio-card" id="card-liquidez">
+            <div class="ratio-title">3. Liquidez Corriente</div>
+            <div class="ratio-val" id="val-liquidez">1.57x</div>
+            <div class="ratio-status" id="stat-liquidez">🟢 Activos cubren pasivos</div>
+          </div>
+        </div>
+
+        <!-- PILAR 2 -->
+        <h4 style="color:var(--blue);margin:24px 0 8px;border-bottom:2px solid #edf2f7;padding-bottom:6px;">Pilar II: ¿Puede Pagarlo?</h4>
+        <div class="ratio-grid">
+          <div class="ratio-card" id="card-dscr">
+            <div class="ratio-title">4. Cobertura de Deuda (DSCR)</div>
+            <div class="ratio-val" id="val-dscr">2.06x</div>
+            <div class="ratio-status" id="stat-dscr">🟢 Cobertura holgada (>1.40x)</div>
+          </div>
+          <div class="ratio-card" id="card-caja-rest">
+            <div class="ratio-title">5. Caja Restante post-Deuda</div>
+            <div class="ratio-val" id="val-caja-rest">$1,439.04 / mes</div>
+            <div class="ratio-status" id="stat-caja-rest">🟢 Excedente libre para imprevistos</div>
+          </div>
+          <div class="ratio-card" id="card-stress">
+            <div class="ratio-title">6. Cobertura Escenario Adverso (-20% Vtas)</div>
+            <div class="ratio-val" id="val-stress">1.45x</div>
+            <div class="ratio-status" id="stat-stress">🟢 Resiste caída de ventas</div>
+          </div>
+        </div>
+
+        <!-- PILAR 3 -->
+        <h4 style="color:var(--blue);margin:24px 0 8px;border-bottom:2px solid #edf2f7;padding-bottom:6px;">Pilar III: ¿Está Preparado para Solicitarlo?</h4>
+        <div class="ratio-grid">
+          <div class="ratio-card" id="card-leverage">
+            <div class="ratio-title">7. Endeudamiento Patrimonial</div>
+            <div class="ratio-val" id="val-leverage">0.83x</div>
+            <div class="ratio-status" id="stat-leverage">🟢 Apalancamiento bajo control</div>
+          </div>
+          <div class="ratio-card" id="card-doc">
+            <div class="ratio-title">8. Preparación Crediticia y Formal</div>
+            <div class="ratio-val" id="val-doc">100%</div>
+            <div class="ratio-status" id="stat-doc">🟢 Carpeta documental completa</div>
+          </div>
+        </div>
+
+        <!-- DICTAMEN INTEGRAL CON PUERTA DE ENTRADA -->
+        <div id="gate-pass-box" style="background:#f0fdf4;border:2px solid #bbf7d0;border-radius:12px;padding:20px;margin-top:20px;">
           <div style="display:flex;align-items:flex-start;gap:14px;">
-            <span style="font-size:28px;">🛑</span>
+            <span style="font-size:32px;">✅</span>
             <div>
-              <strong style="color:var(--red);font-size:17px;display:block;">Dictamen Consultivo: No se recomienda asumir deuda en este momento.</strong>
-              <p style="margin:6px 0 12px;color:#7f1d1d;font-size:14.5px;">
-                Cuando un negocio tiene pérdidas operativas o cobranzas desordenadas, inyectar un crédito no resuelve el problema de fondo: acelera el ahogo de caja y la insolvencia. Tu empresa necesita primero ordenar su estructura de costos, margen y políticas de cobro.
+              <strong style="color:var(--green);font-size:18px;display:block;">Diagnóstico: Financiamiento Viable y Justificado por Cifras.</strong>
+              <p style="margin:6px 0 12px;color:#14532d;font-size:14.5px;">
+                Tus números reflejan margen operativo positivo, liquidez corriente sólida y capacidad de servicio (DSCR) incluso bajo estrés. La calculadora detallada de cuotas se ha desbloqueado a continuación.
               </p>
-              <div class="actions" style="margin:10px 0 0;">
-                <button class="btn" style="background:var(--red);" onclick="switchTab('serv')">Ver Servicios de Orden Financiero y Costos</button>
-                <a class="btn secondary" target="_blank" href="https://wa.me/584127147963?text=Hola%20SumaTips,%20el%20filtro%20financiero%20me%20indic%C3%B3%20que%20debo%20ordenar%20mi%20estructura%20antes%20de%20endeudarme.%20Quiero%20asesor%C3%ADa.">Hablar con un Consultor</a>
-              </div>
+              <a href="#simulator-section" class="btn" style="background:var(--green);padding:9px 18px;font-size:14px;">Ir al Simulador de Cuotas y Plazos ↓</a>
             </div>
           </div>
         </div>
 
-        <div id="verdict-pass" class="verdict-box" style="background:#f0fdf4;border:2px solid #bbf7d0;">
+        <div id="gate-stop-box" style="background:#fef2f2;border:2px solid #fecaca;border-radius:12px;padding:20px;margin-top:20px;display:none;">
           <div style="display:flex;align-items:flex-start;gap:14px;">
-            <span style="font-size:28px;">✅</span>
+            <span style="font-size:32px;">🛑</span>
             <div>
-              <strong style="color:var(--green);font-size:17px;display:block;">Dictamen Consultivo: Financiamiento Justificado y Estratégico.</strong>
-              <p style="margin:6px 0 12px;color:#14532d;font-size:14.5px;">
-                Tu modelo de negocio es rentable y el financiamiento servirá como palanca para capital de trabajo, inventario o expansión productiva. Procede a dimensionar el monto adecuado y validar tu cobertura de caja a continuación.
+              <strong style="color:var(--red);font-size:18px;display:block;">Diagnóstico: Se desaconseja solicitar crédito en este momento.</strong>
+              <p style="margin:6px 0 12px;color:#7f1d1d;font-size:14.5px;" id="gate-stop-reason">
+                Tus estados financieros muestran debilidad en el margen operativo o liquidez insuficiente. Asumir una nueva cuota hoy asfixiaría tu caja. Te recomendamos ordenar primero costos y cuentas por cobrar.
               </p>
-              <a href="#simulator-section" class="btn" style="background:var(--green);padding:9px 18px;font-size:14px;">Deslizar al Simulador de Cuota y RCSD ↓</a>
+              <div class="actions" style="margin:10px 0 0;">
+                <button class="btn" style="background:var(--red);" onclick="switchTab('serv')">Ver Servicios de Orden Financiero y Costos</button>
+                <a class="btn secondary" target="_blank" href="https://wa.me/584127147963?text=Hola%20SumaTips,%20mis%20n%C3%BAmeros%20indican%20que%20debo%20ordenar%20mi%20caja%20antes%20de%20endeudarme.%20Quiero%20asesor%C3%ADa.">Consultar con un Especialista</a>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- FASE 2: SIMULADOR DE MONTO, CUOTA Y RCSD (SOLO HABILITADO TRAS VALIDACIÓN) -->
+      <!-- FASE 2: SIMULADOR DETALLADO DE CRÉDITO (SE ACTIVA SOLO SI PASA) -->
       <div id="simulator-section" style="transition:opacity .3s ease;">
-        <div class="calc-grid">
-          <!-- FORMULARIO DE VARIABLES -->
-          <div class="card">
-            <div class="tag">Fase 2: Estructuración Numérica</div>
-            <h3 style="margin:8px 0 16px;">Dimensiona tu Crédito y Capacidad Real</h3>
-            
-            <div class="form-group">
-              <label for="calc-income">Ingresos Operativos Promedio Mensuales ($ / USD):</label>
-              <input type="number" id="calc-income" value="12000" min="500" step="100" placeholder="Ej. 12000" oninput="calculateLoan()">
-              <small class="muted">Facturación mensual recurrente sin IVA.</small>
-            </div>
+        <div class="card">
+          <div class="tag">Paso 3: Estructuración y Amortización</div>
+          <h3 style="margin:8px 0 16px;">Simulador de Financiamiento y Vía Estratégica</h3>
 
-            <div class="form-group">
-              <label for="calc-expense">Costos y Gastos Operativos Fijos Mensuales ($ / USD):</label>
-              <input type="number" id="calc-expense" value="8500" min="200" step="100" placeholder="Ej. 8500" oninput="calculateLoan()">
-              <small class="muted">Nómina, compras, alquiler, servicios e impuestos.</small>
-            </div>
-
-            <hr style="border:0;border-top:1px solid #edf2f7;margin:20px 0;">
-
-            <div class="form-group">
-              <label for="calc-amount">Monto del Financiamiento Sugerido / Solicitado ($ / USD):</label>
-              <input type="number" id="calc-amount" value="15000" min="1000" step="500" placeholder="Ej. 15000" oninput="calculateLoan()">
-            </div>
-
-            <div class="form-group">
-              <label for="calc-term">Plazo Estimado (Meses):</label>
-              <select id="calc-term" onchange="calculateLoan()">
-                <option value="6">6 Meses (Corto plazo / Capital de trabajo)</option>
-                <option value="12" selected>12 Meses (1 Año estándar)</option>
-                <option value="24">24 Meses (2 Años)</option>
-                <option value="36">36 Meses (3 Años / Activo fijo)</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="calc-rate">Tasa de Interés Anual Proyectada (% TNA):</label>
-              <input type="number" id="calc-rate" value="16" min="1" max="100" step="0.5" placeholder="Ej. 16" oninput="calculateLoan()">
-              <small class="muted">Referencia bancaria o bursátil estimada anual.</small>
-            </div>
-
-            <button class="btn" style="width:100%;margin-top:10px;" onclick="calculateLoan()">Actualizar Análisis de Solvencia</button>
-          </div>
-
-          <!-- PANEL DE RESULTADOS CON RCSD Y RAZÓN DE ENDEUDAMIENTO -->
-          <div class="card" style="display:flex;flex-direction:column;justify-content:space-between;">
+          <div class="calc-grid">
             <div>
-              <div class="tag">Dictamen Técnico de Cobertura</div>
-              <h3 style="margin:8px 0 16px;">Diagnóstico de Solvencia y Ratios</h3>
-              
-              <div class="calc-result-box">
+              <div class="form-group">
+                <label for="sim-amount">Monto del Financiamiento a Modelar ($ / USD):</label>
+                <input type="number" id="sim-amount" value="15000" min="1000" step="500" oninput="runFinancialAudit()">
+              </div>
+
+              <div class="form-group">
+                <label for="sim-term">Plazo Estimado (Meses):</label>
+                <select id="sim-term" onchange="runFinancialAudit()">
+                  <option value="6">6 Meses (Corto plazo / Capital de trabajo)</option>
+                  <option value="12" selected>12 Meses (1 Año estándar)</option>
+                  <option value="24">24 Meses (2 Años)</option>
+                  <option value="36">36 Meses (3 Años / Activo fijo)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="sim-rate">Tasa de Interés Anual Proyectada (% TNA):</label>
+                <input type="number" id="sim-rate" value="16" min="1" max="100" step="0.5" oninput="runFinancialAudit()">
+                <small class="muted">Referencia bancaria o bursátil estimada anual.</small>
+              </div>
+            </div>
+
+            <!-- RESULTADOS FINALES DE LA SIMULACIÓN -->
+            <div style="display:flex;flex-direction:column;justify-content:space-between;">
+              <div class="calc-result-box" style="margin-top:0;">
                 <div class="calc-stat">
-                  <span>Cuota Mensual Estimada:</span>
-                  <strong id="res-payment">$1,360.96</strong>
+                  <span>Cuota Mensual Proyectada:</span>
+                  <strong id="sim-payment">$1,360.96</strong>
                 </div>
                 <div class="calc-stat">
-                  <span>Flujo de Caja Libre Operativo (FCF):</span>
-                  <strong id="res-fcf">$3,500.00</strong>
+                  <span>Flujo Libre Operativo Mensual:</span>
+                  <strong id="sim-fcf">$2,800.00</strong>
                 </div>
                 <div class="calc-stat" style="background:#e8f3fa;padding:10px 8px;border-radius:6px;margin:4px 0;">
-                  <span><strong>RCSD (Cobertura del Servicio de Deuda):</strong></span>
-                  <strong id="res-rcsd" style="color:var(--blue);font-size:18px;">2.57x</strong>
+                  <span><strong>Ratio de Cobertura DSCR:</strong></span>
+                  <strong id="sim-dscr" style="color:var(--blue);font-size:18px;">2.06x</strong>
                 </div>
                 <div class="calc-stat">
-                  <span>Absorción de Caja Libre:</span>
-                  <strong id="res-ratio">38.9%</strong>
-                </div>
-                <div class="calc-stat">
-                  <span>Compromiso sobre Ventas Totales:</span>
-                  <strong id="res-debt-ratio">11.3%</strong>
+                  <span>Compromiso sobre Ventas:</span>
+                  <strong id="sim-debt-sales">9.1%</strong>
                 </div>
                 <div class="calc-stat">
                   <span>Total Intereses Proyectados:</span>
-                  <strong id="res-interest">$1,331.55</strong>
+                  <strong id="sim-interest">$1,331.55</strong>
                 </div>
               </div>
 
-              <!-- SEMÁFORO DE COBERTURA -->
-              <div style="text-align:center;margin-top:18px;">
-                <div class="traffic-badge badge-green" id="calc-badge">🟢 Cobertura Sólida · RCSD 2.57x</div>
-                <p id="calc-analysis" style="font-size:14.5px;margin-top:12px;font-weight:600;color:var(--text);">
-                  Capacidad holgada. El negocio genera 2.57 veces la cuota requerida. La deuda compromete solo el 38.9% del excedente libre y el 11.3% de las ventas.
-                </p>
-              </div>
-
-              <!-- VÍA ESTRATÉGICA -->
-              <div style="background:#edf2f7;border-radius:10px;padding:14px;margin-top:16px;font-size:14px;">
+              <div style="background:#edf2f7;border-radius:10px;padding:14px;margin-top:14px;font-size:13.5px;">
                 <strong style="color:var(--blue);display:block;margin-bottom:4px;">Vía Estratégica Sugerida:</strong>
-                <span id="calc-recommendation">Para plazos de 6 a 12 meses y montos ágiles, la emisión de <strong>Pagarés Bursátiles o Papeles Comerciales en la Bolsa de Caracas (BVC)</strong> ofrece condiciones atractivas frente al crédito bancario tradicional.</span>
+                <span id="sim-reco">Para plazos de 6 a 12 meses, la emisión de <strong>Pagarés Bursátiles o Papeles Comerciales en la Bolsa de Caracas (BVC)</strong> es una opción óptima frente a las limitaciones de la banca tradicional.</span>
               </div>
             </div>
+          </div>
 
-            <div style="margin-top:24px;">
-              <a class="btn" id="calc-wa-btn" target="_blank" style="width:100%;text-align:center;" href="#">Validar este Análisis con un Consultor SumaTips &gt;</a>
-              <small class="muted" style="display:block;text-align:center;margin-top:8px;">* Cálculo referencial según amortización francesa y ratios de cobertura. No implica aprobación crediticia.</small>
-            </div>
+          <div style="margin-top:24px;">
+            <a class="btn" id="audit-wa-btn" target="_blank" style="width:100%;text-align:center;" href="#">Enviar Diagnóstico Financiero Completo a SumaTips vía WhatsApp &gt;</a>
+            <small class="muted" style="display:block;text-align:center;margin-top:8px;">* Diagnóstico preliminar basado en estados financieros. No constituye aprobación de crédito formal.</small>
           </div>
         </div>
       </div>
@@ -610,7 +671,7 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
 </footer>
 
 <script>
-// NAVEGACIÓN ENTRE LAS 4 PESTAÑAS
+// NAVEGACIÓN ENTRE PESTAÑAS
 function switchTab(tab) {
   document.getElementById('view-home').classList.remove('active');
   document.getElementById('view-serv').classList.remove('active');
@@ -634,22 +695,22 @@ function switchTab(tab) {
   } else if (tab === 'calc') {
     document.getElementById('view-calc').classList.add('active');
     document.getElementById('tab-btn-calc').classList.add('active');
-    runNeedEvaluation();
+    runFinancialAudit();
   }
   window.scrollTo({top:0, behavior:'smooth'});
 }
 
-// 12 MODELOS DE NEGOCIO SEGÚN LA INFOGRAFÍA ("Servicios" simplificado)
+// 12 MODELOS DE NEGOCIO ("Servicios")
 const businessModels = [
   { id: "serv_prof", name: "Servicios", icon: "👥", category: "servicios" },
   { id: "serv_tec", name: "Servicios Técnicos", icon: "🔧", category: "servicios" },
   { id: "com_min", name: "Comercio Minorista", icon: "🛒", category: "comercio" },
   { id: "dist_may", name: "Distribución y Mayorista", icon: "📦", category: "comercio" },
-  { id: "manuf", name: "Manufactura", icon: "🏭", category: "produccion" },
+  { id: "manuf", name: "Manufactura", icon: "🏭", category: "pproducción },
   { id: "const", name: "Construcción y Proyectos", icon: "🏗️", category: "proyectos" },
   { id: "rest", name: "Restaurantes y Alimentos", icon: "🍽️", category: "alimentos" },
   { id: "transp", name: "Transporte y Logística", icon: "🚚", category: "logistica" },
-  { id: "agro", name: "Agroindustria", icon: "🌱", category: "produccion" },
+  { id: "agro", name: "Agroindustria", icon: "🌱", category: "pproducción },
   { id: "digital", name: "Negocios Digitales", icon: "💻", category: "digital" },
   { id: "fin", name: "Financiero y Seguros", icon: "🏛️", category: "financiero" },
   { id: "alquiler", name: "Alquiler y Activos", icon: "🏠", category: "activos" }
@@ -658,243 +719,39 @@ const businessModels = [
 let selectedModelObj = businessModels[0];
 let selectedUnit = "pequena";
 
-// DICCIONARIO DE PREGUNTAS DINÁMICAS
 function getQuestionsFor(model, unit) {
-  let qEstrategia = [
-    "¿Tiene objetivos comerciales y financieros claros y por escrito?",
-    "¿Evalúa su entorno y cuenta con un plan de crecimiento definido?"
-  ];
-  let qRRHH = [
-    "¿Tiene estructura organizacional con roles definidos y capacitación formal?",
-    "¿Evalúa el desempeño de su equipo y controla la rotación de personal?"
-  ];
-  let qTecnologia = [
-    "¿Usa sistemas eficientes con información confiable y respaldo de datos seguro?",
-    "¿Automatiza tareas repetitivas y cuenta con soporte técnico adecuado?"
-  ];
+  let qEstrategia = ["¿Tiene objetivos comerciales y financieros claros y por escrito?", "¿Evalúa su entorno y cuenta con un plan de crecimiento definido?"];
+  let qRRHH = ["¿Tiene estructura organizacional con roles definidos y capacitación formal?", "¿Evalúa el desempeño de su equipo y controla la rotación de personal?"];
+  let qTecnologia = ["¿Usa sistemas eficientes con información confiable y respaldo de datos seguro?", "¿Automatiza tareas repetitivas y cuenta con soporte técnico adecuado?"];
 
   if (unit === "micro") {
-    qEstrategia = [
-      "¿Tiene metas mensuales de ventas y ganancias personales/del negocio por escrito?",
-      "¿El negocio tiene un rumbo claro que no dependa solo de apagar fuegos diarios?"
-    ];
-    qRRHH = [
-      "¿Tiene claramente delimitadas las tareas de cada persona (incluyéndose a usted mismo)?",
-      "¿El negocio puede operar al menos 3 días con normalidad si usted se ausenta?"
-    ];
-    qTecnologia = [
-      "¿Respalda su información contable y base de clientes en la nube de forma segura?",
-      "¿Usa herramientas digitales sencillas para facturar y cotizar sin depender de papel?"
-    ];
-  } else if (unit === "mediana") {
-    qEstrategia = [
-      "¿Cuenta con un plan estratégico formal con KPIs compartidos con sus líderes de área?",
-      "¿Revisa trimestralmente escenarios de expansión, riesgos de mercado y competencia?"
-    ];
-    qRRHH = [
-      "¿Cuenta con manuales de cargos, mandos medios empoderados y planes de retención?",
-      "¿Mide formalmente índices de rotación, clima laboral y productividad por departamento?"
-    ];
-    qTecnologia = [
-      "¿Opera bajo un sistema ERP o software centralizado que integra compras, ventas y contabilidad?",
-      "¿Cuenta con protocolos de ciberseguridad, permisos por usuario y plan de contingencia TI?"
-    ];
+    qEstrategia = ["¿Tiene metas mensuales de ventas y ganancias por escrito?", "¿El negocio tiene un rumbo claro que no dependa solo de resolver urgencias?"];
+    qRRHH = ["¿Tiene delimitadas las tareas de cada persona (incluyéndose a usted)?", "¿El negocio opera normalmente si usted se ausenta 3 días?"];
+    qTecnologia = ["¿Respalda su información contable y clientes en la nube?", "¿Usa herramientas digitales para facturar y cotizar?"];
   }
 
-  let qCostos, qOperaciones, qVentas, qCompras, qLegal;
-
-  switch (model.category) {
-    case "comercio":
-      qCostos = [
-        "¿Conoce el margen bruto real por línea de producto descontando fletes y promociones?",
-        "¿Identifica con precisión los productos de baja rotación que congelan su capital?"
-      ];
-      qOperaciones = [
-        "¿Tiene tiempos definidos para reposición de anaquel, despacho y atención en mostrador?",
-        "¿Realiza arqueos diarios y auditorías periódicas a sus puntos de cobro y despachos?"
-      ];
-      qVentas = [
-        "¿Mide el ticket promedio de compra y la frecuencia de visita de sus clientes?",
-        "¿Aplica estrategias activas de venta cruzada para aumentar el volumen vendido?"
-      ];
-      qCompras = [
-        "¿Lleva control estricto de inventarios con conteos cíclicos para evitar hurtos o pérdidas?",
-        "¿Negocia plazos de crédito y descuentos por volumen con sus distribuidores clave?"
-      ];
-      qLegal = [
-        "¿Cumple con normativas de protección al consumidor, rotulado de precios y garantías?",
-        "¿Tiene contratos de arrendamiento comercial claros y pólizas contra robos e incendios?"
-      ];
-      break;
-
-    case "produccion":
-      qCostos = [
-        "¿Calcula fichas técnicas de costos separando materia prima, mano de obra y costos indirectos (CIF)?",
-        "¿Mide con exactitud el porcentaje de desperdicio, merma o rechazo en cada lote?"
-      ];
-      qOperaciones = [
-        "¿Tiene estandarizados los tiempos de producción y planes de mantenimiento de maquinaria?",
-        "¿Controla la capacidad instalada de su planta para evitar paradas no programadas?"
-      ];
-      qVentas = [
-        "¿Planifica su producción con base en pedidos comprometidos o pronósticos reales de venta?",
-        "¿Cuenta con clientes recurrentes que aseguren un volumen base de producción mensual?"
-      ];
-      qCompras = [
-        "¿Mantiene stock de seguridad de materias primas críticas para no detener la producción?",
-        "¿Evalúa al menos dos proveedores certificados por cada insumo estratégico?"
-      ];
-      qLegal = [
-        "¿Cumple estrictamente con normativas ambientales, de seguridad laboral (LOPCYMAT/equivalente) y permisos sanitarios?",
-        "¿Formaliza contratos de suministro de materia prima con cláusulas de penalización por retraso?"
-      ];
-      break;
-
-    case "alimentos":
-      qCostos = [
-        "¿Tiene costeada cada receta con su respectivo 'escandallo' actualizado a precios de hoy?",
-        "¿Mide y controla diariamente las mermas de cocina, descomposición y consumo interno?"
-      ];
-      qOperaciones = [
-        "¿Mantiene fichas de preparación estándar para asegurar la misma calidad en cada plato?",
-        "¿Controla la cadena de frío, rotación FIFO (primero que entra, primero que sale) e higiene?"
-      ];
-      qVentas = [
-        "¿Mide la ocupación por turno/mesa y la rentabilidad del menú según platos más pedidos?",
-        "¿Tiene un canal ágil para responder y fidelizar clientes por delivery o reservas?"
-      ];
-      qCompras = [
-        "¿Realiza compras de perecederos con base en pronóstico de ventas para evitar vencimientos?",
-        "¿Verifica pesos, frescura y temperatura al momento de recibir a sus proveedores?"
-      ];
-      qLegal = [
-        "¿Tiene al día certificados de manipulación de alimentos, permisos de bomberos y patentes?",
-        "¿Cuenta con protocolos claros para atender reclamos por calidad o intoxicaciones?"
-      ];
-      break;
-
-    case "proyectos":
-      qCostos = [
-        "¿Elabora presupuestos con análisis de precios unitarios (APU) y provisiona desviaciones por inflación?",
-        "¿Mide la desviación entre el costo presupuestado y el costo real ejecutado por hito?"
-      ];
-      qOperaciones = [
-        "¿Lleva control de avance físico vs. financiero mediante cronogramas de obra (Gantt)?",
-        "¿Supervisa el rendimiento del personal en campo y la seguridad industrial en sitio?"
-      ];
-      qVentas = [
-        "¿Tiene un embudo para licitaciones o presupuestos con seguimiento antes del vencimiento?",
-        "¿Establece condiciones de anticipo comercial que cubran el arranque de cada etapa?"
-      ];
-      qCompras = [
-        "¿Coordina la entrega de materiales en obra justo a tiempo para evitar deterioros o robos?",
-        "¿Gestiona compras con comparativas de precios de materiales pesados y equipos?"
-      ];
-      qLegal = [
-        "¿Firma contratos por obra con alcance exacto, actas de entrega y pólizas de fiel cumplimiento?",
-        "¿Gestiona las responsabilidades laborales patronales del personal eventual de obra?"
-      ];
-      break;
-
-    case "logistica":
-      qCostos = [
-        "¿Conoce el costo operativo real por kilómetro recorrido o flete (combustible, cauchos, viáticos)?",
-        "¿Provisiona adecuadamente los fondos de depreciación y mantenimiento mayor de su flota?"
-      ];
-      qOperaciones = [
-        "¿Planifica rutas eficientes controlando tiempos de tránsito, carga y descarga?",
-        "¿Realiza mantenimientos preventivos programados a cada unidad de transporte?"
-      ];
-      qVentas = [
-        "¿Mide el nivel de cumplimiento de entregas a tiempo (OTIF) para fidelizar a sus clientes?",
-        "¿Diversifica su cartera de clientes para no depender de un solo generador de carga?"
-      ];
-      qCompras = [
-        "¿Gestiona compras de repuestos, lubricantes y neumáticos con proveedores mayoristas de confianza?",
-        "¿Lleva control de inventario de repuestos para no tener camiones paralizados?"
-      ];
-      qLegal = [
-        "¿Mantiene al día guías de movilización, permisos viales, seguros de carga y de vehículos?",
-        "¿Establece límites claros de responsabilidad civil ante pérdidas, robos o siniestros viales?"
-      ];
-      break;
-
-    case "digital":
-      qCostos = [
-        "¿Mide el Costo de Adquisición de Clientes (CAC) y el Valor de Vida del Cliente (LTV)?",
-        "¿Controla el gasto recurrente en servidores, licencias de software y pasarelas de pago?"
-      ];
-      qOperaciones = [
-        "¿Aplica metodologías ágiles (Scrum/Kanban) con entregas continuas y control de errores/bugs?",
-        "¿Garantiza la disponibilidad de su plataforma (uptime) y tiempos de respuesta técnica rápidos?"
-      ];
-      qVentas = [
-        "¿Mide la tasa de conversión en su embudo digital (visitas vs. compras/registros)?",
-        "¿Aplica estrategias de retención para reducir la tasa de cancelación (churn rate)?"
-      ];
-      qCompras = [
-        "¿Evalúa periódicamente alternativas de pasarelas de pago y proveedores de infraestructura en la nube?",
-        "¿Negocia tarifas por volumen con sus proveedores de APIs o servicios tecnológicos?"
-      ];
-      qLegal = [
-        "¿Cuenta con Términos y Condiciones, políticas de privacidad y protección de datos (cookies)?",
-        "¿Tiene protegida su propiedad intelectual, marcas registradas y código fuente por contrato?"
-      ];
-      break;
-
-    default: // Servicios
-      qCostos = [
-        "¿Conoce el costo real de su hora de servicio considerando gastos fijos y horas no facturables?",
-        "¿Calcula la rentabilidad individual de cada proyecto, contrato o cliente atendido?"
-      ];
-      qOperaciones = [
-        "¿Dispone de procedimientos estándar para entregar sus servicios con calidad homogénea?",
-        "¿Lleva control estricto de los tiempos de entrega y plazos comprometidos con el cliente?"
-      ];
-      qVentas = [
-        "¿Tiene un proceso sistemático para presentar propuestas comerciales y hacerles seguimiento?",
-        "¿Consigue nuevos clientes mediante recomendaciones planificadas o canales medibles?"
-      ];
-      qCompras = [
-        "¿Evalúa a los subcontratistas y especialistas externos que apoyan sus servicios?",
-        "¿Controla las licencias o herramientas de trabajo indispensables para prestar el servicio?"
-      ];
-      qLegal = [
-        "¿Formaliza todo encargo mediante contratos de servicios con alcance y límites de responsabilidad claros?",
-        "¿Protege la confidencialidad de la información y la propiedad intelectual de sus entregables?"
-      ];
-      break;
-  }
+  let qCostos = ["¿Conoce el costo real de su servicio considerando gastos fijos y horas no facturables?", "¿Calcula la rentabilidad individual de cada proyecto o contrato?"];
+  let qOperaciones = ["¿Dispone de procedimientos estándar para entregar servicios con calidad?", "¿Lleva control estricto de los tiempos de entrega pactados?"];
+  let qVentas = ["¿Tiene un proceso sistemático para presentar propuestas y hacer seguimiento?", "¿Consigue nuevos clientes mediante recomendaciones planificadas?"];
+  let qCompras = ["¿Evalúa a subcontratistas y especialistas externos que apoyan sus servicios?", "¿Controla licencias o herramientas de trabajo indispensables?"];
+  let qLegal = ["¿Formaliza todo encargo mediante contratos de servicio con alcance claro?", "¿Protege la confidencialidad de la información de sus clientes?"];
 
   return [
     { num: "1", name: "Estrategia y Dirección", enfoque: "Planeación", q: qEstrategia, tip: "Estructure una hoja de ruta con metas financieras trimestrales." },
-    { num: "2", name: "Finanzas y Tesorería", enfoque: "Liquidez", q: [
-      "¿Controla su flujo de caja proyectado semanal y conoce su nivel exacto de endeudamiento?",
-      "¿Separa totalmente las finanzas del negocio de sus gastos personales y familiares?"
-    ], tip: "Implemente un flujo de caja preventivo para asegurar liquidez continua." },
-    { num: "3", name: "Contabilidad y Control", enfoque: "Información", q: [
-      "¿Cierra sus estados financieros a tiempo para tomar decisiones antes del día 10 de cada mes?",
-      "¿Concilia cuentas bancarias semanalmente y controla activos fijos?"
-    ], tip: "Estandarice fechas de corte contable para gobernar con números al día." },
-    { num: "4", name: "Costos y Rentabilidad", enfoque: "Rentabilidad", q: qCostos, tip: "Actualice la estructura de costos directos e indirectos de su operación." },
-    { num: "5", name: "Ventas y Comercial", enfoque: "Crecimiento", q: qVentas, tip: "Sistematice el seguimiento de cotizaciones para subir la tasa de conversión." },
-    { num: "6", name: "Marketing y Posicionamiento", enfoque: "Marca", q: [
-      "¿Cuenta con un calendario planificado de atracción comercial y contenidos?",
-      "¿Mide qué campañas o canales le generan ventas efectivas y no solo vistas?"
-    ], tip: "Vincule sus acciones de marketing con métricas de ventas reales." },
-    { num: "7", name: "Operaciones y Procesos", enfoque: "Eficiencia", q: qOperaciones, tip: "Documente los procedimientos que evitan retrasos y errores en su entrega." },
+    { num: "2", name: "Finanzas y Tesorería", enfoque: "Liquidez", q: ["¿Controla su flujo de caja proyectado semanal y nivel de endeudamiento?", "¿Separa las finanzas del negocio de sus gastos personales?"], tip: "Implemente un flujo de caja preventivo para asegurar liquidez continua." },
+    { num: "3", name: "Contabilidad y Control", enfoque: "Información", q: ["¿Cierra estados financieros antes del día 10 de cada mes?", "¿Concilia cuentas bancarias semanalmente y controla activos?"], tip: "Estandarice fechas de corte contable para gobernar con números al día." },
+    { num: "4", name: "Costos y Rentabilidad", enfoque: "Rentabilidad", q: qCostos, tip: "Actualice la estructura de costos directos e indirectos." },
+    { num: "5", name: "Ventas y Comercial", enfoque: "Crecimiento", q: qVentas, tip: "Sistematice el seguimiento de cotizaciones para subir ventas." },
+    { num: "6", name: "Marketing y Posicionamiento", enfoque: "Marca", q: ["¿Tiene un calendario planificado de atracción comercial?", "¿Mide qué campañas le generan ventas efectivas?"], tip: "Vincule acciones de marketing con ventas reales." },
+    { num: "7", name: "Operaciones y Procesos", enfoque: "Eficiencia", q: qOperaciones, tip: "Documente procedimientos para evitar retrasos y fallas." },
     { num: "8", name: "Recursos Humanos y Organización", enfoque: "Talento", q: qRRHH, tip: "Defina responsabilidades puntuales y delegue operativamente." },
-    { num: "9", name: "Tecnología y Sistemas", enfoque: "Innovación", q: qTecnologia, tip: "Automatice tareas repetitivas y asegure respaldos periódicos de datos." },
-    { num: "10", name: "Gestión Fiscal y Tributaria", enfoque: "Cumplimiento", q: [
-      "¿Declara y paga tributos (IVA, ISLR, impuestos municipales) en los plazos fijados?",
-      "¿Emite facturas cumpliendo formalidades de ley y coordina cierres mensuales con su contador?"
-    ], tip: "Diseñe un calendario fiscal preventivo para evitar multas tributarias." },
-    { num: "11", name: "Compras, Inventarios y Proveedores", enfoque: "Abastecimiento", q: qCompras, tip: "Establezca controles de stock o acuerdos de suministro con mejores condiciones." },
-    { num: "12", name: "Legal, Riesgos y Cumplimiento", enfoque: "Seguridad", q: qLegal, tip: "Blinde legalmente sus acuerdos con clientes y mantenga licencias al día." }
+    { num: "9", name: "Tecnología y Sistemas", enfoque: "Innovación", q: qTecnologia, tip: "Automatice tareas repetitivas y asegure respaldos de datos." },
+    { num: "10", name: "Gestión Fiscal y Tributaria", enfoque: "Cumplimiento", q: ["¿Declara y paga tributos (IVA, ISLR, municipales) a tiempo?", "¿Emite facturas cumpliendo formalidades de ley?"], tip: "Diseñe un calendario fiscal preventivo." },
+    { num: "11", name: "Compras y Proveedores", enfoque: "Abastecimiento", q: qCompras, tip: "Establezca acuerdos de suministro con mejores condiciones." },
+    { num: "12", name: "Legal y Cumplimiento", enfoque: "Seguridad", q: qLegal, tip: "Blinde legalmente sus acuerdos con clientes." }
   ];
 }
 
-// RENDERIZADO DE MODELOS
 const modelsDiv = document.getElementById('models-container');
 modelsDiv.innerHTML = businessModels.map((m, idx) => `
   <div class="model-card ${idx === 0 ? 'selected' : ''}" onclick="selectModel('${m.id}', this)">
@@ -919,17 +776,13 @@ let currentAreas = [];
 
 function renderQuestions() {
   currentAreas = getQuestionsFor(selectedModelObj, selectedUnit);
-
   const unitLabel = document.getElementById('econ-unit').options[document.getElementById('econ-unit').selectedIndex].text;
   document.getElementById('active-model-label').textContent = selectedModelObj.name;
   document.getElementById('active-unit-label').textContent = unitLabel;
 
   let questionsHTML = '';
   currentAreas.forEach((area, aIdx) => {
-    questionsHTML += `
-      <fieldset>
-        <legend>${area.num}. ${area.name} (Enfoque: ${area.enfoque})</legend>
-    `;
+    questionsHTML += `<fieldset><legend>${area.num}. ${area.name} (Enfoque: ${area.enfoque})</legend>`;
     area.q.forEach((pregunta, qIdx) => {
       questionsHTML += `
         <div class="question-item">
@@ -938,21 +791,15 @@ function renderQuestions() {
             <label><input type="radio" name="area_${aIdx}_q${qIdx}" value="1" required> Sí</label>
             <label><input type="radio" name="area_${aIdx}_q${qIdx}" value="0" required> No</label>
           </div>
-        </div>
-      `;
+        </div>`;
     });
     questionsHTML += `</fieldset>`;
   });
   document.getElementById('questions-wrapper').innerHTML = questionsHTML;
-  
-  const resDiv = document.getElementById('results-box');
-  resDiv.hidden = true;
-  resDiv.innerHTML = '';
+  document.getElementById('results-box').hidden = true;
 }
-
 renderQuestions();
 
-// PROCESAR EVALUACIÓN Y SEMÁFORO
 document.getElementById('quiz-form').addEventListener('submit', function(e) {
   e.preventDefault();
   let totalAffirmative = 0;
@@ -968,35 +815,15 @@ document.getElementById('quiz-form').addEventListener('submit', function(e) {
         totalAffirmative++;
       }
     });
-    details.push({
-      num: area.num,
-      name: area.name,
-      score: aScore,
-      pct: Math.round((aScore / 2) * 100),
-      tip: area.tip
-    });
+    details.push({ num: area.num, name: area.name, pct: Math.round((aScore / 2) * 100), tip: area.tip });
   });
 
   const finalPct = Math.round((totalAffirmative / maxPossible) * 100);
   const econUnitText = document.getElementById('econ-unit').options[document.getElementById('econ-unit').selectedIndex].text;
 
-  let badgeClass = "";
-  let badgeText = "";
-  let statusAction = "";
-
-  if (finalPct <= 39) {
-    badgeClass = "badge-red";
-    badgeText = "0% – 39% · Crítico";
-    statusAction = "Atención inmediata. Se identifican brechas estructurales que amenazan la estabilidad del flujo y la operación.";
-  } else if (finalPct <= 69) {
-    badgeClass = "badge-yellow";
-    badgeText = "40% – 69% · En Mejora";
-    statusAction = "Plan de acción requerido. El negocio opera con prácticas funcionales pero presenta fugas de control clave.";
-  } else {
-    badgeClass = "badge-green";
-    badgeText = "70% – 100% · Sólido";
-    statusAction = "Mantener y optimizar. La empresa demuestra prácticas estructuradas y base firme para escalar.";
-  }
+  let badgeClass = finalPct <= 39 ? "badge-red" : (finalPct <= 69 ? "badge-yellow" : "badge-green");
+  let badgeText = finalPct <= 39 ? "0% – 39% · Crítico" : (finalPct <= 69 ? "40% – 69% · En Mejora" : "70% – 100% · Sólido");
+  let statusAction = finalPct <= 39 ? "Atención inmediata. Brechas estructurales de control." : (finalPct <= 69 ? "Plan de acción requerido. Ajuste de fugas operativas." : "Sólido y listo para escalar.");
 
   let outHTML = `
     <div class="score-box">
@@ -1004,53 +831,28 @@ document.getElementById('quiz-form').addEventListener('submit', function(e) {
       <div class="score-number">${finalPct}%</div>
       <div class="traffic-badge ${badgeClass}">${badgeText}</div>
       <p style="margin-top:14px;font-weight:700;color:var(--blue);">${statusAction}</p>
-      <div style="background:#f1f5f9;padding:12px;border-radius:8px;display:inline-block;margin-top:10px;font-size:14px;">
-        <strong>Modelo Evaluado:</strong> ${selectedModelObj.name} | <strong>Unidad:</strong> ${econUnitText}
-      </div>
     </div>
-
     <h3>Evaluación discriminada por Área:</h3>
   `;
 
-  let waSummary = `*Diagnóstico Pre-Cita SumaTips*\n`;
-  waSummary += `• *Modelo:* ${selectedModelObj.name}\n`;
-  waSummary += `• *Unidad Económica:* ${econUnitText}\n`;
-  waSummary += `• *Resultado Global:* ${finalPct}% (${badgeText})\n\n`;
-  waSummary += `*Áreas críticas a revisar:*\n`;
+  let waSummary = `*Diagnóstico Pre-Cita SumaTips*\n• Modelo: ${selectedModelObj.name}\n• Unidad: ${econUnitText}\n• Global: ${finalPct}% (${badgeText})\n\n`;
 
   details.forEach(item => {
-    let color = item.pct <= 39 ? "var(--red)" : item.pct <= 69 ? "var(--yellow)" : "var(--green)";
-    let estadoLabel = item.pct <= 39 ? "Crítico" : item.pct <= 69 ? "En mejora" : "Sólido";
-
-    if (item.pct <= 69) {
-      waSummary += `- ${item.name}: ${item.pct}% (${estadoLabel})\n`;
-    }
-
+    let color = item.pct <= 39 ? "var(--red)" : (item.pct <= 69 ? "var(--yellow)" : "var(--green)");
     outHTML += `
       <div class="area-result">
-        <div class="area-header">
-          <span>${item.num}. ${item.name}</span>
-          <span style="color:${color}">${item.pct}% · ${estadoLabel}</span>
-        </div>
-        <div class="area-bar">
-          <div class="area-bar-fill" style="width:${item.pct}%;background:${color};"></div>
-        </div>
-        <small class="muted"><strong>Enfoque sugerido:</strong> ${item.tip}</small>
-      </div>
-    `;
+        <div class="area-header"><span>${item.num}. ${item.name}</span><span style="color:${color}">${item.pct}%</span></div>
+        <div class="area-bar"><div class="area-bar-fill" style="width:${item.pct}%;background:${color};"></div></div>
+        <small class="muted">${item.tip}</small>
+      </div>`;
   });
 
-  const waMsg = encodeURIComponent(`Hola SumaTips, realicé el Diagnóstico Pre-Cita.\n\n${waSummary}\nQuiero agendar la sesión consultiva para revisar el plan de acción.`);
-  
+  const waMsg = encodeURIComponent(`Hola SumaTips, realicé el Diagnóstico Pre-Cita.\n\n${waSummary}\nQuiero coordinar la sesión consultiva.`);
   outHTML += `
     <div class="card" style="margin-top:24px;background:#ebf5fb;border-color:#bce1f5;">
-      <h3 style="margin-top:0;">Próximo Paso:</h3>
-      <p>Conozca en minutos dónde enfocarse para tomar decisiones y potenciar su negocio.</p>
-      <div class="actions">
-        <a class="btn" target="_blank" href="https://wa.me/584127147963?text=${waMsg}">¡Agende su cita consultiva vía WhatsApp! &gt;</a>
-      </div>
-    </div>
-  `;
+      <h3>Próximo Paso:</h3>
+      <div class="actions"><a class="btn" target="_blank" href="https://wa.me/584127147963?text=${waMsg}">¡Agendar cita consultiva vía WhatsApp! &gt;</a></div>
+    </div>`;
 
   const resDiv = document.getElementById('results-box');
   resDiv.innerHTML = outHTML;
@@ -1059,117 +861,167 @@ document.getElementById('quiz-form').addEventListener('submit', function(e) {
 });
 
 document.getElementById('quiz-form').addEventListener('reset', () => {
-  const resDiv = document.getElementById('results-box');
-  resDiv.hidden = true;
-  resDiv.innerHTML = '';
+  document.getElementById('results-box').hidden = true;
 });
 
-// FASE 1: EVALUACIÓN DE NECESIDAD REAL DE FINANCIAMIENTO
-let needVerdict = "pass";
-
-function runNeedEvaluation() {
-  const purpose = document.getElementById('eval-purpose').value;
-  const margin = document.getElementById('eval-margin').value;
-  const cycle = document.getElementById('eval-cycle').value;
-
-  const stopDiv = document.getElementById('verdict-stop');
-  const passDiv = document.getElementById('verdict-pass');
-  const simSection = document.getElementById('simulator-section');
-
-  // Si busca crédito para pérdidas, deudas vencidas, o si está en pérdidas operativas/caos de cobro
-  if (purpose === "losses" || margin === "negative" || (purpose === "refinance" && margin === "breakeven") || cycle === "chaos") {
-    needVerdict = "stop";
-    stopDiv.style.display = "block";
-    passDiv.style.display = "none";
-    simSection.style.opacity = "0.35";
-    simSection.style.pointerEvents = "none";
-  } else {
-    needVerdict = "pass";
-    stopDiv.style.display = "none";
-    passDiv.style.display = "block";
-    simSection.style.opacity = "1";
-    simSection.style.pointerEvents = "auto";
-    calculateLoan();
+// MOTOR MATEMÁTICO: EVALUACIÓN DE LOS 8 INDICADORES FINANCIEROS
+function runFinancialAudit() {
+  const sales = parseFloat(document.getElementById('f-sales').value) || 0;
+  const ebit = parseFloat(document.getElementById('f-ebit').value) || 0;
+  const expenses = parseFloat(document.getElementById('f-expenses').value) || 0;
+  const actCorr = parseFloat(document.getElementById('f-act-corr').value) || 0;
+  const pasCorr = Math.max(1, parseFloat(document.getElementById('f-pas-corr').value) || 1);
+  const pasTot = parseFloat(document.getElementById('f-pas-tot').value) || 0;
+  const patrim = Math.max(1, parseFloat(document.getElementById('f-patrim').value) || 1);
+  
+  // Sincronizar monto si se cambia arriba
+  const targetLoan = parseFloat(document.getElementById('f-target-loan').value) || 15000;
+  if (document.activeElement.id === 'f-target-loan') {
+    document.getElementById('sim-amount').value = targetLoan;
   }
-}
+  const principal = parseFloat(document.getElementById('sim-amount').value) || targetLoan;
+  const months = parseInt(document.getElementById('sim-term').value) || 12;
+  const rate = parseFloat(document.getElementById('sim-rate').value) || 16;
 
-// FASE 2: LÓGICA DE LA CALCULADORA FINANCIERA (AMORTIZACIÓN, RCSD Y ENDEUDAMIENTO)
-function calculateLoan() {
-  const income = parseFloat(document.getElementById('calc-income').value) || 0;
-  const expense = parseFloat(document.getElementById('calc-expense').value) || 0;
-  const principal = parseFloat(document.getElementById('calc-amount').value) || 0;
-  const months = parseInt(document.getElementById('calc-term').value) || 12;
-  const annualRate = parseFloat(document.getElementById('calc-rate').value) || 16;
+  // 1. Brecha de caja mensual proyectada (Flujo libre operativo)
+  const brechaCaja = sales - expenses;
+  // 2. Margen Operativo (%)
+  const margenOp = sales > 0 ? ((ebit / sales) * 100) : 0;
+  // 3. Liquidez Corriente
+  const liquidez = actCorr / pasCorr;
 
-  const fcf = Math.max(0, income - expense);
-  const monthlyRate = (annualRate / 100) / 12;
-
+  // Cuota teórica mensual (amortización francesa)
+  const r = (rate / 100) / 12;
   let payment = 0;
-  if (monthlyRate > 0) {
-    payment = (principal * monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
+  if (r > 0) {
+    payment = (principal * r * Math.pow(1 + r, months)) / (Math.pow(1 + r, months) - 1);
   } else {
     payment = principal / months;
   }
+  const totalInterest = Math.max(0, (payment * months) - principal);
 
-  const totalPaid = payment * months;
-  const totalInterest = Math.max(0, totalPaid - principal);
+  // 4. Cobertura de Deuda (DSCR)
+  const fcf = Math.max(0, brechaCaja);
+  const dscr = payment > 0 ? (fcf / payment) : 0;
+  // 5. Caja Restante después de pagar la cuota
+  const cajaRestante = brechaCaja - payment;
+  // 6. Escenario adverso (-20% ventas asumiendo 85% de costos fijos)
+  const stressSales = sales * 0.8;
+  const stressExpenses = expenses * 0.95;
+  const stressFCF = Math.max(0, stressSales - stressExpenses);
+  const stressDSCR = payment > 0 ? (stressFCF / payment) : 0;
 
-  // Ratios técnicos
-  const rcsd = payment > 0 ? (fcf / payment) : 0;
-  const absorptionPct = fcf > 0 ? ((payment / fcf) * 100) : 100;
-  const debtOnSalesPct = income > 0 ? ((payment / income) * 100) : 0;
+  // 7. Endeudamiento Patrimonial
+  const leverage = pasTot / patrim;
+  // 8. Preparación crediticia
+  let docsChecked = 0;
+  if (document.getElementById('doc-1').checked) docsChecked++;
+  if (document.getElementById('doc-2').checked) docsChecked++;
+  if (document.getElementById('doc-3').checked) docsChecked++;
+  const docScore = Math.round((docsChecked / 3) * 100);
 
-  // Render en pantalla
-  document.getElementById('res-payment').textContent = `$${payment.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}`;
-  document.getElementById('res-fcf').textContent = `$${fcf.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}`;
-  document.getElementById('res-rcsd').textContent = `${rcsd.toFixed(2)}x`;
-  document.getElementById('res-ratio').textContent = `${absorptionPct.toFixed(1)}%`;
-  document.getElementById('res-debt-ratio').textContent = `${debtOnSalesPct.toFixed(1)}%`;
-  document.getElementById('res-interest').textContent = `$${totalInterest.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}`;
+  // Render Indicadores
+  document.getElementById('val-brecha').textContent = `$${brechaCaja.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})} / mes`;
+  document.getElementById('stat-brecha').textContent = brechaCaja >= 0 ? "🟢 Flujo mensual disponible" : "🔴 Déficit de caja estructural";
+  document.getElementById('card-brecha').style.borderLeftColor = brechaCaja >= 0 ? "var(--green)" : "var(--red)";
 
-  const badge = document.getElementById('calc-badge');
-  const analysis = document.getElementById('calc-analysis');
-  const reco = document.getElementById('calc-recommendation');
+  document.getElementById('val-margen').textContent = `${margenOp.toFixed(1)}%`;
+  document.getElementById('stat-margen').textContent = margenOp >= 12 ? "🟢 Margen operativo sólido" : (margenOp >= 5 ? "🟡 Margen moderado" : "🔴 Margen crítico");
+  document.getElementById('card-margen').style.borderLeftColor = margenOp >= 12 ? "var(--green)" : (margenOp >= 5 ? "var(--yellow)" : "var(--red)");
 
-  let riskLevel = "";
-  if (rcsd >= 1.50) {
-    badge.className = "traffic-badge badge-green";
-    badge.textContent = `🟢 Cobertura Sólida · RCSD ${rcsd.toFixed(2)}x`;
-    analysis.textContent = `Capacidad holgada. El negocio genera ${rcsd.toFixed(2)} veces la cuota requerida. La deuda compromete solo el ${absorptionPct.toFixed(1)}% del excedente libre y el ${debtOnSalesPct.toFixed(1)}% de las ventas.`;
-    riskLevel = `🟢 Sólido (RCSD ${rcsd.toFixed(2)}x)`;
-  } else if (rcsd >= 1.15) {
-    badge.className = "traffic-badge badge-yellow";
-    badge.textContent = `🟡 Nivel de Alerta · RCSD ${rcsd.toFixed(2)}x`;
-    analysis.textContent = `Cobertura ajustada. El flujo operativo cubre ${rcsd.toFixed(2)} veces el servicio de la deuda, absorbiendo el ${absorptionPct.toFixed(1)}% de la caja libre. Requiere sincronizar ciclos de cobro y pago.`;
-    riskLevel = `🟡 Alerta (RCSD ${rcsd.toFixed(2)}x)`;
-  } else {
-    badge.className = "traffic-badge badge-red";
-    badge.textContent = `🔴 Riesgo Crítico · RCSD ${rcsd.toFixed(2)}x`;
-    analysis.textContent = `Alerta de iliquidez: El flujo libre no alcanza a cubrir con margen la cuota (RCSD menor a 1.15x), comprometiendo el ${absorptionPct.toFixed(1)}% del flujo disponible.`;
-    riskLevel = `🔴 Crítico (RCSD ${rcsd.toFixed(2)}x)`;
+  document.getElementById('val-liquidez').textContent = `${liquidez.toFixed(2)}x`;
+  document.getElementById('stat-liquidez').textContent = liquidez >= 1.3 ? "🟢 Capacidad corriente holgada" : (liquidez >= 1.0 ? "🟡 Liquidez justa" : "🔴 Iliquidez inmediata");
+  document.getElementById('card-liquidez').style.borderLeftColor = liquidez >= 1.3 ? "var(--green)" : (liquidez >= 1.0 ? "var(--yellow)" : "var(--red)");
+
+  document.getElementById('val-dscr').textContent = `${dscr.toFixed(2)}x`;
+  document.getElementById('stat-dscr').textContent = dscr >= 1.4 ? "🟢 Cobertura holgada (>1.40x)" : (dscr >= 1.15 ? "🟡 Cobertura ajustada" : "🔴 Insuficiente para pagar");
+  document.getElementById('card-dscr').style.borderLeftColor = dscr >= 1.4 ? "var(--green)" : (dscr >= 1.15 ? "var(--yellow)" : "var(--red)");
+
+  document.getElementById('val-caja-rest').textContent = `$${cajaRestante.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})} / mes`;
+  document.getElementById('stat-caja-rest').textContent = cajaRestante > 0 ? "🟢 Excedente para contingencias" : "🔴 Saldo negativo tras cuota";
+  document.getElementById('card-caja-rest').style.borderLeftColor = cajaRestante > 0 ? "var(--green)" : "var(--red)";
+
+  document.getElementById('val-stress').textContent = `${stressDSCR.toFixed(2)}x`;
+  document.getElementById('stat-stress').textContent = stressDSCR >= 1.15 ? "🟢 Resiste caída de facturación" : "🔴 Quiebra ante baja en ventas";
+  document.getElementById('card-stress').style.borderLeftColor = stressDSCR >= 1.15 ? "var(--green)" : "var(--red)";
+
+  document.getElementById('val-leverage').textContent = `${leverage.toFixed(2)}x`;
+  document.getElementById('stat-leverage').textContent = leverage <= 1.5 ? "🟢 Apalancamiento prudente" : (leverage <= 2.5 ? "🟡 Apalancamiento alto" : "🔴 Sobreendeudado");
+  document.getElementById('card-leverage').style.borderLeftColor = leverage <= 1.5 ? "var(--green)" : (leverage <= 2.5 ? "var(--yellow)" : "var(--red)");
+
+  document.getElementById('val-doc').textContent = `${docScore}%`;
+  document.getElementById('stat-doc').textContent = docScore === 100 ? "🟢 Documentación al día" : (docScore >= 66 ? "🟡 Formalización en proceso" : "🔴 Documentación incompleta");
+  document.getElementById('card-doc').style.borderLeftColor = docScore === 100 ? "var(--green)" : (docScore >= 66 ? "var(--yellow)" : "var(--red)");
+
+  // EVALUACIÓN DE COMPUERTA (GATEKEEPER CUANTITATIVO)
+  const gatePass = document.getElementById('gate-pass-box');
+  const gateStop = document.getElementById('gate-stop-box');
+  const simSec = document.getElementById('simulator-section');
+  const stopReason = document.getElementById('gate-stop-reason');
+
+  // Criterio de rechazo técnico estricto:
+  let canBorrow = true;
+  let reasonText = "";
+
+  if (ebit < 0 || margenOp < 2) {
+    canBorrow = false;
+    reasonText = "El negocio no genera utilidad operativa real (EBIT crítico). Asumir deuda con margen negativo acelera la quiebra.";
+  } else if (dscr < 1.10) {
+    canBorrow = false;
+    reasonText = "Tu flujo de caja libre no alcanza a cubrir la cuota proyectada con margen de seguridad (DSCR inferior a 1.10x).";
+  } else if (liquidez < 0.90) {
+    canBorrow = false;
+    reasonText = "Tus pasivos inmediatos superan a tus activos corrientes (Liquidez menor a 0.90x). Hay riesgo alto de mora.";
   }
 
+  if (canBorrow) {
+    gatePass.style.display = "block";
+    gateStop.style.display = "none";
+    simSec.style.opacity = "1";
+    simSec.style.pointerEvents = "auto";
+  } else {
+    gatePass.style.display = "none";
+    gateStop.style.display = "block";
+    gateStop.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    stopReason.textContent = reasonText;
+    simSec.style.opacity = "0.3";
+    simSec.style.pointerEvents = "none";
+  }
+
+  // Render Simulador de Amortización
+  const debtOnSales = sales > 0 ? ((payment / sales) * 100) : 0;
+  document.getElementById('sim-payment').textContent = `$${payment.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}`;
+  document.getElementById('sim-fcf').textContent = `$${fcf.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}`;
+  document.getElementById('sim-dscr').textContent = `${dscr.toFixed(2)}x`;
+  document.getElementById('sim-debt-sales').textContent = `${debtOnSales.toFixed(1)}%`;
+  document.getElementById('sim-interest').textContent = `$${totalInterest.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}`;
+
+  const reco = document.getElementById('sim-reco');
   if (months <= 12) {
-    reco.innerHTML = `Para este horizonte (${months} meses), la emisión de <strong>Pagarés Bursátiles o Papeles Comerciales en la Bolsa de Caracas (BVC)</strong> es más ágil y estructurable que la banca tradicional.`;
+    reco.innerHTML = `Para un horizonte de ${months} meses, emitir <strong>Pagarés Bursátiles o Papeles Comerciales en la Bolsa de Caracas (BVC)</strong> es más ágil y estructurable que el crédito bancario indexado.`;
   } else {
-    reco.innerHTML = `Para plazos mayores a 12 meses destinados a activos fijos, conviene estructurar <strong>crédito sindicado o financiamiento indexado</strong> con amortizaciones adaptadas al ciclo operativo.`;
+    reco.innerHTML = `Para plazos mayores a 12 meses destinados a maquinaria o expansión, conviene estructurar <strong>crédito sindicado bancario o emisiones de renta fija</strong> a mediano plazo.`;
   }
 
-  const purposeText = document.getElementById('eval-purpose').options[document.getElementById('eval-purpose').selectedIndex].text;
-
+  // Mensaje a WhatsApp con la Ficha de los 8 Indicadores
   const msg = encodeURIComponent(
-    `Hola SumaTips, evalué mi necesidad y capacidad de financiamiento en la web:\n\n` +
-    `• Destino: ${purposeText}\n` +
-    `• Monto evaluado: $${principal.toLocaleString('en-US')}\n` +
-    `• Plazo: ${months} meses | Tasa ref: ${annualRate}%\n` +
-    `• Cuota estimada: $${payment.toFixed(2)}/mes\n` +
-    `• Flujo libre (FCF): $${fcf.toFixed(2)}/mes\n` +
-    `• Ratio Cobertura (RCSD): ${rcsd.toFixed(2)}x\n` +
-    `• Compromiso s/Ventas: ${debtOnSalesPct.toFixed(1)}%\n` +
-    `• Dictamen: ${riskLevel}\n\n` +
-    `Deseo coordinar una sesión consultiva para estructurar las opciones de financiamiento.`
+    `*Auditoría de Crédito y Salud Financiera SumaTips*\n\n` +
+    `📊 *Datos Base:*\n` +
+    `• Ventas: $${sales.toLocaleString('en-US')}/mes | EBIT: $${ebit.toLocaleString('en-US')}\n` +
+    `• Solicitud: $${principal.toLocaleString('en-US')} a ${months} meses\n\n` +
+    `📈 *Evaluación de los 8 Indicadores:*\n` +
+    `1. Brecha de Caja: $${brechaCaja.toFixed(2)}/mes\n` +
+    `2. Margen Operativo: ${margenOp.toFixed(1)}%\n` +
+    `3. Liquidez Corriente: ${liquidez.toFixed(2)}x\n` +
+    `4. Cobertura DSCR: ${dscr.toFixed(2)}x\n` +
+    `5. Caja Post-Deuda: $${cajaRestante.toFixed(2)}/mes\n` +
+    `6. Cobertura Adversa (-20% Vtas): ${stressDSCR.toFixed(2)}x\n` +
+    `7. Endeudamiento Patrimonial: ${leverage.toFixed(2)}x\n` +
+    `8. Preparación Documental: ${docScore}%\n\n` +
+    `💵 *Cuota mensual proyectada:* $${payment.toFixed(2)}/mes\n` +
+    `Quiero agendar una sesión consultiva para estructurar mi expediente formal.`
   );
-  document.getElementById('calc-wa-btn').href = `https://wa.me/584127147963?text=${msg}`;
+  document.getElementById('audit-wa-btn').href = `https://wa.me/584127147963?text=${msg}`;
 }
 
 // FORMULARIO DE CONTACTO DIRECTO
