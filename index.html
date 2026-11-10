@@ -413,7 +413,7 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
   </section>
 </div>
 
-<!-- PESTAÑA 4: CALCULADORA FINANCIERA Y CAPACIDAD DE PAGO (NUEVA PESTAÑA) -->
+<!-- PESTAÑA 4: CALCULADORA FINANCIERA, RCSD Y CAPACIDAD DE PAGO -->
 <div id="view-calc" class="tab-view">
   <section class="hero" style="padding:48px 0;">
     <div class="wrap" style="text-align:center;max-width:850px;">
@@ -432,13 +432,13 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
           
           <div class="form-group">
             <label for="calc-income">Ingresos Operativos Promedio Mensuales ($ / USD):</label>
-            <input type="number" id="calc-income" value="12000" min="500" step="100" placeholder="Ej. 12000">
+            <input type="number" id="calc-income" value="12000" min="500" step="100" placeholder="Ej. 12000" oninput="calculateLoan()">
             <small class="muted">Facturación recurrente mensual sin IVA.</small>
           </div>
 
           <div class="form-group">
             <label for="calc-expense">Costos y Gastos Operativos Fijos Mensuales ($ / USD):</label>
-            <input type="number" id="calc-expense" value="8500" min="200" step="100" placeholder="Ej. 8500">
+            <input type="number" id="calc-expense" value="8500" min="200" step="100" placeholder="Ej. 8500" oninput="calculateLoan()">
             <small class="muted">Nómina, compras, alquiler, servicios e impuestos.</small>
           </div>
 
@@ -446,12 +446,12 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
 
           <div class="form-group">
             <label for="calc-amount">Monto del Financiamiento a Solicitar ($ / USD):</label>
-            <input type="number" id="calc-amount" value="15000" min="1000" step="500" placeholder="Ej. 15000">
+            <input type="number" id="calc-amount" value="15000" min="1000" step="500" placeholder="Ej. 15000" oninput="calculateLoan()">
           </div>
 
           <div class="form-group">
             <label for="calc-term">Plazo Estimado (Meses):</label>
-            <select id="calc-term">
+            <select id="calc-term" onchange="calculateLoan()">
               <option value="6">6 Meses (Corto plazo / Capital de trabajo)</option>
               <option value="12" selected>12 Meses (1 Año estándar)</option>
               <option value="24">24 Meses (2 Años)</option>
@@ -461,47 +461,55 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
 
           <div class="form-group">
             <label for="calc-rate">Tasa de Interés Anual Proyectada (% TNA):</label>
-            <input type="number" id="calc-rate" value="16" min="1" max="100" step="0.5" placeholder="Ej. 16">
+            <input type="number" id="calc-rate" value="16" min="1" max="100" step="0.5" placeholder="Ej. 16" oninput="calculateLoan()">
             <small class="muted">Referencia bancaria o bursátil estimada anual.</small>
           </div>
 
-          <button class="btn" style="width:100%;margin-top:10px;" onclick="calculateLoan()">Calcular Viabilidad y Cobertura</button>
+          <button class="btn" style="width:100%;margin-top:10px;" onclick="calculateLoan()">Actualizar Análisis de Solvencia</button>
         </div>
 
-        <!-- PANEL DE RESULTADOS Y SEMÁFORO DE COBERTURA -->
+        <!-- PANEL DE RESULTADOS CON RCSD Y RAZÓN DE ENDEUDAMIENTO -->
         <div class="card" style="display:flex;flex-direction:column;justify-content:space-between;">
           <div>
-            <div class="tag">Dictamen Preliminar de Caja</div>
-            <h3 style="margin:8px 0 16px;">Diagnóstico de Solvencia y Cuota</h3>
+            <div class="tag">Dictamen Técnico de Cobertura</div>
+            <h3 style="margin:8px 0 16px;">Diagnóstico de Solvencia y Ratios</h3>
             
             <div class="calc-result-box">
               <div class="calc-stat">
                 <span>Cuota Mensual Estimada:</span>
-                <strong id="res-payment">$1,361.05</strong>
+                <strong id="res-payment">$1,360.96</strong>
               </div>
               <div class="calc-stat">
-                <span>Flujo de Caja Libre Operativo:</span>
+                <span>Flujo de Caja Libre Operativo (FCF):</span>
                 <strong id="res-fcf">$3,500.00</strong>
               </div>
-              <div class="calc-stat">
-                <span>Total Intereses del Financiamiento:</span>
-                <strong id="res-interest">$1,332.55</strong>
+              <div class="calc-stat" style="background:#e8f3fa;padding:10px 8px;border-radius:6px;margin:4px 0;">
+                <span><strong>RCSD (Cobertura del Servicio de Deuda):</strong></span>
+                <strong id="res-rcsd" style="color:var(--blue);font-size:18px;">2.57x</strong>
               </div>
               <div class="calc-stat">
-                <span>% de Absorción de la Caja Libre:</span>
+                <span>Absorción de Caja Libre:</span>
                 <strong id="res-ratio">38.9%</strong>
+              </div>
+              <div class="calc-stat">
+                <span>Compromiso sobre Ventas Totales:</span>
+                <strong id="res-debt-ratio">11.3%</strong>
+              </div>
+              <div class="calc-stat">
+                <span>Total Intereses Proyectados:</span>
+                <strong id="res-interest">$1,331.55</strong>
               </div>
             </div>
 
-            <!-- SEMÁFORO DE ABSORCIÓN DE DEUDA -->
-            <div style="text-align:center;margin-top:20px;">
-              <div class="traffic-badge badge-yellow" id="calc-badge">🟡 Nivel de Alerta · 38.9% de Caja</div>
+            <!-- SEMÁFORO DE COBERTURA -->
+            <div style="text-align:center;margin-top:18px;">
+              <div class="traffic-badge badge-green" id="calc-badge">🟢 Cobertura Sólida · RCSD 2.57x</div>
               <p id="calc-analysis" style="font-size:14.5px;margin-top:12px;font-weight:600;color:var(--text);">
-                La cuota absorbe entre el 30% y el 50% de tu flujo libre. Es viable, pero requiere disciplina estricta de cobranzas y optimización de capital de trabajo.
+                Capacidad holgada. El negocio genera 2.57 veces la cuota requerida. La deuda compromete solo el 38.9% del excedente libre y el 11.3% de las ventas.
               </p>
             </div>
 
-            <!-- VÍA RECOMENDADA -->
+            <!-- VÍA ESTRATÉGICA -->
             <div style="background:#edf2f7;border-radius:10px;padding:14px;margin-top:16px;font-size:14px;">
               <strong style="color:var(--blue);display:block;margin-bottom:4px;">Vía Estratégica Sugerida:</strong>
               <span id="calc-recommendation">Para plazos de 6 a 12 meses y montos ágiles, la emisión de <strong>Pagarés Bursátiles o Papeles Comerciales en la Bolsa de Caracas (BVC)</strong> ofrece condiciones atractivas frente al crédito bancario tradicional.</span>
@@ -510,7 +518,7 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
 
           <div style="margin-top:24px;">
             <a class="btn" id="calc-wa-btn" target="_blank" style="width:100%;text-align:center;" href="#">Validar este Análisis con un Consultor SumaTips &gt;</a>
-            <small class="muted" style="display:block;text-align:center;margin-top:8px;">* Cálculo referencial según amortización francesa. No implica aprobación de crédito.</small>
+            <small class="muted" style="display:block;text-align:center;margin-top:8px;">* Cálculo referencial según amortización francesa y ratios de cobertura. No implica aprobación crediticia.</small>
           </div>
         </div>
       </div>
@@ -557,7 +565,7 @@ function switchTab(tab) {
 
 // 12 MODELOS DE NEGOCIO SEGÚN LA INFOGRAFÍA
 const businessModels = [
-  { id: "serv_prof", name: "Servicios", icon: "👥", category: "servicios" },
+  { id: "serv_prof", name: "Servicios Profesionales", icon: "👥", category: "servicios" },
   { id: "serv_tec", name: "Servicios Técnicos", icon: "🔧", category: "servicios" },
   { id: "com_min", name: "Comercio Minorista", icon: "🛒", category: "comercio" },
   { id: "dist_may", name: "Distribución y Mayorista", icon: "📦", category: "comercio" },
@@ -980,7 +988,7 @@ document.getElementById('quiz-form').addEventListener('reset', () => {
   resDiv.innerHTML = '';
 });
 
-// LÓGICA DE LA CALCULADORA FINANCIERA (AMORTIZACIÓN Y COBERTURA)
+// LÓGICA DE LA CALCULADORA FINANCIERA (AMORTIZACIÓN, RCSD Y ENDEUDAMIENTO)
 function calculateLoan() {
   const income = parseFloat(document.getElementById('calc-income').value) || 0;
   const expense = parseFloat(document.getElementById('calc-expense').value) || 0;
@@ -1000,49 +1008,58 @@ function calculateLoan() {
 
   const totalPaid = payment * months;
   const totalInterest = Math.max(0, totalPaid - principal);
-  const ratioPct = fcf > 0 ? ((payment / fcf) * 100) : 100;
 
+  // Ratios técnicos
+  const rcsd = payment > 0 ? (fcf / payment) : 0;
+  const absorptionPct = fcf > 0 ? ((payment / fcf) * 100) : 100;
+  const debtOnSalesPct = income > 0 ? ((payment / income) * 100) : 0;
+
+  // Render en pantalla
   document.getElementById('res-payment').textContent = `$${payment.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}`;
   document.getElementById('res-fcf').textContent = `$${fcf.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}`;
+  document.getElementById('res-rcsd').textContent = `${rcsd.toFixed(2)}x`;
+  document.getElementById('res-ratio').textContent = `${absorptionPct.toFixed(1)}%`;
+  document.getElementById('res-debt-ratio').textContent = `${debtOnSalesPct.toFixed(1)}%`;
   document.getElementById('res-interest').textContent = `$${totalInterest.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}`;
-  document.getElementById('res-ratio').textContent = `${ratioPct.toFixed(1)}%`;
 
   const badge = document.getElementById('calc-badge');
   const analysis = document.getElementById('calc-analysis');
   const reco = document.getElementById('calc-recommendation');
 
   let riskLevel = "";
-  if (ratioPct <= 30) {
+  if (rcsd >= 1.50) {
     badge.className = "traffic-badge badge-green";
-    badge.textContent = `🟢 Solvencia Saludable · ${ratioPct.toFixed(1)}% de Caja`;
-    analysis.textContent = "Excelente cobertura. La cuota compromete menos del 30% del flujo libre operativo, lo que deja margen cómodo para imprevistos de caja.";
-    riskLevel = "🟢 Saludable (Bajo riesgo)";
-  } else if (ratioPct <= 50) {
+    badge.textContent = `🟢 Cobertura Sólida · RCSD ${rcsd.toFixed(2)}x`;
+    analysis.textContent = `Capacidad holgada. El negocio genera ${rcsd.toFixed(2)} veces la cuota requerida. La deuda compromete solo el ${absorptionPct.toFixed(1)}% del excedente libre y el ${debtOnSalesPct.toFixed(1)}% de las ventas.`;
+    riskLevel = `🟢 Sólido (RCSD ${rcsd.toFixed(2)}x)`;
+  } else if (rcsd >= 1.15) {
     badge.className = "traffic-badge badge-yellow";
-    badge.textContent = `🟡 Nivel de Alerta · ${ratioPct.toFixed(1)}% de Caja`;
-    analysis.textContent = "La cuota absorbe entre el 30% y el 50% de tu flujo libre. La operación es viable pero requiere sincronizar rigurosamente los días de cobro y pago.";
-    riskLevel = "🟡 Alerta (Riesgo moderado)";
+    badge.textContent = `🟡 Nivel de Alerta · RCSD ${rcsd.toFixed(2)}x`;
+    analysis.textContent = `Cobertura ajustada. El flujo operativo cubre ${rcsd.toFixed(2)} veces el servicio de la deuda, absorbiendo el ${absorptionPct.toFixed(1)}% de la caja libre. Requiere sincronizar ciclos de cobro y pago.`;
+    riskLevel = `🟡 Alerta (RCSD ${rcsd.toFixed(2)}x)`;
   } else {
     badge.className = "traffic-badge badge-red";
-    badge.textContent = `🔴 Riesgo Crítico · ${ratioPct.toFixed(1)}% de Caja`;
-    analysis.textContent = "Atención: La cuota supera el 50% de tu flujo operativo disponible. Existe alto riesgo de asfixia de liquidez si no se extiende el plazo o se reduce el monto.";
-    riskLevel = "🔴 Crítico (Alto compromiso de caja)";
+    badge.textContent = `🔴 Riesgo Crítico · RCSD ${rcsd.toFixed(2)}x`;
+    analysis.textContent = `Alerta de iliquidez: El flujo libre no alcanza a cubrir con margen la cuota (RCSD menor a 1.15x), comprometiendo el ${absorptionPct.toFixed(1)}% del flujo disponible.`;
+    riskLevel = `🔴 Crítico (RCSD ${rcsd.toFixed(2)}x)`;
   }
 
   if (months <= 12) {
-    reco.innerHTML = `Para plazos cortos (${months} meses) orientados a capital de trabajo, la emisión estructurada de <strong>Pagarés Bursátiles o Papeles Comerciales en la Bolsa de Caracas (BVC)</strong> es una opción ágil frente a las restricciones del crédito bancario tradicional.`;
+    reco.innerHTML = `Para este horizonte (${months} meses), la emisión de <strong>Pagarés Bursátiles o Papeles Comerciales en la Bolsa de Caracas (BVC)</strong> es más ágil y estructurable que la banca tradicional.`;
   } else {
-    reco.innerHTML = `Para plazos medianos (${months} meses) destinados a maquinaria, expansión o infraestructura, se sugiere evaluar <strong>crédito indexado bancario o financiamiento sindicado</strong> junto a un esquema de amortizaciones trimestrales.`;
+    reco.innerHTML = `Para plazos mayores a 12 meses destinados a activos fijos, conviene estructurar <strong>crédito sindicado o financiamiento indexado</strong> con amortizaciones adaptadas al ciclo operativo.`;
   }
 
   const msg = encodeURIComponent(
-    `Hola SumaTips, utilicé la Calculadora Financiera en la web.\n\n` +
-    `• Monto financiamiento: $${principal.toLocaleString('en-US')}\n` +
-    `• Plazo: ${months} meses | Tasa ref: ${annualRate}%\n` +
+    `Hola SumaTips, evalué mi capacidad de financiamiento en la web:\n\n` +
+    `• Monto solicitado: $${principal.toLocaleString('en-US')}\n` +
+    `• Plazo: ${months} meses | Tasa: ${annualRate}%\n` +
     `• Cuota estimada: $${payment.toFixed(2)}/mes\n` +
-    `• Flujo libre disponible: $${fcf.toFixed(2)}/mes\n` +
-    `• Cobertura de caja: ${ratioPct.toFixed(1)}% (${riskLevel})\n\n` +
-    `Deseo coordinar una llamada para validar la viabilidad real y opciones de financiamiento.`
+    `• Flujo libre (FCF): $${fcf.toFixed(2)}/mes\n` +
+    `• Ratio Cobertura (RCSD): ${rcsd.toFixed(2)}x\n` +
+    `• Compromiso s/Ventas: ${debtOnSalesPct.toFixed(1)}%\n` +
+    `• Dictamen: ${riskLevel}\n\n` +
+    `Deseo agendar una sesión para revisar opciones de financiamiento y estructura de caja.`
   );
   document.getElementById('calc-wa-btn').href = `https://wa.me/584127147963?text=${msg}`;
 }
