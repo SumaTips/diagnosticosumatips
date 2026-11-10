@@ -41,7 +41,7 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:20px;min-h
 .tab-view.active{display:block}
 
 /* TIPOGRAFIA Y BOTONES */
-h1,h2,h3{color:var(--blue);line-height:1.15}
+h1,h2,h3,h4{color:var(--blue);line-height:1.15}
 h1{font-size:clamp(34px,5vw,56px);letter-spacing:-1.5px}
 h2{font-size:clamp(24px,4vw,36px)}
 h3{font-size:20px}
@@ -419,7 +419,7 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
   </section>
 </div>
 
-<!-- PESTAÑA 4: DIAGNÓSTICO FINANCIERO CON NUMEROS REALES Y SIMULADOR -->
+<!-- PESTAÑA 4: DIAGNÓSTICO FINANCIERO Y CALCULADORA -->
 <div id="view-calc" class="tab-view">
   <section class="hero" style="padding:48px 0;">
     <div class="wrap" style="text-align:center;max-width:880px;">
@@ -432,7 +432,7 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
   <section style="padding-top:24px;">
     <div class="wrap">
       
-      <!-- INGRESO DE DATOS CONTABLES SENCILLOS -->
+      <!-- INGRESO DE DATOS CONTABLES -->
       <div class="card" style="margin-bottom:28px;">
         <div class="tag">Paso 1: Tus Cifras Contables (Sin Fórmulas)</div>
         <h3 style="margin:8px 0 16px;">Datos de tu Estado de Resultados y Balance General</h3>
@@ -483,12 +483,11 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
 
           <div class="form-group">
             <label for="f-target-loan">Monto de Crédito Estimado ($ USD):</label>
-            <input type="number" id="f-target-loan" value="15000" min="1000" step="500" oninput="runFinancialAudit()">
+            <input type="number" id="f-target-loan" value="15000" min="1000" step="500" oninput="syncTargetLoan()">
             <small class="muted">Capital que buscas o necesitas financiar.</small>
           </div>
         </div>
 
-        <!-- CHECKLIST DOCUMENTAL -->
         <div style="background:#f1f5f9;border-radius:10px;padding:16px;margin-top:10px;">
           <strong style="color:var(--blue);font-size:14px;display:block;margin-bottom:8px;">8. Preparación Crediticia y Documental:</strong>
           <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:14px;">
@@ -499,12 +498,11 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
         </div>
       </div>
 
-      <!-- TABLERO DE LOS 8 INDICADORES TÉCNICOS CALCULADOS -->
+      <!-- TABLERO DE LOS 8 INDICADORES -->
       <div class="card" style="margin-bottom:28px;">
         <div class="tag">Paso 2: Dictamen de los 8 Indicadores Financieros</div>
         <h3 style="margin:8px 0 16px;">Diagnóstico de Salud y Viabilidad</h3>
 
-        <!-- PILAR 1 -->
         <h4 style="color:var(--blue);margin:16px 0 8px;border-bottom:2px solid #edf2f7;padding-bottom:6px;">Pilar I: ¿Necesita Financiamiento?</h4>
         <div class="ratio-grid">
           <div class="ratio-card" id="card-brecha">
@@ -524,7 +522,6 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
           </div>
         </div>
 
-        <!-- PILAR 2 -->
         <h4 style="color:var(--blue);margin:24px 0 8px;border-bottom:2px solid #edf2f7;padding-bottom:6px;">Pilar II: ¿Puede Pagarlo?</h4>
         <div class="ratio-grid">
           <div class="ratio-card" id="card-dscr">
@@ -544,7 +541,6 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
           </div>
         </div>
 
-        <!-- PILAR 3 -->
         <h4 style="color:var(--blue);margin:24px 0 8px;border-bottom:2px solid #edf2f7;padding-bottom:6px;">Pilar III: ¿Está Preparado para Solicitarlo?</h4>
         <div class="ratio-grid">
           <div class="ratio-card" id="card-leverage">
@@ -559,7 +555,6 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
           </div>
         </div>
 
-        <!-- DICTAMEN INTEGRAL CON PUERTA DE ENTRADA -->
         <div id="gate-pass-box" style="background:#f0fdf4;border:2px solid #bbf7d0;border-radius:12px;padding:20px;margin-top:20px;">
           <div style="display:flex;align-items:flex-start;gap:14px;">
             <span style="font-size:32px;">✅</span>
@@ -590,7 +585,7 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
         </div>
       </div>
 
-      <!-- FASE 2: SIMULADOR DETALLADO DE CRÉDITO (SE ACTIVA SOLO SI PASA) -->
+      <!-- FASE 2: SIMULADOR DETALLADO -->
       <div id="simulator-section" style="transition:opacity .3s ease;">
         <div class="card">
           <div class="tag">Paso 3: Estructuración y Amortización</div>
@@ -620,7 +615,6 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
               </div>
             </div>
 
-            <!-- RESULTADOS FINALES DE LA SIMULACIÓN -->
             <div style="display:flex;flex-direction:column;justify-content:space-between;">
               <div class="calc-result-box" style="margin-top:0;">
                 <div class="calc-stat">
@@ -647,7 +641,7 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
 
               <div style="background:#edf2f7;border-radius:10px;padding:14px;margin-top:14px;font-size:13.5px;">
                 <strong style="color:var(--blue);display:block;margin-bottom:4px;">Vía Estratégica Sugerida:</strong>
-                <span id="sim-reco">Para plazos de 6 a 12 meses, la emisión de <strong>Pagarés Bursátiles o Papeles Comerciales en la Bolsa de Caracas (BVC)</strong> es una opción óptima frente a las limitaciones de la banca tradicional.</span>
+                <span id="sim-reco">Para un horizonte de 12 meses, emitir <strong>Pagarés Bursátiles o Papeles Comerciales en la Bolsa de Caracas (BVC)</strong> es más ágil y estructurable que el crédito bancario indexado.</span>
               </div>
             </div>
           </div>
@@ -671,33 +665,30 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
 </footer>
 
 <script>
-// NAVEGACIÓN ENTRE PESTAÑAS
+// NAVEGACIÓN TOTALMENTE AISLADA DE ERRORES DE CÁLCULO
 function switchTab(tab) {
-  document.getElementById('view-home').classList.remove('active');
-  document.getElementById('view-serv').classList.remove('active');
-  document.getElementById('view-diag').classList.remove('active');
-  document.getElementById('view-calc').classList.remove('active');
+  try {
+    const views = ['home', 'serv', 'diag', 'calc'];
+    views.forEach(v => {
+      const elView = document.getElementById('view-' + v);
+      const elBtn = document.getElementById('tab-btn-' + v);
+      if (elView) elView.classList.remove('active');
+      if (elBtn) elBtn.classList.remove('active');
+    });
 
-  document.getElementById('tab-btn-home').classList.remove('active');
-  document.getElementById('tab-btn-serv').classList.remove('active');
-  document.getElementById('tab-btn-diag').classList.remove('active');
-  document.getElementById('tab-btn-calc').classList.remove('active');
+    const activeView = document.getElementById('view-' + tab);
+    const activeBtn = document.getElementById('tab-btn-' + tab);
+    if (activeView) activeView.classList.add('active');
+    if (activeBtn) activeBtn.classList.add('active');
 
-  if (tab === 'home') {
-    document.getElementById('view-home').classList.add('active');
-    document.getElementById('tab-btn-home').classList.add('active');
-  } else if (tab === 'serv') {
-    document.getElementById('view-serv').classList.add('active');
-    document.getElementById('tab-btn-serv').classList.add('active');
-  } else if (tab === 'diag') {
-    document.getElementById('view-diag').classList.add('active');
-    document.getElementById('tab-btn-diag').classList.add('active');
-  } else if (tab === 'calc') {
-    document.getElementById('view-calc').classList.add('active');
-    document.getElementById('tab-btn-calc').classList.add('active');
-    runFinancialAudit();
+    window.scrollTo({top: 0, behavior: 'smooth'});
+
+    if (tab === 'calc') {
+      setTimeout(runFinancialAudit, 50);
+    }
+  } catch (err) {
+    console.error("Error al cambiar pestaña:", err);
   }
-  window.scrollTo({top:0, behavior:'smooth'});
 }
 
 // 12 MODELOS DE NEGOCIO ("Servicios")
@@ -706,11 +697,11 @@ const businessModels = [
   { id: "serv_tec", name: "Servicios Técnicos", icon: "🔧", category: "servicios" },
   { id: "com_min", name: "Comercio Minorista", icon: "🛒", category: "comercio" },
   { id: "dist_may", name: "Distribución y Mayorista", icon: "📦", category: "comercio" },
-  { id: "manuf", name: "Manufactura", icon: "🏭", category: "pproducción },
+  { id: "manuf", name: "Manufactura", icon: "🏭", category: "produccion" },
   { id: "const", name: "Construcción y Proyectos", icon: "🏗️", category: "proyectos" },
   { id: "rest", name: "Restaurantes y Alimentos", icon: "🍽️", category: "alimentos" },
   { id: "transp", name: "Transporte y Logística", icon: "🚚", category: "logistica" },
-  { id: "agro", name: "Agroindustria", icon: "🌱", category: "pproducción },
+  { id: "agro", name: "Agroindustria", icon: "🌱", category: "produccion" },
   { id: "digital", name: "Negocios Digitales", icon: "💻", category: "digital" },
   { id: "fin", name: "Financiero y Seguros", icon: "🏛️", category: "financiero" },
   { id: "alquiler", name: "Alquiler y Activos", icon: "🏠", category: "activos" }
@@ -753,12 +744,14 @@ function getQuestionsFor(model, unit) {
 }
 
 const modelsDiv = document.getElementById('models-container');
-modelsDiv.innerHTML = businessModels.map((m, idx) => `
-  <div class="model-card ${idx === 0 ? 'selected' : ''}" onclick="selectModel('${m.id}', this)">
-    <div class="model-icon">${m.icon}</div>
-    <div class="model-title">${m.name}</div>
-  </div>
-`).join('');
+if (modelsDiv) {
+  modelsDiv.innerHTML = businessModels.map((m, idx) => `
+    <div class="model-card ${idx === 0 ? 'selected' : ''}" onclick="selectModel('${m.id}', this)">
+      <div class="model-icon">${m.icon}</div>
+      <div class="model-title">${m.name}</div>
+    </div>
+  `).join('');
+}
 
 function selectModel(id, element) {
   selectedModelObj = businessModels.find(m => m.id === id);
@@ -776,9 +769,12 @@ let currentAreas = [];
 
 function renderQuestions() {
   currentAreas = getQuestionsFor(selectedModelObj, selectedUnit);
-  const unitLabel = document.getElementById('econ-unit').options[document.getElementById('econ-unit').selectedIndex].text;
-  document.getElementById('active-model-label').textContent = selectedModelObj.name;
-  document.getElementById('active-unit-label').textContent = unitLabel;
+  const econEl = document.getElementById('econ-unit');
+  if (econEl) {
+    const unitLabel = econEl.options[econEl.selectedIndex].text;
+    document.getElementById('active-model-label').textContent = selectedModelObj.name;
+    document.getElementById('active-unit-label').textContent = unitLabel;
+  }
 
   let questionsHTML = '';
   currentAreas.forEach((area, aIdx) => {
@@ -795,244 +791,242 @@ function renderQuestions() {
     });
     questionsHTML += `</fieldset>`;
   });
-  document.getElementById('questions-wrapper').innerHTML = questionsHTML;
-  document.getElementById('results-box').hidden = true;
+  const wrapEl = document.getElementById('questions-wrapper');
+  if (wrapEl) wrapEl.innerHTML = questionsHTML;
+  const resEl = document.getElementById('results-box');
+  if (resEl) resEl.hidden = true;
 }
 renderQuestions();
 
-document.getElementById('quiz-form').addEventListener('submit', function(e) {
-  e.preventDefault();
-  let totalAffirmative = 0;
-  const maxPossible = currentAreas.length * 2;
-  let details = [];
+const quizForm = document.getElementById('quiz-form');
+if (quizForm) {
+  quizForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    let totalAffirmative = 0;
+    const maxPossible = currentAreas.length * 2;
+    let details = [];
 
-  currentAreas.forEach((area, aIdx) => {
-    let aScore = 0;
-    area.q.forEach((_, qIdx) => {
-      const checked = document.querySelector(`input[name="area_${aIdx}_q${qIdx}"]:checked`);
-      if (checked && checked.value === "1") {
-        aScore++;
-        totalAffirmative++;
-      }
+    currentAreas.forEach((area, aIdx) => {
+      let aScore = 0;
+      area.q.forEach((_, qIdx) => {
+        const checked = document.querySelector(`input[name="area_${aIdx}_q${qIdx}"]:checked`);
+        if (checked && checked.value === "1") {
+          aScore++;
+          totalAffirmative++;
+        }
+      });
+      details.push({ num: area.num, name: area.name, pct: Math.round((aScore / 2) * 100), tip: area.tip });
     });
-    details.push({ num: area.num, name: area.name, pct: Math.round((aScore / 2) * 100), tip: area.tip });
-  });
 
-  const finalPct = Math.round((totalAffirmative / maxPossible) * 100);
-  const econUnitText = document.getElementById('econ-unit').options[document.getElementById('econ-unit').selectedIndex].text;
+    const finalPct = Math.round((totalAffirmative / maxPossible) * 100);
+    const econUnitText = document.getElementById('econ-unit').options[document.getElementById('econ-unit').selectedIndex].text;
 
-  let badgeClass = finalPct <= 39 ? "badge-red" : (finalPct <= 69 ? "badge-yellow" : "badge-green");
-  let badgeText = finalPct <= 39 ? "0% – 39% · Crítico" : (finalPct <= 69 ? "40% – 69% · En Mejora" : "70% – 100% · Sólido");
-  let statusAction = finalPct <= 39 ? "Atención inmediata. Brechas estructurales de control." : (finalPct <= 69 ? "Plan de acción requerido. Ajuste de fugas operativas." : "Sólido y listo para escalar.");
+    let badgeClass = finalPct <= 39 ? "badge-red" : (finalPct <= 69 ? "badge-yellow" : "badge-green");
+    let badgeText = finalPct <= 39 ? "0% – 39% · Crítico" : (finalPct <= 69 ? "40% – 69% · En Mejora" : "70% – 100% · Sólido");
+    let statusAction = finalPct <= 39 ? "Atención inmediata. Brechas estructurales de control." : (finalPct <= 69 ? "Plan de acción requerido. Ajuste de fugas operativas." : "Sólido y listo para escalar.");
 
-  let outHTML = `
-    <div class="score-box">
-      <div class="tag">Resultado del Diagnóstico Pre-Cita</div>
-      <div class="score-number">${finalPct}%</div>
-      <div class="traffic-badge ${badgeClass}">${badgeText}</div>
-      <p style="margin-top:14px;font-weight:700;color:var(--blue);">${statusAction}</p>
-    </div>
-    <h3>Evaluación discriminada por Área:</h3>
-  `;
+    let outHTML = `
+      <div class="score-box">
+        <div class="tag">Resultado del Diagnóstico Pre-Cita</div>
+        <div class="score-number">${finalPct}%</div>
+        <div class="traffic-badge ${badgeClass}">${badgeText}</div>
+        <p style="margin-top:14px;font-weight:700;color:var(--blue);">${statusAction}</p>
+      </div>
+      <h3>Evaluación discriminada por Área:</h3>
+    `;
 
-  let waSummary = `*Diagnóstico Pre-Cita SumaTips*\n• Modelo: ${selectedModelObj.name}\n• Unidad: ${econUnitText}\n• Global: ${finalPct}% (${badgeText})\n\n`;
+    let waSummary = `*Diagnóstico Pre-Cita SumaTips*\n• Modelo: ${selectedModelObj.name}\n• Unidad: ${econUnitText}\n• Global: ${finalPct}% (${badgeText})\n\n`;
 
-  details.forEach(item => {
-    let color = item.pct <= 39 ? "var(--red)" : (item.pct <= 69 ? "var(--yellow)" : "var(--green)");
+    details.forEach(item => {
+      let color = item.pct <= 39 ? "var(--red)" : (item.pct <= 69 ? "var(--yellow)" : "var(--green)");
+      outHTML += `
+        <div class="area-result">
+          <div class="area-header"><span>${item.num}. ${item.name}</span><span style="color:${color}">${item.pct}%</span></div>
+          <div class="area-bar"><div class="area-bar-fill" style="width:${item.pct}%;background:${color};"></div></div>
+          <small class="muted">${item.tip}</small>
+        </div>`;
+    });
+
+    const waMsg = encodeURIComponent(`Hola SumaTips, realicé el Diagnóstico Pre-Cita.\n\n${waSummary}\nQuiero coordinar la sesión consultiva.`);
     outHTML += `
-      <div class="area-result">
-        <div class="area-header"><span>${item.num}. ${item.name}</span><span style="color:${color}">${item.pct}%</span></div>
-        <div class="area-bar"><div class="area-bar-fill" style="width:${item.pct}%;background:${color};"></div></div>
-        <small class="muted">${item.tip}</small>
+      <div class="card" style="margin-top:24px;background:#ebf5fb;border-color:#bce1f5;">
+        <h3>Próximo Paso:</h3>
+        <div class="actions"><a class="btn" target="_blank" href="https://wa.me/584127147963?text=${waMsg}">¡Agendar cita consultiva vía WhatsApp! &gt;</a></div>
       </div>`;
+
+    const resDiv = document.getElementById('results-box');
+    resDiv.innerHTML = outHTML;
+    resDiv.hidden = false;
+    resDiv.scrollIntoView({ behavior: 'smooth' });
   });
 
-  const waMsg = encodeURIComponent(`Hola SumaTips, realicé el Diagnóstico Pre-Cita.\n\n${waSummary}\nQuiero coordinar la sesión consultiva.`);
-  outHTML += `
-    <div class="card" style="margin-top:24px;background:#ebf5fb;border-color:#bce1f5;">
-      <h3>Próximo Paso:</h3>
-      <div class="actions"><a class="btn" target="_blank" href="https://wa.me/584127147963?text=${waMsg}">¡Agendar cita consultiva vía WhatsApp! &gt;</a></div>
-    </div>`;
-
-  const resDiv = document.getElementById('results-box');
-  resDiv.innerHTML = outHTML;
-  resDiv.hidden = false;
-  resDiv.scrollIntoView({ behavior: 'smooth' });
-});
-
-document.getElementById('quiz-form').addEventListener('reset', () => {
-  document.getElementById('results-box').hidden = true;
-});
-
-// MOTOR MATEMÁTICO: EVALUACIÓN DE LOS 8 INDICADORES FINANCIEROS
-function runFinancialAudit() {
-  const sales = parseFloat(document.getElementById('f-sales').value) || 0;
-  const ebit = parseFloat(document.getElementById('f-ebit').value) || 0;
-  const expenses = parseFloat(document.getElementById('f-expenses').value) || 0;
-  const actCorr = parseFloat(document.getElementById('f-act-corr').value) || 0;
-  const pasCorr = Math.max(1, parseFloat(document.getElementById('f-pas-corr').value) || 1);
-  const pasTot = parseFloat(document.getElementById('f-pas-tot').value) || 0;
-  const patrim = Math.max(1, parseFloat(document.getElementById('f-patrim').value) || 1);
-  
-  // Sincronizar monto si se cambia arriba
-  const targetLoan = parseFloat(document.getElementById('f-target-loan').value) || 15000;
-  if (document.activeElement.id === 'f-target-loan') {
-    document.getElementById('sim-amount').value = targetLoan;
-  }
-  const principal = parseFloat(document.getElementById('sim-amount').value) || targetLoan;
-  const months = parseInt(document.getElementById('sim-term').value) || 12;
-  const rate = parseFloat(document.getElementById('sim-rate').value) || 16;
-
-  // 1. Brecha de caja mensual proyectada (Flujo libre operativo)
-  const brechaCaja = sales - expenses;
-  // 2. Margen Operativo (%)
-  const margenOp = sales > 0 ? ((ebit / sales) * 100) : 0;
-  // 3. Liquidez Corriente
-  const liquidez = actCorr / pasCorr;
-
-  // Cuota teórica mensual (amortización francesa)
-  const r = (rate / 100) / 12;
-  let payment = 0;
-  if (r > 0) {
-    payment = (principal * r * Math.pow(1 + r, months)) / (Math.pow(1 + r, months) - 1);
-  } else {
-    payment = principal / months;
-  }
-  const totalInterest = Math.max(0, (payment * months) - principal);
-
-  // 4. Cobertura de Deuda (DSCR)
-  const fcf = Math.max(0, brechaCaja);
-  const dscr = payment > 0 ? (fcf / payment) : 0;
-  // 5. Caja Restante después de pagar la cuota
-  const cajaRestante = brechaCaja - payment;
-  // 6. Escenario adverso (-20% ventas asumiendo 85% de costos fijos)
-  const stressSales = sales * 0.8;
-  const stressExpenses = expenses * 0.95;
-  const stressFCF = Math.max(0, stressSales - stressExpenses);
-  const stressDSCR = payment > 0 ? (stressFCF / payment) : 0;
-
-  // 7. Endeudamiento Patrimonial
-  const leverage = pasTot / patrim;
-  // 8. Preparación crediticia
-  let docsChecked = 0;
-  if (document.getElementById('doc-1').checked) docsChecked++;
-  if (document.getElementById('doc-2').checked) docsChecked++;
-  if (document.getElementById('doc-3').checked) docsChecked++;
-  const docScore = Math.round((docsChecked / 3) * 100);
-
-  // Render Indicadores
-  document.getElementById('val-brecha').textContent = `$${brechaCaja.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})} / mes`;
-  document.getElementById('stat-brecha').textContent = brechaCaja >= 0 ? "🟢 Flujo mensual disponible" : "🔴 Déficit de caja estructural";
-  document.getElementById('card-brecha').style.borderLeftColor = brechaCaja >= 0 ? "var(--green)" : "var(--red)";
-
-  document.getElementById('val-margen').textContent = `${margenOp.toFixed(1)}%`;
-  document.getElementById('stat-margen').textContent = margenOp >= 12 ? "🟢 Margen operativo sólido" : (margenOp >= 5 ? "🟡 Margen moderado" : "🔴 Margen crítico");
-  document.getElementById('card-margen').style.borderLeftColor = margenOp >= 12 ? "var(--green)" : (margenOp >= 5 ? "var(--yellow)" : "var(--red)");
-
-  document.getElementById('val-liquidez').textContent = `${liquidez.toFixed(2)}x`;
-  document.getElementById('stat-liquidez').textContent = liquidez >= 1.3 ? "🟢 Capacidad corriente holgada" : (liquidez >= 1.0 ? "🟡 Liquidez justa" : "🔴 Iliquidez inmediata");
-  document.getElementById('card-liquidez').style.borderLeftColor = liquidez >= 1.3 ? "var(--green)" : (liquidez >= 1.0 ? "var(--yellow)" : "var(--red)");
-
-  document.getElementById('val-dscr').textContent = `${dscr.toFixed(2)}x`;
-  document.getElementById('stat-dscr').textContent = dscr >= 1.4 ? "🟢 Cobertura holgada (>1.40x)" : (dscr >= 1.15 ? "🟡 Cobertura ajustada" : "🔴 Insuficiente para pagar");
-  document.getElementById('card-dscr').style.borderLeftColor = dscr >= 1.4 ? "var(--green)" : (dscr >= 1.15 ? "var(--yellow)" : "var(--red)");
-
-  document.getElementById('val-caja-rest').textContent = `$${cajaRestante.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})} / mes`;
-  document.getElementById('stat-caja-rest').textContent = cajaRestante > 0 ? "🟢 Excedente para contingencias" : "🔴 Saldo negativo tras cuota";
-  document.getElementById('card-caja-rest').style.borderLeftColor = cajaRestante > 0 ? "var(--green)" : "var(--red)";
-
-  document.getElementById('val-stress').textContent = `${stressDSCR.toFixed(2)}x`;
-  document.getElementById('stat-stress').textContent = stressDSCR >= 1.15 ? "🟢 Resiste caída de facturación" : "🔴 Quiebra ante baja en ventas";
-  document.getElementById('card-stress').style.borderLeftColor = stressDSCR >= 1.15 ? "var(--green)" : "var(--red)";
-
-  document.getElementById('val-leverage').textContent = `${leverage.toFixed(2)}x`;
-  document.getElementById('stat-leverage').textContent = leverage <= 1.5 ? "🟢 Apalancamiento prudente" : (leverage <= 2.5 ? "🟡 Apalancamiento alto" : "🔴 Sobreendeudado");
-  document.getElementById('card-leverage').style.borderLeftColor = leverage <= 1.5 ? "var(--green)" : (leverage <= 2.5 ? "var(--yellow)" : "var(--red)");
-
-  document.getElementById('val-doc').textContent = `${docScore}%`;
-  document.getElementById('stat-doc').textContent = docScore === 100 ? "🟢 Documentación al día" : (docScore >= 66 ? "🟡 Formalización en proceso" : "🔴 Documentación incompleta");
-  document.getElementById('card-doc').style.borderLeftColor = docScore === 100 ? "var(--green)" : (docScore >= 66 ? "var(--yellow)" : "var(--red)");
-
-  // EVALUACIÓN DE COMPUERTA (GATEKEEPER CUANTITATIVO)
-  const gatePass = document.getElementById('gate-pass-box');
-  const gateStop = document.getElementById('gate-stop-box');
-  const simSec = document.getElementById('simulator-section');
-  const stopReason = document.getElementById('gate-stop-reason');
-
-  // Criterio de rechazo técnico estricto:
-  let canBorrow = true;
-  let reasonText = "";
-
-  if (ebit < 0 || margenOp < 2) {
-    canBorrow = false;
-    reasonText = "El negocio no genera utilidad operativa real (EBIT crítico). Asumir deuda con margen negativo acelera la quiebra.";
-  } else if (dscr < 1.10) {
-    canBorrow = false;
-    reasonText = "Tu flujo de caja libre no alcanza a cubrir la cuota proyectada con margen de seguridad (DSCR inferior a 1.10x).";
-  } else if (liquidez < 0.90) {
-    canBorrow = false;
-    reasonText = "Tus pasivos inmediatos superan a tus activos corrientes (Liquidez menor a 0.90x). Hay riesgo alto de mora.";
-  }
-
-  if (canBorrow) {
-    gatePass.style.display = "block";
-    gateStop.style.display = "none";
-    simSec.style.opacity = "1";
-    simSec.style.pointerEvents = "auto";
-  } else {
-    gatePass.style.display = "none";
-    gateStop.style.display = "block";
-    gateStop.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    stopReason.textContent = reasonText;
-    simSec.style.opacity = "0.3";
-    simSec.style.pointerEvents = "none";
-  }
-
-  // Render Simulador de Amortización
-  const debtOnSales = sales > 0 ? ((payment / sales) * 100) : 0;
-  document.getElementById('sim-payment').textContent = `$${payment.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}`;
-  document.getElementById('sim-fcf').textContent = `$${fcf.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}`;
-  document.getElementById('sim-dscr').textContent = `${dscr.toFixed(2)}x`;
-  document.getElementById('sim-debt-sales').textContent = `${debtOnSales.toFixed(1)}%`;
-  document.getElementById('sim-interest').textContent = `$${totalInterest.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}`;
-
-  const reco = document.getElementById('sim-reco');
-  if (months <= 12) {
-    reco.innerHTML = `Para un horizonte de ${months} meses, emitir <strong>Pagarés Bursátiles o Papeles Comerciales en la Bolsa de Caracas (BVC)</strong> es más ágil y estructurable que el crédito bancario indexado.`;
-  } else {
-    reco.innerHTML = `Para plazos mayores a 12 meses destinados a maquinaria o expansión, conviene estructurar <strong>crédito sindicado bancario o emisiones de renta fija</strong> a mediano plazo.`;
-  }
-
-  // Mensaje a WhatsApp con la Ficha de los 8 Indicadores
-  const msg = encodeURIComponent(
-    `*Auditoría de Crédito y Salud Financiera SumaTips*\n\n` +
-    `📊 *Datos Base:*\n` +
-    `• Ventas: $${sales.toLocaleString('en-US')}/mes | EBIT: $${ebit.toLocaleString('en-US')}\n` +
-    `• Solicitud: $${principal.toLocaleString('en-US')} a ${months} meses\n\n` +
-    `📈 *Evaluación de los 8 Indicadores:*\n` +
-    `1. Brecha de Caja: $${brechaCaja.toFixed(2)}/mes\n` +
-    `2. Margen Operativo: ${margenOp.toFixed(1)}%\n` +
-    `3. Liquidez Corriente: ${liquidez.toFixed(2)}x\n` +
-    `4. Cobertura DSCR: ${dscr.toFixed(2)}x\n` +
-    `5. Caja Post-Deuda: $${cajaRestante.toFixed(2)}/mes\n` +
-    `6. Cobertura Adversa (-20% Vtas): ${stressDSCR.toFixed(2)}x\n` +
-    `7. Endeudamiento Patrimonial: ${leverage.toFixed(2)}x\n` +
-    `8. Preparación Documental: ${docScore}%\n\n` +
-    `💵 *Cuota mensual proyectada:* $${payment.toFixed(2)}/mes\n` +
-    `Quiero agendar una sesión consultiva para estructurar mi expediente formal.`
-  );
-  document.getElementById('audit-wa-btn').href = `https://wa.me/584127147963?text=${msg}`;
+  quizForm.addEventListener('reset', () => {
+    document.getElementById('results-box').hidden = true;
+  });
 }
 
-// FORMULARIO DE CONTACTO DIRECTO
-document.getElementById('contact-form').addEventListener('submit', function(e) {
-  e.preventDefault();
-  const c = document.getElementById('company').value;
-  const t = document.getElementById('challenge').value;
-  const n = document.getElementById('name').value;
-  const body = encodeURIComponent(`Empresa: ${c}\nConsulta: ${t}\nNombre de contacto: ${n}`);
-  window.location.href = `mailto:Lgonr0430@gmail.com?subject=Consulta%20SumaTips%20-%20${encodeURIComponent(c)}&body=${body}`;
-});
+function syncTargetLoan() {
+  const tVal = document.getElementById('f-target-loan').value;
+  const sEl = document.getElementById('sim-amount');
+  if (sEl) sEl.value = tVal;
+  runFinancialAudit();
+}
+
+// MOTOR MATEMÁTICO DE LOS 8 INDICADORES
+function runFinancialAudit() {
+  try {
+    const elSales = document.getElementById('f-sales');
+    if (!elSales) return;
+
+    const sales = parseFloat(elSales.value) || 0;
+    const ebit = parseFloat(document.getElementById('f-ebit').value) || 0;
+    const expenses = parseFloat(document.getElementById('f-expenses').value) || 0;
+    const actCorr = parseFloat(document.getElementById('f-act-corr').value) || 0;
+    const pasCorr = Math.max(1, parseFloat(document.getElementById('f-pas-corr').value) || 1);
+    const pasTot = parseFloat(document.getElementById('f-pas-tot').value) || 0;
+    const patrim = Math.max(1, parseFloat(document.getElementById('f-patrim').value) || 1);
+    
+    const principal = parseFloat(document.getElementById('sim-amount').value) || 15000;
+    const months = parseInt(document.getElementById('sim-term').value) || 12;
+    const rate = parseFloat(document.getElementById('sim-rate').value) || 16;
+
+    const brechaCaja = sales - expenses;
+    const margenOp = sales > 0 ? ((ebit / sales) * 100) : 0;
+    const liquidez = actCorr / pasCorr;
+
+    const r = (rate / 100) / 12;
+    let payment = 0;
+    if (r > 0) {
+      payment = (principal * r * Math.pow(1 + r, months)) / (Math.pow(1 + r, months) - 1);
+    } else {
+      payment = principal / months;
+    }
+    const totalInterest = Math.max(0, (payment * months) - principal);
+
+    const fcf = Math.max(0, brechaCaja);
+    const dscr = payment > 0 ? (fcf / payment) : 0;
+    const cajaRestante = brechaCaja - payment;
+    
+    const stressSales = sales * 0.8;
+    const stressExpenses = expenses * 0.95;
+    const stressFCF = Math.max(0, stressSales - stressExpenses);
+    const stressDSCR = payment > 0 ? (stressFCF / payment) : 0;
+
+    const leverage = pasTot / patrim;
+    
+    let docsChecked = 0;
+    if (document.getElementById('doc-1')?.checked) docsChecked++;
+    if (document.getElementById('doc-2')?.checked) docsChecked++;
+    if (document.getElementById('doc-3')?.checked) docsChecked++;
+    const docScore = Math.round((docsChecked / 3) * 100);
+
+    // Actualizar Ratios
+    document.getElementById('val-brecha').textContent = `$${brechaCaja.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})} / mes`;
+    document.getElementById('stat-brecha').textContent = brechaCaja >= 0 ? "🟢 Flujo mensual disponible" : "🔴 Déficit de caja estructural";
+    document.getElementById('card-brecha').style.borderLeftColor = brechaCaja >= 0 ? "var(--green)" : "var(--red)";
+
+    document.getElementById('val-margen').textContent = `${margenOp.toFixed(1)}%`;
+    document.getElementById('stat-margen').textContent = margenOp >= 12 ? "🟢 Margen operativo sólido" : (margenOp >= 5 ? "🟡 Margen moderado" : "🔴 Margen crítico");
+    document.getElementById('card-margen').style.borderLeftColor = margenOp >= 12 ? "var(--green)" : (margenOp >= 5 ? "var(--yellow)" : "var(--red)");
+
+    document.getElementById('val-liquidez').textContent = `${liquidez.toFixed(2)}x`;
+    document.getElementById('stat-liquidez').textContent = liquidez >= 1.3 ? "🟢 Capacidad corriente holgada" : (liquidez >= 1.0 ? "🟡 Liquidez justa" : "🔴 Iliquidez inmediata");
+    document.getElementById('card-liquidez').style.borderLeftColor = liquidez >= 1.3 ? "var(--green)" : (liquidez >= 1.0 ? "var(--yellow)" : "var(--red)");
+
+    document.getElementById('val-dscr').textContent = `${dscr.toFixed(2)}x`;
+    document.getElementById('stat-dscr').textContent = dscr >= 1.4 ? "🟢 Cobertura holgada (>1.40x)" : (dscr >= 1.15 ? "🟡 Cobertura ajustada" : "🔴 Insuficiente para pagar");
+    document.getElementById('card-dscr').style.borderLeftColor = dscr >= 1.4 ? "var(--green)" : (dscr >= 1.15 ? "var(--yellow)" : "var(--red)");
+
+    document.getElementById('val-caja-rest').textContent = `$${cajaRestante.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})} / mes`;
+    document.getElementById('stat-caja-rest').textContent = cajaRestante > 0 ? "🟢 Excedente para contingencias" : "🔴 Saldo negativo tras cuota";
+    document.getElementById('card-caja-rest').style.borderLeftColor = cajaRestante > 0 ? "var(--green)" : "var(--red)";
+
+    document.getElementById('val-stress').textContent = `${stressDSCR.toFixed(2)}x`;
+    document.getElementById('stat-stress').textContent = stressDSCR >= 1.15 ? "🟢 Resiste caída de facturación" : "🔴 Quiebra ante baja en ventas";
+    document.getElementById('card-stress').style.borderLeftColor = stressDSCR >= 1.15 ? "var(--green)" : "var(--red)";
+
+    document.getElementById('val-leverage').textContent = `${leverage.toFixed(2)}x`;
+    document.getElementById('stat-leverage').textContent = leverage <= 1.5 ? "🟢 Apalancamiento prudente" : (leverage <= 2.5 ? "🟡 Apalancamiento alto" : "🔴 Sobreendeudado");
+    document.getElementById('card-leverage').style.borderLeftColor = leverage <= 1.5 ? "var(--green)" : (leverage <= 2.5 ? "var(--yellow)" : "var(--red)");
+
+    document.getElementById('val-doc').textContent = `${docScore}%`;
+    document.getElementById('stat-doc').textContent = docScore === 100 ? "🟢 Documentación al día" : (docScore >= 66 ? "🟡 Formalización en proceso" : "🔴 Documentación incompleta");
+    document.getElementById('card-doc').style.borderLeftColor = docScore === 100 ? "var(--green)" : (docScore >= 66 ? "var(--yellow)" : "var(--red)");
+
+    // Compuerta de acceso
+    const gatePass = document.getElementById('gate-pass-box');
+    const gateStop = document.getElementById('gate-stop-box');
+    const simSec = document.getElementById('simulator-section');
+    const stopReason = document.getElementById('gate-stop-reason');
+
+    let canBorrow = true;
+    let reasonText = "";
+
+    if (ebit < 0 || margenOp < 2) {
+      canBorrow = false;
+      reasonText = "El negocio no genera utilidad operativa real (EBIT crítico). Asumir deuda con margen negativo acelera la quiebra.";
+    } else if (dscr < 1.10) {
+      canBorrow = false;
+      reasonText = "Tu flujo de caja libre no alcanza a cubrir la cuota proyectada con margen de seguridad (DSCR inferior a 1.10x).";
+    } else if (liquidez < 0.90) {
+      canBorrow = false;
+      reasonText = "Tus pasivos inmediatos superan a tus activos corrientes (Liquidez menor a 0.90x). Hay riesgo alto de mora.";
+    }
+
+    if (canBorrow) {
+      if (gatePass) gatePass.style.display = "block";
+      if (gateStop) gateStop.style.display = "none";
+      if (simSec) { simSec.style.opacity = "1"; simSec.style.pointerEvents = "auto"; }
+    } else {
+      if (gatePass) gatePass.style.display = "none";
+      if (gateStop) gateStop.style.display = "block";
+      if (stopReason) stopReason.textContent = reasonText;
+      if (simSec) { simSec.style.opacity = "0.3"; simSec.style.pointerEvents = "none"; }
+    }
+
+    // Render del simulador
+    const debtOnSales = sales > 0 ? ((payment / sales) * 100) : 0;
+    document.getElementById('sim-payment').textContent = `$${payment.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}`;
+    document.getElementById('sim-fcf').textContent = `$${fcf.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}`;
+    document.getElementById('sim-dscr').textContent = `${dscr.toFixed(2)}x`;
+    document.getElementById('sim-debt-sales').textContent = `${debtOnSales.toFixed(1)}%`;
+    document.getElementById('sim-interest').textContent = `$${totalInterest.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}`;
+
+    const msg = encodeURIComponent(
+      `*Auditoría de Crédito y Salud Financiera SumaTips*\n\n` +
+      `📊 *Datos Base:*\n` +
+      `• Ventas: $${sales.toLocaleString('en-US')}/mes | EBIT: $${ebit.toLocaleString('en-US')}\n` +
+      `• Solicitud: $${principal.toLocaleString('en-US')} a ${months} meses\n\n` +
+      `📈 *Evaluación de los 8 Indicadores:*\n` +
+      `1. Brecha de Caja: $${brechaCaja.toFixed(2)}/mes\n` +
+      `2. Margen Operativo: ${margenOp.toFixed(1)}%\n` +
+      `3. Liquidez Corriente: ${liquidez.toFixed(2)}x\n` +
+      `4. Cobertura DSCR: ${dscr.toFixed(2)}x\n` +
+      `5. Caja Post-Deuda: $${cajaRestante.toFixed(2)}/mes\n` +
+      `6. Cobertura Adversa (-20% Vtas): ${stressDSCR.toFixed(2)}x\n` +
+      `7. Endeudamiento Patrimonial: ${leverage.toFixed(2)}x\n` +
+      `8. Preparación Documental: ${docScore}%\n\n` +
+      `💵 *Cuota mensual proyectada:* $${payment.toFixed(2)}/mes\n` +
+      `Quiero agendar una sesión consultiva para estructurar mi expediente formal.`
+    );
+    const waBtn = document.getElementById('audit-wa-btn');
+    if (waBtn) waBtn.href = `https://wa.me/584127147963?text=${msg}`;
+  } catch (err) {
+    console.error("Error en runFinancialAudit:", err);
+  }
+}
+
+const cForm = document.getElementById('contact-form');
+if (cForm) {
+  cForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const c = document.getElementById('company').value;
+    const t = document.getElementById('challenge').value;
+    const n = document.getElementById('name').value;
+    const body = encodeURIComponent(`Empresa: ${c}\nConsulta: ${t}\nNombre de contacto: ${n}`);
+    window.location.href = `mailto:Lgonr0430@gmail.com?subject=Consulta%20SumaTips%20-%20${encodeURIComponent(c)}&body=${body}`;
+  });
+}
 
 document.getElementById('year').textContent = new Date().getFullYear();
 </script>
