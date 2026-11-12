@@ -120,6 +120,13 @@ legend{font-weight:800;color:var(--blue);padding:0 8px}
 
 .form-group{margin-bottom:16px}
 .form-group label{display:block;font-weight:700;margin-bottom:6px;color:var(--blue)}
+.debt-panel{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:8px 24px;padding:18px 20px;background:#f8fafc;border:1px solid #dfe6ee;border-radius:12px}
+.debt-question{grid-column:1;grid-row:1;color:var(--blue)}
+.debt-toggle{grid-column:1;grid-row:2;display:flex!important;align-items:center;gap:9px;font-weight:500!important;color:var(--text)!important;margin:0!important}
+.debt-toggle input{width:auto!important;margin:0}
+.debt-payment{grid-column:2;grid-row:1 / span 2;margin:0}
+.debt-payment input{margin-top:6px}
+.debt-help{grid-column:1/-1;margin:0}
 .form-group input, .form-group textarea, .form-group select{
   width:100%;
   display:block;
@@ -134,6 +141,8 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
 
 @media(max-width:850px){
   .hero-grid,.grid,.two,.four,.calc-grid{grid-template-columns:1fr}
+  .debt-panel{grid-template-columns:1fr}
+  .debt-question,.debt-toggle,.debt-payment,.debt-help{grid-column:1;grid-row:auto}
   section{padding:42px 0}
   h1{font-size:32px}
   .model-selector{grid-template-columns:repeat(2, 1fr)}
@@ -517,18 +526,6 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
           </div>
 
           <div class="form-group">
-            <span style="display:block;font-weight:700;margin-bottom:6px;color:var(--blue);">¿Tiene otras deudas vigentes?</span>
-            <label style="display:flex;align-items:center;gap:8px;font-weight:400;color:var(--text);">
-              <input type="checkbox" id="f-has-debt"> Sí, tengo pagos de otras deudas
-            </label>
-            <div id="existing-debt-payment-wrap" hidden style="margin-top:10px;">
-              <label for="f-existing-debt-payment">Pagos mensuales de esas deudas (USD):</label>
-              <input type="number" id="f-existing-debt-payment" value="0" min="0" step="50">
-            </div>
-            <small class="muted">Si no tiene deudas, deje la casilla desmarcada.</small>
-          </div>
-
-          <div class="form-group">
             <label for="f-expenses">Costos y gastos operativos mensuales (USD):</label>
             <input type="number" id="f-expenses" value="12200" min="0" step="500">
             <small class="muted">Incluya costos y gastos operativos. Excluya impuestos, intereses y pagos de deuda.</small>
@@ -562,6 +559,16 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
             <label for="f-target-loan">Crédito Estimado ($ USD):</label>
             <input type="number" id="f-target-loan" value="15000" min="1000" step="500">
             <small class="muted">Capital que buscas o necesitas financiar.</small>
+          </div>
+
+          <div class="debt-panel">
+            <strong class="debt-question">¿Tiene otras deudas vigentes?</strong>
+            <label class="debt-toggle"><input type="checkbox" id="f-has-debt"> Sí, tengo pagos de otras deudas</label>
+            <div id="existing-debt-payment-wrap" class="debt-payment" hidden>
+              <label for="f-existing-debt-payment">Pagos mensuales de esas deudas (USD):</label>
+              <input type="number" id="f-existing-debt-payment" value="0" min="0" step="50">
+            </div>
+            <small class="muted debt-help">Si no tiene deudas, deje la casilla desmarcada. El monto corresponde a la suma de cuotas mensuales vigentes.</small>
           </div>
         </div>
 
