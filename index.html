@@ -502,49 +502,60 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
       <div class="card" style="margin-bottom:28px;">
         <div class="tag">Paso 1: Tus Cifras Contables (Sin Fórmulas)</div>
         <h3 style="margin:8px 0 16px;">Datos de tu Estado de Resultados y Balance General</h3>
-        <p class="muted">Coloca las cifras promedio mensuales de tu empresa en dólares ($ USD o equivalente contable):</p>
+        <p class="muted">Ingresa ventas, costos y gastos operativos mensuales en USD. Activos, pasivos y patrimonio son saldos a la fecha de corte. Los cálculos se realizan en este navegador; las cifras solo se comparten si pulsas WhatsApp.</p>
 
         <div class="grid" style="grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:16px;">
           <div class="form-group">
-            <label for="f-sales">Ventas Netas Mensuales:</label>
+            <label for="f-cutoff-date">Fecha de corte del balance:</label>
+            <input type="date" id="f-cutoff-date">
+            <small class="muted">Fecha a la que corresponden activos, pasivos y patrimonio.</small>
+          </div>
+          <div class="form-group">
+            <label for="f-sales">Ventas Netas Mensuales (USD):</label>
             <input type="number" id="f-sales" value="15000" min="0" step="500">
             <small class="muted">Facturación mensual promedio.</small>
           </div>
 
           <div class="form-group">
-            <label for="f-ebit">Utilidad Operativa (EBIT):</label>
-            <input type="number" id="f-ebit" value="2800" min="-10000" step="100">
-            <small class="muted">Ganancia neta antes de intereses e impuestos.</small>
+            <span style="display:block;font-weight:700;margin-bottom:6px;color:var(--blue);">¿Tiene otras deudas vigentes?</span>
+            <label style="display:flex;align-items:center;gap:8px;font-weight:400;color:var(--text);">
+              <input type="checkbox" id="f-has-debt"> Sí, tengo pagos de otras deudas
+            </label>
+            <div id="existing-debt-payment-wrap" hidden style="margin-top:10px;">
+              <label for="f-existing-debt-payment">Pagos mensuales de esas deudas (USD):</label>
+              <input type="number" id="f-existing-debt-payment" value="0" min="0" step="50">
+            </div>
+            <small class="muted">Si no tiene deudas, deje la casilla desmarcada.</small>
           </div>
 
           <div class="form-group">
-            <label for="f-expenses">Egresos Mensuales Totales:</label>
+            <label for="f-expenses">Costos y gastos operativos mensuales (USD):</label>
             <input type="number" id="f-expenses" value="12200" min="0" step="500">
-            <small class="muted">Compras, nómina, alquiler y gastos operativos.</small>
+            <small class="muted">Incluya costos y gastos operativos. Excluya impuestos, intereses y pagos de deuda.</small>
           </div>
 
           <div class="form-group">
             <label for="f-act-corr">Activo Corriente:</label>
             <input type="number" id="f-act-corr" value="22000" min="0" step="500">
-            <small class="muted">Bancos + Cuentas por Cobrar + Inventario.</small>
+            <small class="muted">Saldo a la fecha de corte: bancos + cuentas por cobrar + inventario.</small>
           </div>
 
           <div class="form-group">
             <label for="f-pas-corr">Pasivo Corriente:</label>
             <input type="number" id="f-pas-corr" value="14000" min="0" step="500">
-            <small class="muted">Deudas y cuentas por pagar a corto plazo.</small>
+            <small class="muted">Saldo de deudas y cuentas por pagar a corto plazo a la fecha de corte.</small>
           </div>
 
           <div class="form-group">
             <label for="f-pas-tot">Pasivo Total:</label>
             <input type="number" id="f-pas-tot" value="25000" min="0" step="500">
-            <small class="muted">Suma de todas las deudas vigentes.</small>
+            <small class="muted">Saldo de todas las deudas a la fecha de corte.</small>
           </div>
 
           <div class="form-group">
             <label for="f-patrim">Patrimonio Total:</label>
-            <input type="number" id="f-patrim" value="30000" min="1" step="500">
-            <small class="muted">Capital social + reservas acumuladas.</small>
+            <input type="number" id="f-patrim" value="30000" min="-100000000" step="500">
+            <small class="muted">Saldo a la fecha de corte: activos menos pasivos.</small>
           </div>
 
           <div class="form-group">
@@ -572,7 +583,7 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
         <h4 style="color:var(--blue);margin:16px 0 8px;border-bottom:2px solid #edf2f7;padding-bottom:6px;">Pilar I: ¿Necesita Financiamiento?</h4>
         <div class="ratio-grid">
           <div class="ratio-card" id="card-brecha">
-            <div class="ratio-title">1. Brecha de Caja Proyectada</div>
+            <div class="ratio-title">1. Excedente Operativo Mensual Estimado (antes de impuestos)</div>
             <div class="ratio-val" id="val-brecha">$2,800.00 / mes</div>
             <div class="ratio-status" id="stat-brecha">🟢 Flujo mensual positivo</div>
           </div>
@@ -591,17 +602,17 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
         <h4 style="color:var(--blue);margin:24px 0 8px;border-bottom:2px solid #edf2f7;padding-bottom:6px;">Pilar II: ¿Puede Pagarlo?</h4>
         <div class="ratio-grid">
           <div class="ratio-card" id="card-dscr">
-            <div class="ratio-title">4. Cobertura de Deuda (DSCR)</div>
+            <div class="ratio-title">4. Cobertura estimada del servicio total de deuda (DSCR)</div>
             <div class="ratio-val" id="val-dscr">2.06x</div>
             <div class="ratio-status" id="stat-dscr">🟢 Cobertura holgada (>1.40x)</div>
           </div>
           <div class="ratio-card" id="card-caja-rest">
-            <div class="ratio-title">5. Caja Restante post-Deuda</div>
+            <div class="ratio-title">5. Excedente estimado tras pagos de deuda</div>
             <div class="ratio-val" id="val-caja-rest">$1,439.04 / mes</div>
             <div class="ratio-status" id="stat-caja-rest">🟢 Excedente libre para imprevistos</div>
           </div>
           <div class="ratio-card" id="card-stress">
-            <div class="ratio-title">6. Cobertura Escenario Adverso (-20% Vtas)</div>
+            <div class="ratio-title">6. Estrés hipotético: ventas -20%, costos y gastos -5%</div>
             <div class="ratio-val" id="val-stress">1.45x</div>
             <div class="ratio-status" id="stat-stress">🟢 Resiste caída de ventas</div>
           </div>
@@ -625,9 +636,9 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
           <div style="display:flex;align-items:flex-start;gap:14px;">
             <span style="font-size:32px;">✅</span>
             <div>
-              <strong style="color:var(--green);font-size:18px;display:block;">Diagnóstico: Financiamiento Viable y Justificado por Cifras.</strong>
+              <strong style="color:var(--green);font-size:18px;display:block;">Evaluación financiera preliminar: capacidad estimada suficiente bajo los supuestos del modelo.</strong>
               <p style="margin:6px 0 12px;color:#14532d;font-size:14.5px;">
-                Tus números reflejan margen operativo positivo, liquidez corriente sólida y capacidad de servicio (DSCR) incluso bajo estrés. La calculadora detallada de cuotas se ha desbloqueado a continuación.
+                El excedente operativo estimado cubre el servicio de deuda modelado, incluso en el escenario de estrés. Es una simulación, no una aprobación bancaria; revise aparte las alertas de perfil y documentación.
               </p>
               <a href="#simulator-section" class="btn" style="background:var(--green);padding:9px 18px;font-size:14px;">Ir al Simulador de Cuotas y Plazos ↓</a>
             </div>
@@ -638,7 +649,7 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
           <div style="display:flex;align-items:flex-start;gap:14px;">
             <span style="font-size:32px;">🛑</span>
             <div>
-              <strong style="color:var(--red);font-size:18px;display:block;">Diagnóstico: Se desaconseja solicitar crédito en este momento.</strong>
+              <strong style="color:var(--red);font-size:18px;display:block;">Evaluación financiera preliminar: la capacidad estimada requiere atención antes de asumir deuda.</strong>
               <p style="margin:6px 0 12px;color:#7f1d1d;font-size:14.5px;" id="gate-stop-reason">
                 Tus estados financieros muestran debilidad en el margen operativo o liquidez insuficiente. Asumir una nueva cuota hoy asfixiaría tu caja. Te recomendamos ordenar primero costos y cuentas por cobrar.
               </p>
@@ -675,9 +686,9 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
               </div>
 
               <div class="form-group">
-                <label for="sim-rate">Tasa de Interés Anual Proyectada (% TNA):</label>
-                <input type="number" id="sim-rate" value="16" min="1" max="100" step="0.5">
-                <small class="muted">Referencia bancaria o bursátil estimada anual.</small>
+                <label for="sim-rate">Tasa nominal anual supuesta (%):</label>
+                <input type="number" id="sim-rate" value="16" min="0" max="100" step="0.5">
+                <small class="muted">16% es un supuesto editable, no una oferta ni una tasa universal en USD. Amortización mensual; excluye indexación, comisiones y seguros.</small>
               </div>
             </div>
 
@@ -688,7 +699,7 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
                   <strong id="sim-payment">$1,360.96</strong>
                 </div>
                 <div class="calc-stat">
-                  <span>Flujo Libre Operativo Mensual:</span>
+                  <span>Excedente operativo estimado antes de impuestos:</span>
                   <strong id="sim-fcf">$2,800.00</strong>
                 </div>
                 <div class="calc-stat" style="background:#e8f3fa;padding:10px 8px;border-radius:6px;margin:4px 0;">
@@ -707,13 +718,13 @@ footer{padding:30px 0;background:#061b41;color:white;text-align:center}
 
               <div style="background:#edf2f7;border-radius:10px;padding:14px;margin-top:14px;font-size:13.5px;">
                 <strong style="color:var(--blue);display:block;margin-bottom:4px;">Vía Estratégica Sugerida:</strong>
-                <span id="sim-reco">Para un horizonte de 12 meses, emitir <strong>Pagarés Bursátiles o Papeles Comerciales en la Bolsa de Caracas (BVC)</strong> es más ágil y estructurable que el crédito bancario indexado.</span>
+                <span id="sim-reco">Plazo seleccionado: 12 meses. Evalúa que las cuotas coincidan con el ciclo de caja del negocio. La recomendación no representa una oferta de financiamiento.</span>
               </div>
             </div>
           </div>
 
           <div style="margin-top:24px;">
-            <a class="btn" id="audit-wa-btn" target="_blank" style="width:100%;text-align:center;" href="#">Enviar Diagnóstico Financiero Completo a SumaTips vía WhatsApp &gt;</a>
+            <a class="btn" id="audit-wa-btn" target="_blank" rel="noopener noreferrer" style="width:100%;text-align:center;" href="#">Enviar resumen financiero a SumaTips vía WhatsApp &gt;</a>
             <small class="muted" style="display:block;text-align:center;margin-top:8px;">* Diagnóstico preliminar basado en estados financieros. No constituye aprobación de crédito formal.</small>
           </div>
         </div>
@@ -763,7 +774,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  var calcFields = ['f-sales', 'f-ebit', 'f-expenses', 'f-act-corr', 'f-pas-corr', 'f-pas-tot', 'f-patrim', 'sim-amount', 'sim-rate', 'sim-term', 'doc-1', 'doc-2', 'doc-3'];
+  var calcFields = ['f-cutoff-date', 'f-sales', 'f-expenses', 'f-act-corr', 'f-pas-corr', 'f-pas-tot', 'f-patrim', 'f-existing-debt-payment', 'sim-amount', 'sim-rate', 'sim-term', 'doc-1', 'doc-2', 'doc-3'];
   calcFields.forEach(function(id) {
     var el = document.getElementById(id);
     if (el) {
@@ -771,6 +782,20 @@ document.addEventListener('DOMContentLoaded', function() {
       el.addEventListener('change', runFinancialAudit);
     }
   });
+
+  var hasDebt = document.getElementById('f-has-debt');
+  var debtPaymentWrap = document.getElementById('existing-debt-payment-wrap');
+  if (hasDebt && debtPaymentWrap) {
+    hasDebt.addEventListener('change', function() {
+      debtPaymentWrap.hidden = !this.checked;
+      runFinancialAudit();
+    });
+  }
+  var cutoffDate = document.getElementById('f-cutoff-date');
+  if (cutoffDate && !cutoffDate.value) {
+    var today = new Date();
+    cutoffDate.value = new Date(today.getTime() - today.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+  }
 
   var targetLoan = document.getElementById('f-target-loan');
   if (targetLoan) {
@@ -1286,136 +1311,72 @@ if (quizForm) {
   });
 }
 
-// EVALUACIÓN DE LOS 8 INDICADORES FINANCIEROS (MOTOR CUANTITATIVO)
+// EVALUACIÓN PRELIMINAR DE INDICADORES FINANCIEROS
 function runFinancialAudit() {
-  var elSales = document.getElementById('f-sales');
-  if (!elSales) return;
+  var byId = function(id) { return document.getElementById(id); };
+  var num = function(id) { var e=byId(id); if(!e || e.value.trim()==='') return 0; var n=Number(e.value); return Number.isFinite(n)?n:0; };
+  var money = function(n) { return '$'+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); };
+  if (!byId('f-sales')) return;
+  var sales=num('f-sales'), expenses=num('f-expenses'), actCorr=num('f-act-corr'), pasCorr=num('f-pas-corr'), pasTot=num('f-pas-tot'), patrim=num('f-patrim');
+  var hasDebt=!!(byId('f-has-debt') && byId('f-has-debt').checked);
+  var existingDebtPayment=hasDebt?num('f-existing-debt-payment'):0;
+  var principal=num('sim-amount'), months=parseInt(byId('sim-term').value,10)||12;
+  var rateEl=byId('sim-rate'), rate=rateEl && rateEl.value.trim()!==''?Number(rateEl.value):16;
+  if(!Number.isFinite(rate)||rate<0) rate=16;
+  // Proxy simplificado antes de impuestos; no incorpora inversión ni cambios de capital de trabajo.
+  var surplus=sales-expenses, margin=sales>0?surplus/sales*100:0;
+  var liquidity=pasCorr>0?actCorr/pasCorr:null;
+  var r=rate/100/12;
+  var payment=principal>0?(r>0?principal*r*Math.pow(1+r,months)/(Math.pow(1+r,months)-1):principal/months):0;
+  var interest=Math.max(0,payment*months-principal), debtService=existingDebtPayment+payment;
+  var dscr=debtService>0?surplus/debtService:null, cashAfter=surplus-debtService;
+  var stressSurplus=sales*.8-expenses*.95, stressDscr=debtService>0?stressSurplus/debtService:null;
+  var leverage=patrim>0?pasTot/patrim:null;
+  var docs=['doc-1','doc-2','doc-3'].filter(function(id){return byId(id)&&byId(id).checked;}).length;
+  var docScore=Math.round(docs/3*100);
 
-  var sales = parseFloat(elSales.value) || 0;
-  var ebit = parseFloat(document.getElementById('f-ebit').value) || 0;
-  var expenses = parseFloat(document.getElementById('f-expenses').value) || 0;
-  var actCorr = parseFloat(document.getElementById('f-act-corr').value) || 0;
-  var pasCorr = parseFloat(document.getElementById('f-pas-corr').value) || 0;
-  var pasTot = parseFloat(document.getElementById('f-pas-tot').value) || 0;
-  var patrim = Math.max(1, parseFloat(document.getElementById('f-patrim').value) || 1);
-  
-  var principal = parseFloat(document.getElementById('sim-amount').value) || 15000;
-  var months = parseInt(document.getElementById('sim-term').value) || 12;
-  var rate = parseFloat(document.getElementById('sim-rate').value) || 16;
+  if(liquidity===null){byId('val-liquidez').textContent='N/C';byId('stat-liquidez').textContent='No calculable: pasivo corriente igual a cero';byId('card-liquidez').style.borderLeftColor='#64748b';}
+  else {byId('val-liquidez').textContent=liquidity.toFixed(2)+'x';byId('stat-liquidez').textContent=liquidity>=1.3?'🟢 Capacidad corriente holgada':(liquidity>=1?'🟡 Liquidez justa':'🔴 Iliquidez inmediata');byId('card-liquidez').style.borderLeftColor=liquidity>=1.3?'var(--green)':(liquidity>=1?'var(--yellow)':'var(--red)');}
+  byId('val-brecha').textContent=money(surplus)+' / mes';
+  byId('stat-brecha').textContent=surplus>=0?'Excedente operativo estimado antes de impuestos':'Déficit operativo estimado antes de impuestos';
+  byId('card-brecha').style.borderLeftColor=surplus>=0?'var(--green)':'var(--red)';
+  byId('val-margen').textContent=margin.toFixed(1)+'%';
+  byId('stat-margen').textContent=margin>=12?'🟢 Margen estimado sólido':(margin>=5?'🟡 Margen moderado':'🔴 Margen crítico');
+  byId('card-margen').style.borderLeftColor=margin>=12?'var(--green)':(margin>=5?'var(--yellow)':'var(--red)');
+  byId('val-dscr').textContent=dscr===null?'N/C':dscr.toFixed(2)+'x';
+  byId('stat-dscr').textContent=dscr===null?'No calculable: no hay servicio de deuda registrado':(dscr>=1.4?'🟢 Cobertura holgada':(dscr>=1.1?'🟡 Cobertura ajustada':'🔴 Cobertura insuficiente'));
+  byId('card-dscr').style.borderLeftColor=dscr===null?'#64748b':(dscr>=1.4?'var(--green)':(dscr>=1.1?'var(--yellow)':'var(--red)'));
+  byId('val-caja-rest').textContent=money(cashAfter)+' / mes';
+  byId('stat-caja-rest').textContent=cashAfter>=0?'Excedente estimado tras pagos de deuda':'Déficit estimado tras pagos de deuda';
+  byId('card-caja-rest').style.borderLeftColor=cashAfter>=0?'var(--green)':'var(--red)';
+  byId('val-stress').textContent=stressDscr===null?'N/C':stressDscr.toFixed(2)+'x';
+  byId('stat-stress').textContent=stressDscr===null?'No calculable: no hay servicio de deuda registrado':(stressDscr>=1.1?'🟢 Cubre deuda en este escenario hipotético':'🔴 No cubre deuda en este escenario hipotético');
+  byId('card-stress').style.borderLeftColor=stressDscr===null?'#64748b':(stressDscr>=1.1?'var(--green)':'var(--red)');
+  if(leverage===null){byId('val-leverage').textContent='N/C';byId('stat-leverage').textContent='No calculable: patrimonio igual o menor que cero';byId('card-leverage').style.borderLeftColor='#64748b';}
+  else {byId('val-leverage').textContent=leverage.toFixed(2)+'x';byId('stat-leverage').textContent=leverage<=1.5?'🟢 Apalancamiento prudente':(leverage<=2.5?'🟡 Apalancamiento alto':'🔴 Sobreendeudado');byId('card-leverage').style.borderLeftColor=leverage<=1.5?'var(--green)':(leverage<=2.5?'var(--yellow)':'var(--red)');}
+  byId('val-doc').textContent=docScore+'%';
+  byId('stat-doc').textContent=docScore===100?'🟢 Documentación al día':(docScore>=66?'🟡 Formalización en proceso':'🔴 Documentación incompleta');
+  byId('card-doc').style.borderLeftColor=docScore===100?'var(--green)':(docScore>=66?'var(--yellow)':'var(--red)');
 
-  var brechaCaja = sales - expenses;
-  var margenOp = sales > 0 ? ((ebit / sales) * 100) : 0;
-  var liquidez = pasCorr > 0 ? (actCorr / pasCorr) : (actCorr > 0 ? actCorr : 1);
-
-  var r = (rate / 100) / 12;
-  var payment = 0;
-  if (r > 0) {
-    payment = (principal * r * Math.pow(1 + r, months)) / (Math.pow(1 + r, months) - 1);
-  } else {
-    payment = principal / months;
-  }
-  var totalInterest = Math.max(0, (payment * months) - principal);
-
-  var fcf = Math.max(0, brechaCaja);
-  var dscr = payment > 0 ? (fcf / payment) : 0;
-  var cajaRestante = brechaCaja - payment;
-  
-  var stressSales = sales * 0.8;
-  var stressExpenses = expenses * 0.95;
-  var stressFCF = Math.max(0, stressSales - stressExpenses);
-  var stressDSCR = payment > 0 ? (stressFCF / payment) : 0;
-
-  var leverage = pasTot / patrim;
-  
-  var docsChecked = 0;
-  if (document.getElementById('doc-1') && document.getElementById('doc-1').checked) docsChecked++;
-  if (document.getElementById('doc-2') && document.getElementById('doc-2').checked) docsChecked++;
-  if (document.getElementById('doc-3') && document.getElementById('doc-3').checked) docsChecked++;
-  var docScore = Math.round((docsChecked / 3) * 100);
-
-  // Render Ratios
-  document.getElementById('val-brecha').textContent = '$' + brechaCaja.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' / mes';
-  document.getElementById('stat-brecha').textContent = brechaCaja >= 0 ? "🟢 Flujo mensual disponible" : "🔴 Déficit de caja estructural";
-  document.getElementById('card-brecha').style.borderLeftColor = brechaCaja >= 0 ? "var(--green)" : "var(--red)";
-
-  document.getElementById('val-margen').textContent = margenOp.toFixed(1) + '%';
-  document.getElementById('stat-margen').textContent = margenOp >= 12 ? "🟢 Margen operativo sólido" : (margenOp >= 5 ? "🟡 Margen moderado" : "🔴 Margen crítico");
-  document.getElementById('card-margen').style.borderLeftColor = margenOp >= 12 ? "var(--green)" : (margenOp >= 5 ? "var(--yellow)" : "var(--red)");
-
-  document.getElementById('val-liquidez').textContent = liquidez.toFixed(2) + 'x';
-  document.getElementById('stat-liquidez').textContent = liquidez >= 1.3 ? "🟢 Capacidad corriente holgada" : (liquidez >= 1.0 ? "🟡 Liquidez justa" : "🔴 Iliquidez inmediata");
-  document.getElementById('card-liquidez').style.borderLeftColor = liquidez >= 1.3 ? "var(--green)" : (liquidez >= 1.0 ? "var(--yellow)" : "var(--red)");
-
-  document.getElementById('val-dscr').textContent = dscr.toFixed(2) + 'x';
-  document.getElementById('stat-dscr').textContent = dscr >= 1.4 ? "🟢 Cobertura holgada (>1.40x)" : (dscr >= 1.15 ? "🟡 Cobertura ajustada" : "🔴 Insuficiente para pagar");
-  document.getElementById('card-dscr').style.borderLeftColor = dscr >= 1.4 ? "var(--green)" : (dscr >= 1.15 ? "var(--yellow)" : "var(--red)");
-
-  document.getElementById('val-caja-rest').textContent = '$' + cajaRestante.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' / mes';
-  document.getElementById('stat-caja-rest').textContent = cajaRestante > 0 ? "🟢 Excedente para contingencias" : "🔴 Saldo negativo tras cuota";
-  document.getElementById('card-caja-rest').style.borderLeftColor = cajaRestante > 0 ? "var(--green)" : "var(--red)";
-
-  document.getElementById('val-stress').textContent = stressDSCR.toFixed(2) + 'x';
-  document.getElementById('stat-stress').textContent = stressDSCR >= 1.15 ? "🟢 Resiste caída de facturación" : "🔴 Quiebra ante baja en ventas";
-  document.getElementById('card-stress').style.borderLeftColor = stressDSCR >= 1.15 ? "var(--green)" : "var(--red)";
-
-  document.getElementById('val-leverage').textContent = leverage.toFixed(2) + 'x';
-  document.getElementById('stat-leverage').textContent = leverage <= 1.5 ? "🟢 Apalancamiento prudente" : (leverage <= 2.5 ? "🟡 Apalancamiento alto" : "🔴 Sobreendeudado");
-  document.getElementById('card-leverage').style.borderLeftColor = leverage <= 1.5 ? "var(--green)" : (leverage <= 2.5 ? "var(--yellow)" : "var(--red)");
-
-  document.getElementById('val-doc').textContent = docScore + '%';
-  document.getElementById('stat-doc').textContent = docScore === 100 ? "🟢 Documentación al día" : (docScore >= 66 ? "🟡 Formalización en proceso" : "🔴 Documentación incompleta");
-  document.getElementById('card-doc').style.borderLeftColor = docScore === 100 ? "var(--green)" : (docScore >= 66 ? "var(--yellow)" : "var(--red)");
-
-  var gatePass = document.getElementById('gate-pass-box');
-  var gateStop = document.getElementById('gate-stop-box');
-  var simSec = document.getElementById('simulator-section');
-  var stopReason = document.getElementById('gate-stop-reason');
-
-  var canBorrow = true;
-  var reasonText = "";
-
-  if (ebit < 0 || margenOp < 2) {
-    canBorrow = false;
-    reasonText = "El negocio no genera utilidad operativa real (EBIT crítico). Asumir deuda con margen negativo acelera la quiebra.";
-  } else if (dscr < 1.10) {
-    canBorrow = false;
-    reasonText = "Tu flujo de caja libre no alcanza a cubrir la cuota proyectada con margen de seguridad (DSCR inferior a 1.10x).";
-  } else if (pasCorr > 0 && liquidez < 0.90) {
-    canBorrow = false;
-    reasonText = "Tus pasivos inmediatos superan a tus activos corrientes (Liquidez menor a 0.90x). Hay riesgo de mora.";
-  }
-
-  if (canBorrow) {
-    if (gatePass) gatePass.style.display = "block";
-    if (gateStop) gateStop.style.display = "none";
-    if (simSec) { simSec.style.opacity = "1"; simSec.style.pointerEvents = "auto"; }
-  } else {
-    if (gatePass) gatePass.style.display = "none";
-    if (gateStop) gateStop.style.display = "block";
-    if (stopReason) stopReason.textContent = reasonText;
-    if (simSec) { simSec.style.opacity = "0.3"; simSec.style.pointerEvents = "none"; }
-  }
-
-  var debtOnSales = sales > 0 ? ((payment / sales) * 100) : 0;
-  document.getElementById('sim-payment').textContent = '$' + payment.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
-  document.getElementById('sim-fcf').textContent = '$' + fcf.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
-  document.getElementById('sim-dscr').textContent = dscr.toFixed(2) + 'x';
-  document.getElementById('sim-debt-sales').textContent = debtOnSales.toFixed(1) + '%';
-  document.getElementById('sim-interest').textContent = '$' + totalInterest.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
-
-  var msg = encodeURIComponent(
-    '*Auditoría Financiera SumaTips*\n\n' +
-    '• Ventas: $' + sales.toLocaleString('en-US') + '/mes\n' +
-    '• Solicitud: $' + principal.toLocaleString('en-US') + ' a ' + months + ' meses\n' +
-    '• Cobertura DSCR: ' + dscr.toFixed(2) + 'x\n' +
-    '• Margen Operativo: ' + margenOp.toFixed(1) + '%\n' +
-    '• Cuota proyectada: $' + payment.toFixed(2) + '/mes\n\n' +
-    'Deseo agendar una sesión consultiva para estructurar mi expediente formal.'
-  );
-  var waBtn = document.getElementById('audit-wa-btn');
-  if (waBtn) waBtn.href = 'https://wa.me/584127147963?text=' + msg;
+  var canBorrow=true, reason='';
+  if(surplus<=0){canBorrow=false;reason='El excedente operativo estimado es nulo o negativo antes de impuestos; no muestra capacidad para asumir una nueva cuota.';}
+  else if(dscr!==null&&dscr<1.1){canBorrow=false;reason='El excedente operativo estimado no cubre el servicio mensual total de deuda con el margen mínimo de este ejercicio (DSCR menor a 1.10x).';}
+  else if(stressDscr!==null&&stressDscr<1.1){canBorrow=false;reason='La cobertura cae por debajo de 1.10x en el escenario hipotético de estrés. Revisa monto o plazo.';}
+  else if(liquidity!==null&&liquidity<.9){canBorrow=false;reason='La liquidez corriente estimada es menor a 0.90x y requiere revisión.';}
+  byId('gate-pass-box').style.display=canBorrow?'block':'none';
+  byId('gate-stop-box').style.display=canBorrow?'none':'block';
+  if(!canBorrow) byId('gate-stop-reason').textContent=reason;
+  var sim=byId('simulator-section');sim.style.opacity='1';sim.style.pointerEvents='auto';
+  var debtSales=sales>0?debtService/sales*100:0;
+  byId('sim-payment').textContent=money(payment);byId('sim-fcf').textContent=money(surplus);
+  byId('sim-dscr').textContent=dscr===null?'N/C':dscr.toFixed(2)+'x';byId('sim-debt-sales').textContent=debtSales.toFixed(1)+'%';byId('sim-interest').textContent=money(interest);
+  var verdict=canBorrow?'Capacidad estimada suficiente bajo los supuestos del modelo':'Requiere revisión antes de considerar nueva deuda';
+  var cutoff=byId('f-cutoff-date').value||'No indicada';
+  var debtText=hasDebt?'Sí; pagos mensuales '+money(existingDebtPayment):'No';
+  var summary='*Resumen financiero preliminar SumaTips*\nFecha de corte: '+cutoff+'\nVentas mensuales: '+money(sales)+'\nCostos y gastos operativos (sin impuestos): '+money(expenses)+'\nExcedente operativo estimado antes de impuestos: '+money(surplus)+'\nDeudas anteriores: '+debtText+'\nSolicitud: '+money(principal)+' a '+months+' meses\nTasa nominal anual supuesta: '+rate.toFixed(2)+'%\nCuota nueva estimada: '+money(payment)+'/mes\nServicio total de deuda estimado: '+money(debtService)+'/mes\nDSCR estimado: '+(dscr===null?'N/C':dscr.toFixed(2)+'x')+'\nDSCR bajo estrés hipotético: '+(stressDscr===null?'N/C':stressDscr.toFixed(2)+'x')+'\nLiquidez corriente: '+(liquidity===null?'N/C':liquidity.toFixed(2)+'x')+'\nEndeudamiento patrimonial: '+(leverage===null?'N/C':leverage.toFixed(2)+'x')+'\nDocumentación indicada: '+docScore+'%\nResultado financiero: '+verdict+'\n\nEstimación simplificada antes de impuestos. No incluye inversiones, cambios de capital de trabajo, indexación, cargos ni seguros. No es aprobación bancaria.';
+  var wa=byId('audit-wa-btn');if(wa)wa.href='https://wa.me/584127147963?text='+encodeURIComponent(summary);
+  var reco=byId('sim-reco');if(reco)reco.textContent='Plazo seleccionado: '+months+' meses. Evalúa que las cuotas coincidan con el ciclo de caja del negocio. Tasa ilustrativa; no incluye indexación ni cargos.';
 }
-
 // FORMULARIO DE CONTACTO
 var cForm = document.getElementById('contact-form');
 if (cForm) {
